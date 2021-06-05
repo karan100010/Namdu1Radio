@@ -700,7 +700,7 @@ while True:
                 recFileName = name_prefix+"_comment"+datetime.now().strftime('%d%b%Y_%H_%M_%S')
                 print(recFileName)
                 # records with 48000 quality
-                os.system("arecord "+recFileName+"wav" +" &")
+                os.system("arecord "+recFileName+".wav" +" &")
                 # scan for button press to stop recording
                 but11.wait_for_press(20)
                 os.system("pkill -9 arecord")
