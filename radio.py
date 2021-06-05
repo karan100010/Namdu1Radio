@@ -74,6 +74,7 @@ while True:
         #time.sleep(3)
         aplay("radiostart.wav")
         driver.get("http://localhost/new")  
+        time.sleep(3)
         driver.execute_script('document.getElementsByTagName("audio")[0].play()')   
         cntr = False
         playpause = True
@@ -88,6 +89,7 @@ while True:
         time.sleep(3)
         aplay("radiostart.wav")
         driver.get("http://localhost/new")
+        time.sleep(3)
         driver.execute_script('document.getElementsByTagName("audio")[0].play()')
         cntr = False
         playpause = True
@@ -787,6 +789,7 @@ while True:
                 aplay("radiostart.wav")
                 time.sleep(0.4)
                 driver.get("http://localhost/new")
+                time.sleep(3)
                 driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                 playpause = True
             # Check whether the internet is available to play from the website
@@ -805,6 +808,7 @@ while True:
                 #Starts playing mp3 from .upload folder
                 print("starting audio form localhost in gencat")
                 driver.get("http://localhost/new")
+                time.sleep(3)
                 driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                 chromium_running=True
                 time.sleep(0.2)
