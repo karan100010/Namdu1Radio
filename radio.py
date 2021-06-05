@@ -30,10 +30,10 @@ from selenium import webdriver
 sys.path.append("/home/pi/Namdu1Radio/")
 from globle_var import *
 from selenium.webdriver.chrome.options import Options
-
-driver= webdriver.Chrome()
 option = Options()
 option.add_argument("--autoplay-policy=no-user-gesture-required")
+
+driver= webdriver.Chrome(chrome_options=option)
 
 #logging.basicConfig(filename="/opt/logfilename.log", level=logging.INFO)
 
@@ -771,7 +771,7 @@ while True:
                 print ("echo closing radio !!!")
                 os.system("killall chromium-browser")
                 os.system("pkill -o chromium")
-                driver=webdriver.Chrome()
+                driver=webdriver.Chrome(chrome_options=option)
                 chromium_running=False
                 os.system("pkill -9 aplay")
                 time.sleep(0.2)
@@ -782,7 +782,7 @@ while True:
                 os.system("pkill -9 aplay")
                 os.system("killall chromium-browser")
                 os.system("pkill -o chromium")
-                driver=webdriver.Chrome()
+                driver=webdriver.Chrome(chrome_options=option)
                 chromium_running=False
                 print ("starting namma school radio....from local server ")
                 time.sleep(0.4)
@@ -800,7 +800,7 @@ while True:
                 print ("Button11 general playback started")
                 os.system("pkill -9 aplay")
                 os.system("pkill -o chromium")
-                driver=webdriver.Chrome()
+                driver=webdriver.Chrome(chrome_options=option)
                 aplay("radiostart.wav")
                 src_renamPath = r'/var/www/html/indexgencat.php'
                 dst_renamPath = r'/var/www/html/index.php'
