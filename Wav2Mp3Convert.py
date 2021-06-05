@@ -27,7 +27,7 @@ projectpath =  os.path.split(os.path.realpath(__file__))[0]
 audioguidepath = projectpath + "/audio-alert"
 previewaudioguidepath = projectpath + "/recordings"
 #local categories .wav file save path
-recordingpath1to9 = projectpath + "/recordings/cat"
+recordiangpath1to9 = projectpath + "/recordings/cat"
 recordingpathcat1 = projectpath + "/recordings/cat1"
 recordingpathcat2 = projectpath + "/recordings/cat2"
 recordingpathcat3 = projectpath + "/recordings/cat3"
