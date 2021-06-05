@@ -73,7 +73,8 @@ while True:
         aplay("radiostart.wav")
         #time.sleep(3)
         aplay("radiostart.wav")
-        driver.get("http://localhost/new")     
+        driver.get("http://localhost/new")  
+        driver.execute_script('document.getElementsByTagName("audio")[0].play()')   
         cntr = False
         playpause = True
     # #Check whether the internet is available to play from the website
@@ -87,6 +88,7 @@ while True:
         time.sleep(3)
         aplay("radiostart.wav")
         driver.get("http://localhost/new")
+        driver.execute_script('document.getElementsByTagName("audio")[0].play()')
         cntr = False
         playpause = True
         time.sleep(0.2)
