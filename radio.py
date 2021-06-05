@@ -697,7 +697,7 @@ while True:
                 driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
                 #aplay("beep_catgen.wav")
                 #time.sleep(1.0)
-                recFileName = name_prefix+"_comment"+datetime.now().strftime('%d%b%Y_%H_%M_%S')+".wav"
+                recFileName = name_prefix+"_comment"+datetime.now().strftime('%d%b%Y_%H_%M_%S')
                 print(recFileName)
                 # records with 48000 quality
                 os.system("arecord "+recFileName +" &")
@@ -713,6 +713,7 @@ while True:
                 previewplay(".",recFileName)
                 os.system("cp "+ recFileName+ " " +recordingpathcat11+"/"+recFileName)
                 os.system("lxterminal -e python "+projectpath+"/Wav2Mp3Convert.py  &")
+                shutil.copyfile(recordingpathcat11+"/"+recFileName+".mp3","/var/www/html/new/.upload/"+recFileName+"mp3")
                 os.system("rm "+recFileName)
                 led.fwd_on()
                 longpress = False
@@ -752,6 +753,7 @@ while True:
                 os.system("cp "+ recFileName+ " " +recordingpathcat11+"/"+recFileName)
                 os.system("lxterminal -e python "+projectpath+"/Wav2Mp3Convert.py  &")
                 os.system("rm "+recFileName)
+                
                 led.fwd_on()
                 longpress = False
                 gencatpreview = True

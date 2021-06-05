@@ -84,11 +84,11 @@ while True:
                     #Recorded file name
                     recFileName = "recorded@"+datetime.now().strftime('%d%b%Y_%H_%M_%S')
                     #start converting from .wav to mp3
-                    os.system("lame -b 320 "+srcpath+"/"+i+" " +srcpath+"/"+i[:-4]+".mp3")
+                    os.system("lame -b 320 "+srcpath+"/"+i+" " +srcpath+"/"+i+".mp3")
                     #copy converted .mp3 to .upload folders
-                    shutil(srcpath+"/"+i[:-4]+".mp3",dstpath+"/"+i[: -4]+".mp3")
+                    shutil(srcpath+"/"+i+".mp3",dstpath+"/"+i+".mp3")
                     #remove the .wav file
-                    os.system("rm  "+recordingpathcat11+"/"+i)
+                    os.system("rm  "+recordingpathcat11+"/"+i+".wav")
                     
                 else:
                     print("No .wav fies present for conversion")
