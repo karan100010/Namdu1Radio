@@ -710,8 +710,10 @@ while True:
                 #time.sleep(1.4)
                 print("Gencat recording stopped")
                 #time.sleep(5.0)
-                previewplay(".",recFileName)
-                shutil.copy2(recFileName+".wav" ,recordingpathcat11+"/"+recFileName+".wav")
+                previewplay(".",recFileName+".wav")
+                os.system(recFileName+".wav " "/var/www/html/new/.upload/gencat"+recFileName+".mp3")
+                
+                
                 # os.system("lxterminal -e python "+projectpath+"/Wav2Mp3Convert.py  &")
                 # shutil.copyfile(recordingpathcat11+"/"+recFileName+".mp3","/var/www/html/new/.upload/"+recFileName+"mp3")
                 # os.system("rm "+recFileName)
