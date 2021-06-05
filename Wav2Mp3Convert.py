@@ -40,7 +40,7 @@ recordingpathcat9 = projectpath + "/recordings/cat9"
 recordingpathcat10 = projectpath + "/recordings/cat10"
 recordingpathcat11 = projectpath + "/recordings/gencat"
 #.upload categories .mp3 file save path
-uploadpath = "/var/www/html/.upload"
+uploadpath = "/var/www/html/new/.upload"
 uploadpath1to9 = uploadpath + "/cat"
 uploadpathcat1 = uploadpath + "/cat1"
 uploadpathcat2 = uploadpath + "/cat2"
