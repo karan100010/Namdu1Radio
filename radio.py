@@ -26,9 +26,14 @@ import shutil
 from dualled import DualLED
 from new_function import *
 import sys
+from selenium import webdriver
 sys.path.append("/home/pi/Namdu1Radio/")
 from globle_var import *
+from selenium.webdriver.chrome.options import Options
 
+driver= webdriver.Chrome()
+option = Options()
+option.add_argument("--autoplay-policy=no-user-gesture-required")
 
 #logging.basicConfig(filename="/opt/logfilename.log", level=logging.INFO)
 
@@ -67,7 +72,8 @@ while True:
         print ("starting namma school radio....from local server ")
         aplay("radiostart.wav")
         #time.sleep(3)
-        os.system("chromium-browser --kiosk --app=http://"+local_server+" &")        
+        aplay("radiostart.wav")
+        driver.get("http://localhost/new")     
         cntr = False
         playpause = True
     # #Check whether the internet is available to play from the website
@@ -80,7 +86,7 @@ while True:
         shutil.copy(src_renamPath, dst_renamPath)
         time.sleep(3)
         aplay("radiostart.wav")
-        os.system("chromium-browser --kiosk localhost/new &")
+        driver.get("http://localhost/new")
         cntr = False
         playpause = True
         time.sleep(0.2)
@@ -646,15 +652,15 @@ while True:
                 playpause = True               
             led10.off()   
     '''upload and backup play functionality'''
-
-    if but11.is_pressed:
+    x=True
+    if x:
         #os.system("killall chromium-browser")
         #os.system("pkill -o chromium")
         print("buttons 11 pressed")
         previousTime = time.time()
         
-       
-        while but11.is_pressed:
+        
+        while x:
             #Check if the button is pressed for > 2sec
             if time.time() - previousTime > 2.0:
                 if but1.is_pressed or but2.is_pressed or but3.is_pressed \
@@ -666,7 +672,7 @@ while True:
                    print("hi")
                 # if the button is pressed for more than two seconds, then longpress is True
                 longpress = True
-                #break
+                break
                 aplay("beep_catgen.wav")
          
 
@@ -680,9 +686,7 @@ while True:
                 name_prefix=filepath.split(".")[1].split("/")[-1]
                 f.close()
                 led.fwd_blink("slow")
-                os.system("killall chromium-browser")
-
-                os.system("pkill -o chromium")
+               
                 chromium_running=False
                 #os.system("pkill -9 aplay") # to stop playing recorded audio (if it was)
                 print("Gencat comment recording started")
@@ -708,7 +712,7 @@ while True:
                 longpress = False
                 gencatpreview = True
             
-        
+                x=False
                
 
                  
@@ -716,11 +720,11 @@ while True:
 
             else:    
                 led.fwd_blink("slow")
-                os.system("killall chromium-browser")
-                os.system("pkill -o chromium")
+                
                 chromium_running=False
                 #os.system("pkill -9 aplay") # to stop playing recorded audio (if it was)
                 print("Gencat recording started")
+                driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                 #aplay("beep_catgen.wav")
                 #time.sleep(1.0)
                 recFileName = "recorded@"+datetime.now().strftime('%d%b%Y_%H_%M_%S')
@@ -737,6 +741,7 @@ while True:
                 #time.sleep(1.4)
                 print("Gencat recording stopped")
                 #time.sleep(5.0)
+                driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                 previewplay(".",recFileName)
                 os.system("cp "+ recFileName+ " " +recordingpathcat11+"/"+recFileName)
                 os.system("lxterminal -e python "+projectpath+"/Wav2Mp3Convert.py  &")
@@ -744,7 +749,7 @@ while True:
                 led.fwd_on()
                 longpress = False
                 gencatpreview = True
-            
+                x=False
         
             
         
@@ -760,6 +765,7 @@ while True:
                 print ("echo closing radio !!!")
                 os.system("killall chromium-browser")
                 os.system("pkill -o chromium")
+                driver=webdriver.Chrome()
                 chromium_running=False
                 os.system("pkill -9 aplay")
                 time.sleep(0.2)
@@ -770,12 +776,13 @@ while True:
                 os.system("pkill -9 aplay")
                 os.system("killall chromium-browser")
                 os.system("pkill -o chromium")
+                driver=webdriver.Chrome()
                 chromium_running=False
                 print ("starting namma school radio....from local server ")
                 time.sleep(0.4)
                 aplay("radiostart.wav")
                 time.sleep(0.4)
-                os.system("chromium-browser --kiosk --app=http://"+local_server+" &")
+                driver.get("http://localhost/new")
                 playpause = True
             # Check whether the internet is available to play from the website
             # elif is_connected(remote_server):
@@ -785,13 +792,15 @@ while True:
                 print ("Button11 general playback started")
                 os.system("pkill -9 aplay")
                 os.system("pkill -o chromium")
+                driver=webdriver.Chrome()
                 aplay("radiostart.wav")
                 src_renamPath = r'/var/www/html/indexgencat.php'
                 dst_renamPath = r'/var/www/html/index.php'
                 shutil.copy(src_renamPath, dst_renamPath)
                 #Starts playing mp3 from .upload folder
                 print("starting audio form localhost in gencat")
-                os.system("chromium-browser --kiosk localhost/new &")
+                driver.get("http://localhost/new")
+                
                 chromium_running=True
                 time.sleep(0.2)
                 playpause = True
