@@ -7,6 +7,6 @@ $fileSize = $_FILES["file1"]["size"]; // File size in bytes
 $fileErrorMsg = $_FILES["file1"]["error"]; // 0 for false... and 1 for true
 
 
-move_uploaded_file($fileTmpLoc, '/home/pi/Namdu1Radio/html/.upload/gencat/'.$fileName);
+move_uploaded_file($fileTmpLoc, '../.upload/gencat/'.$fileName);
     
 ?>

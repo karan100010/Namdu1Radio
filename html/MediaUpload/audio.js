@@ -20,11 +20,11 @@
             e.preventDefault();
             link = $(this);
             current = link.parent().index();
-            console.log(audio[0])
+         //   console.log(audio[0])
             run(link, audio[0]);
             
             });
-            var ajax = new XMLHttpRequest();
+            
             audio[0].addEventListener('ended',function(e){
             current++;
             if(current > len){
@@ -66,6 +66,11 @@
           par.addClass('active').siblings().removeClass('active');
           audio[0].load();
           audio[0].play();
+          $.post("./MediaUpload/write_link.php",
+              {
+                link: player.src,
+                
+              })
        }
   
       });
