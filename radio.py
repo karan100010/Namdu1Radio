@@ -722,7 +722,7 @@ while True:
                 # os.system("rm "+recFileName)
                 led.fwd_on()
                 longpress = False
-               # gencatpreview = True
+                gencatpreview = True
             
                
 
