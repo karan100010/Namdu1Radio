@@ -706,11 +706,12 @@ while True:
                 os.system("pkill -9 arecord")
                 os.system("pkill -9 aplay")
                 aplay("Catgen_stop.wav")
-                driver.execute_script('document.getElementsByTagName("audio")[0].play()')
+                
                 #time.sleep(1.4)
                 print("Gencat recording stopped")
                 #time.sleep(5.0)
                 previewplay(".",recFileName+".wav")
+                driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                 os.system("lame -b 320 "+recFileName+".wav " "/var/www/html/new/.upload/gencat/"+recFileName+".mp3")
                 os.system("rm "+recFileName)
                 
