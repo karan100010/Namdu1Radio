@@ -74,7 +74,7 @@ while True:
         #time.sleep(3)
         aplay("radiostart.wav")
         driver.get("http://localhost/new")  
-        time.sleep(3)
+        #time.sleep(3)
         driver.execute_script('document.getElementsByTagName("audio")[0].play()')   
         cntr = False
         playpause = True
@@ -89,7 +89,7 @@ while True:
         time.sleep(3)
         aplay("radiostart.wav")
         driver.get("http://localhost/new")
-        time.sleep(3)
+        #time.sleep(3)
         driver.execute_script('document.getElementsByTagName("audio")[0].play()')
         cntr = False
         playpause = True
@@ -656,15 +656,15 @@ while True:
                 playpause = True               
             led10.off()   
     '''upload and backup play functionality'''
-    x=True
-    if x:
+    
+    if but11.is_pressed:
         #os.system("killall chromium-browser")
         #os.system("pkill -o chromium")
         print("buttons 11 pressed")
         previousTime = time.time()
         
         
-        while x:
+        while but11.is_pressed:
             #Check if the button is pressed for > 2sec
             if time.time() - previousTime > 2.0:
                 if but1.is_pressed or but2.is_pressed or but3.is_pressed \
@@ -672,11 +672,11 @@ while True:
                 or but7.is_pressed or but8.is_pressed or but9.is_pressed \
                 or but10.is_pressed :
                     #if any of the buttons 1 to 9 is also pressed and held, then shutdown the Pi
-                   # shutdownPi()
+                   #shutdownPi()
                    print("hi")
                 # if the button is pressed for more than two seconds, then longpress is True
                 longpress = True
-                break
+                #break
                 aplay("beep_catgen.wav")
          
 
@@ -702,7 +702,7 @@ while True:
                 # records with 48000 quality
                 os.system("arecord "+recFileName+".wav" +" &")
                 # scan for button press to stop recording
-                but11.wait_for_press(10)
+                but11.wait_for_press(300)
                 os.system("pkill -9 arecord")
                 os.system("pkill -9 aplay")
                 aplay("Catgen_stop.wav")
@@ -712,16 +712,16 @@ while True:
                 #time.sleep(5.0)
                 previewplay(".",recFileName+".wav")
                 os.system("lame -b 320 "+recFileName+".wav " "/var/www/html/new/.upload/gencat/"+recFileName+".mp3")
+                os.system("rm "+recFileName)
                 
                 
                 # os.system("lxterminal -e python "+projectpath+"/Wav2Mp3Convert.py  &")
                 # shutil.copyfile(recordingpathcat11+"/"+recFileName+".mp3","/var/www/html/new/.upload/"+recFileName+"mp3")
                 # os.system("rm "+recFileName)
-                # led.fwd_on()
-                # longpress = False
-                # gencatpreview = True
+                led.fwd_on()
+                longpress = False
+               # gencatpreview = True
             
-                # x=False
                
 
                  
@@ -733,7 +733,7 @@ while True:
                 chromium_running=False
                 #os.system("pkill -9 aplay") # to stop playing recorded audio (if it was)
                 print("Gencat recording started")
-                driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
+                #driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
                 #aplay("beep_catgen.wav")
                 #time.sleep(1.0)
                 recFileName = "recorded@"+datetime.now().strftime('%d%b%Y_%H_%M_%S')
@@ -743,24 +743,22 @@ while True:
                 os.system("arecord "+recFileName +" &")
 
                 # scan for button press to stop recording
-                but11.wait_for_press(3)
+                but11.wait_for_press(300)
                 os.system("pkill -9 arecord")
                 os.system("pkill -9 aplay")
                 aplay("Catgen_stop.wav")
+                #driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                 #time.sleep(1.4)
                 print("Gencat recording stopped")
                 #time.sleep(5.0)
-                driver.execute_script('document.getElementsByTagName("audio")[0].play()')
-                previewplay(".",recFileName)
-                os.system("cp "+ recFileName+ " " +recordingpathcat11+"/"+recFileName)
-                os.system("lxterminal -e python "+projectpath+"/Wav2Mp3Convert.py  &")
+                previewplay(".",recFileName+".wav")
+                os.system("lame -b 320 "+recFileName+".wav " "/var/www/html/new/.upload/gencat/"+recFileName+".mp3")
                 os.system("rm "+recFileName)
                 
                 led.fwd_on()
                 longpress = False
-                gencatpreview = True
-                x=False
-        
+               # gencatpreview = True
+                
             
         
            
@@ -793,7 +791,7 @@ while True:
                 aplay("radiostart.wav")
                 time.sleep(0.4)
                 driver.get("http://localhost/new")
-                time.sleep(3)
+                #time.sleep(3)
                 driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                 playpause = True
             # Check whether the internet is available to play from the website
