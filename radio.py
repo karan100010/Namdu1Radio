@@ -677,7 +677,7 @@ while True:
                 # if the button is pressed for more than two seconds, then longpress is True
                 longpress = True
                 #break
-                aplay("beep_catgen.wav")
+                #aplay("beep_catgen.wav")
          
 
    # if longpress is True, record audio after a 'beep'
@@ -712,7 +712,7 @@ while True:
                 print("Gencat recording stopped")
                 
                 previewplay(".",recFileName+".wav")
-                time.sleep(5)
+                time.sleep(10)
                 driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                 os.system("lame -b 320 "+recFileName+".wav " "/var/www/html/new/.upload/gencat/"+recFileName+".mp3")
                 os.system("rm "+recFileName)
