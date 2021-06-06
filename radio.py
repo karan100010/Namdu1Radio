@@ -711,6 +711,7 @@ while True:
                 print("Gencat recording stopped")
                 #time.sleep(5.0)
                 previewplay(".",recFileName+".wav")
+                time.sleep(5)
                 driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                 os.system("lame -b 320 "+recFileName+".wav " "/var/www/html/new/.upload/gencat/"+recFileName+".mp3")
                 os.system("rm "+recFileName)
