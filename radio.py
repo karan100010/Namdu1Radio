@@ -695,8 +695,9 @@ while True:
                 #os.system("pkill -9 aplay") # to stop playing recorded audio (if it was)
                 print("Gencat comment recording started")
                 driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
-                #aplay("beep_catgen.wav")
-                #time.sleep(1.0)
+                time.sleep(2)
+                aplay("beep_catgen.wav")
+                time.sleep(2)
                 recFileName = name_prefix+"_comment"+datetime.now().strftime('%d%b%Y_%H_%M_%S')
                 print(recFileName)
                 # records with 48000 quality
@@ -709,7 +710,7 @@ while True:
                 
                 #time.sleep(1.4)
                 print("Gencat recording stopped")
-                #time.sleep(5.0)
+                
                 previewplay(".",recFileName+".wav")
                 time.sleep(5)
                 driver.execute_script('document.getElementsByTagName("audio")[0].play()')
@@ -735,7 +736,7 @@ while True:
                 chromium_running=False
                 #os.system("pkill -9 aplay") # to stop playing recorded audio (if it was)
                 print("Gencat recording started")
-                #driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
+                driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
                 #aplay("beep_catgen.wav")
                 #time.sleep(1.0)
                 recFileName = "recorded@"+datetime.now().strftime('%d%b%Y_%H_%M_%S')
@@ -749,7 +750,8 @@ while True:
                 os.system("pkill -9 arecord")
                 os.system("pkill -9 aplay")
                 aplay("Catgen_stop.wav")
-                #driver.execute_script('document.getElementsByTagName("audio")[0].play()')
+                time.sleep(5)
+                driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                 #time.sleep(1.4)
                 print("Gencat recording stopped")
                 #time.sleep(5.0)
