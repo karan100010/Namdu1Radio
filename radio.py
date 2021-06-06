@@ -711,7 +711,7 @@ while True:
                 print("Gencat recording stopped")
                 #time.sleep(5.0)
                 previewplay(".",recFileName+".wav")
-                os.system("lame -b 320 "+recFileName+".wav " "/var/www/html/new/.upload/gencat"+recFileName+".mp3")
+                os.system("lame -b 320 "+recFileName+".wav " "/var/www/html/new/.upload/gencat/"+recFileName+".mp3")
                 
                 
                 # os.system("lxterminal -e python "+projectpath+"/Wav2Mp3Convert.py  &")
