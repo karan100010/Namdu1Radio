@@ -702,7 +702,7 @@ while True:
                 # records with 48000 quality
                 os.system("arecord "+recFileName+".wav" +" &")
                 # scan for button press to stop recording
-                but11.wait_for_press(20)
+                but11.wait_for_press(10)
                 os.system("pkill -9 arecord")
                 os.system("pkill -9 aplay")
                 aplay("Catgen_stop.wav")
@@ -711,7 +711,7 @@ while True:
                 print("Gencat recording stopped")
                 #time.sleep(5.0)
                 previewplay(".",recFileName+".wav")
-                os.system(recFileName+".wav " "/var/www/html/new/.upload/gencat/"+recFileName+".mp3")
+                os.system("lame -b 320 "+recFileName+".wav " "/var/www/html/new/.upload/gencat"+recFileName+".mp3")
                 
                 
                 # os.system("lxterminal -e python "+projectpath+"/Wav2Mp3Convert.py  &")
