@@ -32,7 +32,7 @@ from globle_var import *
 from selenium.webdriver.chrome.options import Options
 option = Options()
 option.add_argument("--autoplay-policy=no-user-gesture-required")
-
+driver= webdriver.Chrome(chrome_options=option)
 
 
 #logging.basicConfig(filename="/opt/logfilename.log", level=logging.INFO)
@@ -66,7 +66,7 @@ while True:
     #led.off()
     #led.fwd_on()
     #Check whether local server connected
-    driver= webdriver.Chrome(chrome_options=option)
+ 
     if is_onradio() and is_connected(local_server) and cntr:
         os.system("pkill -9 aplay")
         time.sleep(0.1)
