@@ -762,11 +762,13 @@ while True:
                 os.system("pkill -9 aplay")
                 aplay("Catgen_stop.wav")
                 time.sleep(5)
-                driver.execute_script('document.getElementsByTagName("audio")[0].play()')
+                
                 #time.sleep(1.4)
                 print("Gencat recording stopped")
                 #time.sleep(5.0)
                 previewplay(".",recFileName+".wav")
+                time.sleep(5)
+                driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                 os.system("lame -b 320 "+recFileName+".wav " "/var/www/html/new/.upload/gencat/"+recFileName+".mp3")
                 os.system("rm "+recFileName)
                 
@@ -790,7 +792,7 @@ while True:
                 # os.system("killall chromium-browser")
                 # os.system("pkill -o chromium")
                 #driver=webdriver.Chrome(chrome_options=option)
-                driver.execute_script('document.getElementsByTagName("audio")[0].play()')
+                driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
                 chromium_playing=False
                 os.system("pkill -9 aplay")
                 time.sleep(0.2)
