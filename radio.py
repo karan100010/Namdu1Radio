@@ -742,8 +742,8 @@ while True:
                 #os.system("pkill -9 aplay") # to stop playing recorded audio (if it was)
                 print("Gencat recording started")
                 
-                driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
-                chromium_playing=False
+                # driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
+                # chromium_playing=False
 
                 #aplay("beep_catgen.wav")
                 #time.sleep(1.0)
