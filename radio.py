@@ -95,7 +95,7 @@ while True:
         cntr = False
         playpause = True
         time.sleep(0.2)
-        chromium_playing=True
+        
     
     ''' if button1 is pressed - Category 1 functionality button '''
     
@@ -695,7 +695,7 @@ while True:
                 chromium_playing=False
                 #os.system("pkill -9 aplay") # to stop playing recorded audio (if it was)
                 print("Gencat comment recording started")
-                #driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
+                driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
                 time.sleep(2)
                 aplay("beep_catgen.wav")
                 time.sleep(2)
@@ -738,12 +738,12 @@ while True:
             else:    
                 led.fwd_blink("slow")
                 
-                chromium_playing=False
+                
                 #os.system("pkill -9 aplay") # to stop playing recorded audio (if it was)
                 print("Gencat recording started")
                 
                 driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
-                
+                chromium_playing=False
 
                 #aplay("beep_catgen.wav")
                 #time.sleep(1.0)
@@ -775,6 +775,8 @@ while True:
                 led.fwd_on()
                 longpress = False
                 p=False
+
+
                 gencatpreview = True
                 
             
@@ -806,6 +808,7 @@ while True:
                # driver.close()
                # driver=webdriver.Chrome(chrome_options=option)
                 
+                
                 print ("starting namma school radio....from local server ")
                 time.sleep(0.4)
                 aplay("radiostart.wav")
@@ -814,7 +817,7 @@ while True:
                 driver.get("http://localhost/new")
                 chromium_playing=True
                 #time.sleep(3)
-                driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
+                #driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
                 chromium_playing=True
                 
                 playpause = True
