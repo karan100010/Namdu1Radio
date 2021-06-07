@@ -778,7 +778,7 @@ while True:
                 p=False
 
 
-                gencatpreview = False
+                gencatpreview = True
                 
             
         
@@ -818,8 +818,7 @@ while True:
                 driver.get("http://localhost/new")
                 chromium_playing=True
                 #time.sleep(3)
-                #driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
-                chromium_playing=True
+
                 
                 playpause = True
             # Check whether the internet is available to play from the website
