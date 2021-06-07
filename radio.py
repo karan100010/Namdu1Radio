@@ -777,7 +777,7 @@ while True:
                 p=False
 
 
-                gencatpreview = True
+                gencatpreview = False
                 
             
         
