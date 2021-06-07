@@ -741,6 +741,7 @@ while True:
                 
                 
                 #os.system("pkill -9 aplay") # to stop playing recorded audio (if it was)
+
                 print("Gencat recording started")
                 
                 # driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
@@ -787,6 +788,7 @@ while True:
 
             if gencatpreview == True:
                 gencatpreview = False
+                driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
                 print("Gen cat preview stopped")
                 os.system("pkill -9 aplay")
             elif playpause == True:
