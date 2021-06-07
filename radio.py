@@ -33,7 +33,7 @@ from selenium.webdriver.chrome.options import Options
 option = Options()
 option.add_argument("--autoplay-policy=no-user-gesture-required")
 
-driver= webdriver.Chrome(chrome_options=option)
+
 
 #logging.basicConfig(filename="/opt/logfilename.log", level=logging.INFO)
 
@@ -66,6 +66,7 @@ while True:
     #led.off()
     #led.fwd_on()
     #Check whether local server connected
+    driver= webdriver.Chrome(chrome_options=option)
     if is_onradio() and is_connected(local_server) and cntr:
         os.system("pkill -9 aplay")
         time.sleep(0.1)
@@ -656,15 +657,15 @@ while True:
                 playpause = True               
             led10.off()   
     '''upload and backup play functionality'''
-    
-    if but11.is_pressed:
+    p=True
+    if p:
         #os.system("killall chromium-browser")
         #os.system("pkill -o chromium")
         print("buttons 11 pressed")
         previousTime = time.time()
         
         
-        while but11.is_pressed:
+        while p:
             #Check if the button is pressed for > 2sec
             if time.time() - previousTime > 2.0:
                 if but1.is_pressed or but2.is_pressed or but3.is_pressed \
@@ -676,7 +677,7 @@ while True:
                    print("hi")
                 # if the button is pressed for more than two seconds, then longpress is True
                 longpress = True
-                #break
+                break
                 #aplay("beep_catgen.wav")
          
 
@@ -703,7 +704,7 @@ while True:
                 # records with 48000 quality
                 os.system("arecord "+recFileName+".wav" +" &")
                 # scan for button press to stop recording
-                but11.wait_for_press(300)
+                but11.wait_for_press(3)
                 os.system("pkill -9 arecord")
                 os.system("pkill -9 aplay")
                 aplay("Catgen_stop.wav")
@@ -724,7 +725,7 @@ while True:
                 led.fwd_on()
                 longpress = False
                 gencatpreview = True
-            
+                p=False
                
 
                  
@@ -746,7 +747,7 @@ while True:
                 os.system("arecord "+recFileName +" &")
 
                 # scan for button press to stop recording
-                but11.wait_for_press(300)
+                but11.wait_for_press(3)
                 os.system("pkill -9 arecord")
                 os.system("pkill -9 aplay")
                 aplay("Catgen_stop.wav")
@@ -761,7 +762,8 @@ while True:
                 
                 led.fwd_on()
                 longpress = False
-               # gencatpreview = True
+                p=False
+                gencatpreview = True
                 
             
         
@@ -786,8 +788,9 @@ while True:
             #Check whether the local server is connected    
             elif is_onradio() and is_connected(local_server):
                 os.system("pkill -9 aplay")
-                os.system("killall chromium-browser")
-                os.system("pkill -o chromium")
+                # os.system("killall chromium-browser")
+                # os.system("pkill -o chromium")
+                driver.close()
                 driver=webdriver.Chrome(chrome_options=option)
                 chromium_running=False
                 print ("starting namma school radio....from local server ")
@@ -804,8 +807,9 @@ while True:
                 # playpause = True
             else:
                 print ("Button11 general playback started")
-                os.system("pkill -9 aplay")
-                os.system("pkill -o chromium")
+                # os.system("pkill -9 aplay")
+                # os.system("pkill -o chromium")
+                driver.close()
                 driver=webdriver.Chrome(chrome_options=option)
                 aplay("radiostart.wav")
                 src_renamPath = r'/var/www/html/indexgencat.php'
