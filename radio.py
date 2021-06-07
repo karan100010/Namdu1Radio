@@ -74,7 +74,7 @@ while True:
         aplay("radiostart.wav")
         #time.sleep(3)
         aplay("radiostart.wav")
-        driver.get("http://localhost/new")  
+        #driver.get("http://localhost/new")  
         #time.sleep(3)
       #  driver.execute_script('document.getElementsByTagName("audio")[0].play()')   
         cntr = False
@@ -89,13 +89,13 @@ while True:
         shutil.copy(src_renamPath, dst_renamPath)
         time.sleep(3)
         aplay("radiostart.wav")
-        driver.get("http://localhost/new")
+        #driver.get("http://localhost/new")
         #time.sleep(3)
       #  driver.execute_script('document.getElementsByTagName("audio")[0].play()')
         cntr = False
         playpause = True
         time.sleep(0.2)
-        chromium_running=True
+        chromium_playing=True
     
     ''' if button1 is pressed - Category 1 functionality button '''
     
@@ -685,14 +685,14 @@ while True:
         if time.time() - previousTime < 0.1: continue
         time.sleep(0.5)
         if longpress:
-            if chromium_running:
+            if chromium_playing:
                 f = open("/var/www/html/new/MediaUpload/current_link.txt", "r")
                 filepath=f.readline()
                 name_prefix=filepath.split(".")[1].split("/")[-1]
                 f.close()
                 led.fwd_blink("slow")
                
-                chromium_running=False
+                chromium_playing=False
                 #os.system("pkill -9 aplay") # to stop playing recorded audio (if it was)
                 print("Gencat comment recording started")
                 #driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
@@ -738,7 +738,7 @@ while True:
             else:    
                 led.fwd_blink("slow")
                 
-                chromium_running=False
+                chromium_playing=False
                 #os.system("pkill -9 aplay") # to stop playing recorded audio (if it was)
                 print("Gencat recording started")
                 
@@ -787,10 +787,11 @@ while True:
             elif playpause == True:
                 playpause = False
                 print ("echo closing radio !!!")
-                os.system("killall chromium-browser")
-                os.system("pkill -o chromium")
+                # os.system("killall chromium-browser")
+                # os.system("pkill -o chromium")
                 #driver=webdriver.Chrome(chrome_options=option)
-                chromium_running=False
+                driver.execute_script('document.getElementsByTagName("audio")[0].play()')
+                chromium_playing=False
                 os.system("pkill -9 aplay")
                 time.sleep(0.2)
                 aplay("radiostop.wav")
@@ -802,14 +803,17 @@ while True:
                 # os.system("pkill -o chromium")
                # driver.close()
                # driver=webdriver.Chrome(chrome_options=option)
-                chromium_running=False
+                
                 print ("starting namma school radio....from local server ")
                 time.sleep(0.4)
                 aplay("radiostart.wav")
                 time.sleep(0.4)
                 #driver.get("http://localhost/new")
+                driver.get("http://localhost/new")
+                chromium_playing=True
                 #time.sleep(3)
                 driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
+                chromium_playing=True
                 
                 playpause = True
             # Check whether the internet is available to play from the website
@@ -828,9 +832,10 @@ while True:
                 shutil.copy(src_renamPath, dst_renamPath)
                 #Starts playing mp3 from .upload folder
                 print("starting audio form localhost in gencat")
-                #driver.get("http://localhost/new")
+                driver.get("http://localhost/new")
+                chromium_playing=True
                 time.sleep(3)
                 # driver.execute_script('document.getElementsByTagName("audio")[0].play()')
-                chromium_running=True
+                chromium_playing=True
                 time.sleep(0.2)
                 playpause = True
