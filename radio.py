@@ -789,7 +789,7 @@ while True:
                 print ("echo closing radio !!!")
                 os.system("killall chromium-browser")
                 os.system("pkill -o chromium")
-                driver=webdriver.Chrome(chrome_options=option)
+                #driver=webdriver.Chrome(chrome_options=option)
                 chromium_running=False
                 os.system("pkill -9 aplay")
                 time.sleep(0.2)
@@ -801,15 +801,16 @@ while True:
                 # os.system("killall chromium-browser")
                 # os.system("pkill -o chromium")
                # driver.close()
-                driver=webdriver.Chrome(chrome_options=option)
+               # driver=webdriver.Chrome(chrome_options=option)
                 chromium_running=False
                 print ("starting namma school radio....from local server ")
                 time.sleep(0.4)
                 aplay("radiostart.wav")
                 time.sleep(0.4)
-                driver.get("http://localhost/new")
+                #driver.get("http://localhost/new")
                 #time.sleep(3)
-            #    driver.execute_script('document.getElementsByTagName("audio")[0].play()')
+                driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
+                
                 playpause = True
             # Check whether the internet is available to play from the website
             # elif is_connected(remote_server):
@@ -827,9 +828,9 @@ while True:
                 shutil.copy(src_renamPath, dst_renamPath)
                 #Starts playing mp3 from .upload folder
                 print("starting audio form localhost in gencat")
-                driver.get("http://localhost/new")
+                #driver.get("http://localhost/new")
                 time.sleep(3)
-                driver.execute_script('document.getElementsByTagName("audio")[0].play()')
+                # driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                 chromium_running=True
                 time.sleep(0.2)
                 playpause = True
