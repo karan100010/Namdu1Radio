@@ -659,14 +659,14 @@ while True:
             led10.off()   
     '''upload and backup play functionality'''
     p=True
-    if p:
+    if but11.is_pressed:
         #os.system("killall chromium-browser")
         #os.system("pkill -o chromium")
         print("buttons 11 pressed")
         previousTime = time.time()
         
         
-        while p:
+        while but11.is_pressed:
             #Check if the button is pressed for > 2sec
             if time.time() - previousTime > 2.0:
                 if but1.is_pressed or but2.is_pressed or but3.is_pressed \
@@ -678,7 +678,7 @@ while True:
                    print("hi")
                 # if the button is pressed for more than two seconds, then longpress is True
                 longpress = True
-                break
+                #break
                 #aplay("beep_catgen.wav")
          
 
