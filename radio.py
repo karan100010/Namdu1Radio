@@ -74,7 +74,8 @@ while True:
         aplay("radiostart.wav")
         #time.sleep(3)
         aplay("radiostart.wav")
-        #driver.get("http://localhost/new")  
+        driver.get("http://localhost/new")  
+        chromium_playing=True
         #time.sleep(3)
       #  driver.execute_script('document.getElementsByTagName("audio")[0].play()')   
         cntr = False
@@ -89,8 +90,8 @@ while True:
         shutil.copy(src_renamPath, dst_renamPath)
         time.sleep(3)
         aplay("radiostart.wav")
-        #driver.get("http://localhost/new")
-        #time.sleep(3)
+        driver.get("http://localhost/new")
+        time.sleep(3)
       #  driver.execute_script('document.getElementsByTagName("audio")[0].play()')
         cntr = False
         playpause = True
