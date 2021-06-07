@@ -76,7 +76,7 @@ while True:
         aplay("radiostart.wav")
         driver.get("http://localhost/new")  
         #time.sleep(3)
-        driver.execute_script('document.getElementsByTagName("audio")[0].play()')   
+      #  driver.execute_script('document.getElementsByTagName("audio")[0].play()')   
         cntr = False
         playpause = True
     # #Check whether the internet is available to play from the website
@@ -91,7 +91,7 @@ while True:
         aplay("radiostart.wav")
         driver.get("http://localhost/new")
         #time.sleep(3)
-        driver.execute_script('document.getElementsByTagName("audio")[0].play()')
+      #  driver.execute_script('document.getElementsByTagName("audio")[0].play()')
         cntr = False
         playpause = True
         time.sleep(0.2)
@@ -695,14 +695,18 @@ while True:
                 chromium_running=False
                 #os.system("pkill -9 aplay") # to stop playing recorded audio (if it was)
                 print("Gencat comment recording started")
-                driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
+                #driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
                 time.sleep(2)
                 aplay("beep_catgen.wav")
                 time.sleep(2)
                 recFileName = name_prefix+"_comment"+datetime.now().strftime('%d%b%Y_%H_%M_%S')
                 print(recFileName)
                 # records with 48000 quality
-                os.system("arecord "+recFileName+".wav" +" &")
+
+                if os.system("arecord "+recFileName+".wav" +" &")==0:
+                    print("audio getting recorded")
+                else:
+                    arecord(".",recFileName+".wav")    
                 # scan for button press to stop recording
                 but11.wait_for_press(3)
                 os.system("pkill -9 arecord")
@@ -714,7 +718,7 @@ while True:
                 
                 previewplay(".",recFileName+".wav")
                 time.sleep(10)
-                driver.execute_script('document.getElementsByTagName("audio")[0].play()')
+                #driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                 os.system("lame -b 320 "+recFileName+".wav " "/var/www/html/new/.upload/gencat/"+recFileName+".mp3")
                 os.system("rm "+recFileName)
                 
@@ -737,14 +741,20 @@ while True:
                 chromium_running=False
                 #os.system("pkill -9 aplay") # to stop playing recorded audio (if it was)
                 print("Gencat recording started")
+                
                 driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
+                
+
                 #aplay("beep_catgen.wav")
                 #time.sleep(1.0)
                 recFileName = "recorded@"+datetime.now().strftime('%d%b%Y_%H_%M_%S')
                 # records with 48000 quality
                 print(recFileName)
                 # records with 48000 quality
-                os.system("arecord "+recFileName +" &")
+                if os.system("arecord "+recFileName+".wav" +" &")==0:
+                    print("audio getting recorded")
+                else:
+                    arecord(".",recFileName+".wav")    
 
                 # scan for button press to stop recording
                 but11.wait_for_press(3)
@@ -790,7 +800,7 @@ while True:
                 os.system("pkill -9 aplay")
                 # os.system("killall chromium-browser")
                 # os.system("pkill -o chromium")
-                driver.close()
+               # driver.close()
                 driver=webdriver.Chrome(chrome_options=option)
                 chromium_running=False
                 print ("starting namma school radio....from local server ")
@@ -799,7 +809,7 @@ while True:
                 time.sleep(0.4)
                 driver.get("http://localhost/new")
                 #time.sleep(3)
-                driver.execute_script('document.getElementsByTagName("audio")[0].play()')
+            #    driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                 playpause = True
             # Check whether the internet is available to play from the website
             # elif is_connected(remote_server):
@@ -809,8 +819,8 @@ while True:
                 print ("Button11 general playback started")
                 # os.system("pkill -9 aplay")
                 # os.system("pkill -o chromium")
-                driver.close()
-                driver=webdriver.Chrome(chrome_options=option)
+                # driver.close()
+                # driver=webdriver.Chrome(chrome_options=option)
                 aplay("radiostart.wav")
                 src_renamPath = r'/var/www/html/indexgencat.php'
                 dst_renamPath = r'/var/www/html/index.php'
