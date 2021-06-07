@@ -746,7 +746,7 @@ while True:
                 # driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
                 # chromium_playing=False
 
-                #aplay("beep_catgen.wav")
+                aplay("beep_catgen.wav")
                 #time.sleep(1.0)
                 recFileName = "recorded@"+datetime.now().strftime('%d%b%Y_%H_%M_%S')
                 # records with 48000 quality
