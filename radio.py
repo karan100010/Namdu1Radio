@@ -709,7 +709,7 @@ while True:
                 else:
                     arecord(".",recFileName+".wav")    
                 # scan for button press to stop recording
-                but11.wait_for_press(3)
+                but11.wait_for_press(300)
                 os.system("pkill -9 arecord")
                 os.system("pkill -9 aplay")
                 aplay("Catgen_stop.wav")
@@ -758,7 +758,7 @@ while True:
                     arecord(".",recFileName+".wav")    
 
                 # scan for button press to stop recording
-                but11.wait_for_press(3)
+                but11.wait_for_press(300)
                 os.system("pkill -9 arecord")
                 os.system("pkill -9 aplay")
                 aplay("Catgen_stop.wav")
