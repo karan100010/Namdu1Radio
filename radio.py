@@ -686,6 +686,7 @@ while True:
         if time.time() - previousTime < 0.1: continue
         time.sleep(0.5)
         if longpress:
+            aplay("beep_catgen.wav")
             if chromium_playing:
                 f = open("/var/www/html/new/MediaUpload/current_link.txt", "r")
                 filepath=f.readline()
@@ -698,7 +699,7 @@ while True:
                 print("Gencat comment recording started")
                 driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
                 time.sleep(2)
-                aplay("beep_catgen.wav")
+               # aplay("beep_catgen.wav")
                 time.sleep(2)
                 recFileName = name_prefix+"_comment"+datetime.now().strftime('%d%b%Y_%H_%M_%S')
                 print(recFileName)
@@ -748,7 +749,7 @@ while True:
                 # driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
                 # chromium_playing=False
 
-                aplay("beep_catgen.wav")
+              #  aplay("beep_catgen.wav")
                 #time.sleep(1.0)
                 recFileName = "recorded@"+datetime.now().strftime('%d%b%Y_%H_%M_%S')
                 # records with 48000 quality
@@ -774,7 +775,7 @@ while True:
                 # driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                 os.system("lame -b 320 "+recFileName+".wav " "/var/www/html/new/.upload/gencat/"+recFileName+".mp3")
                 os.system("rm "+recFileName)
-                
+
                 
                 led.fwd_on()
                 longpress = False
