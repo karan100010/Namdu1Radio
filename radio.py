@@ -722,7 +722,7 @@ while True:
                 # previewplay(".",recFileName+".wav")
                 time.sleep(10)
                 
-                #driver.execute_script('document.getElementsByTagName("audio")[0].play()')
+                driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                 os.system("lame -b 320 "+recFileName+".wav " "/var/www/html/new/.upload/gencat/"+recFileName+".mp3")
                 os.system("rm "+recFileName)
                 
@@ -734,6 +734,7 @@ while True:
                 longpress = False
                 gencatpreview = True
                 p=False
+                chromium_playing=True
                
 
                  
@@ -792,7 +793,6 @@ while True:
 
             if gencatpreview == True:
                 gencatpreview = False
-                driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                 
                 print("Gen cat preview stopped")
                 os.system("pkill -9 aplay")
