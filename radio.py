@@ -669,6 +669,7 @@ while True:
         while but11.is_pressed:
             #Check if the button is pressed for > 2sec
             if time.time() - previousTime > 2.0:
+                aplay("beep_catgen.wav")
                 if but1.is_pressed or but2.is_pressed or but3.is_pressed \
                 or but4.is_pressed or but5.is_pressed or but6.is_pressed \
                 or but7.is_pressed or but8.is_pressed or but9.is_pressed \
@@ -686,7 +687,7 @@ while True:
         if time.time() - previousTime < 0.1: continue
         time.sleep(0.5)
         if longpress:
-            aplay("beep_catgen.wav")
+            
             if chromium_playing:
                 f = open("/var/www/html/new/MediaUpload/current_link.txt", "r")
                 filepath=f.readline()
