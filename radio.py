@@ -721,7 +721,7 @@ while True:
                 # previewplay(".",recFileName+".wav")
                 time.sleep(10)
                 
-                driver.execute_script('document.getElementsByTagName("audio")[0].play()')
+                #driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                 os.system("lame -b 320 "+recFileName+".wav " "/var/www/html/new/.upload/gencat/"+recFileName+".mp3")
                 os.system("rm "+recFileName)
                 
@@ -791,6 +791,7 @@ while True:
 
             if gencatpreview == True:
                 gencatpreview = False
+                driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                 
                 print("Gen cat preview stopped")
                 os.system("pkill -9 aplay")
@@ -809,6 +810,7 @@ while True:
             #Check whether the local server is connected    
             elif is_onradio() and is_connected(local_server):
                 os.system("pkill -9 aplay")
+                
                 # os.system("killall chromium-browser")
                 # os.system("pkill -o chromium")
                # driver.close()
