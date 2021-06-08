@@ -91,6 +91,7 @@ while True:
         time.sleep(3)
         aplay("radiostart.wav")
         driver.get("http://localhost/new")
+        chromium_playing=True
         time.sleep(3)
       #  driver.execute_script('document.getElementsByTagName("audio")[0].play()')
         cntr = False
@@ -659,14 +660,14 @@ while True:
             led10.off()   
     '''upload and backup play functionality'''
     p=True
-    if but11.is_pressed:
+    if p:
         #os.system("killall chromium-browser")
         #os.system("pkill -o chromium")
         print("buttons 11 pressed")
         previousTime = time.time()
         
         
-        while but11.is_pressed:
+        while p:
             #Check if the button is pressed for > 2sec
             if time.time() - previousTime > 2.0:
                 aplay("beep_catgen.wav")
@@ -679,7 +680,7 @@ while True:
                    print("hi")
                 # if the button is pressed for more than two seconds, then longpress is True
                 longpress = True
-                #break
+                break
                 #aplay("beep_catgen.wav")
          
 
@@ -720,7 +721,7 @@ while True:
                 print("Gencat recording stopped")
                 
                 # previewplay(".",recFileName+".wav")
-                time.sleep(10)
+                #time.sleep(10)
                 
                 driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                 os.system("lame -b 320 "+recFileName+".wav " "/var/www/html/new/.upload/gencat/"+recFileName+".mp3")
@@ -849,6 +850,6 @@ while True:
                 chromium_playing=True
                 time.sleep(3)
                 # driver.execute_script('document.getElementsByTagName("audio")[0].play()')
-                chromium_playing=True
+                
                 time.sleep(0.2)
                 playpause = True
