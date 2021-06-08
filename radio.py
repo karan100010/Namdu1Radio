@@ -670,7 +670,11 @@ while True:
         while p:
             #Check if the button is pressed for > 2sec
             if time.time() - previousTime > 2.0:
-                aplay("beep_catgen.wav")
+                
+                if chromium_playing:
+                    driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
+                    aplay("beep_catgen.wav")
+                    driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                 if but1.is_pressed or but2.is_pressed or but3.is_pressed \
                 or but4.is_pressed or but5.is_pressed or but6.is_pressed \
                 or but7.is_pressed or but8.is_pressed or but9.is_pressed \
@@ -695,11 +699,11 @@ while True:
                 name_prefix=filepath.split(".")[1].split("/")[-1]
                 f.close()
                 led.fwd_blink("slow")
-               
+                driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
                 chromium_playing=False
                 #os.system("pkill -9 aplay") # to stop playing recorded audio (if it was)
                 print("Gencat comment recording started")
-                driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
+                
                 time.sleep(2)
                # aplay("beep_catgen.wav")
                 time.sleep(2)
