@@ -660,21 +660,21 @@ while True:
             led10.off()   
     '''upload and backup play functionality'''
     p=True
-    if p:
+    if but11.is_pressed:
         #os.system("killall chromium-browser")
         #os.system("pkill -o chromium")
         print("buttons 11 pressed")
         previousTime = time.time()
         
         
-        while p:
+        while but11.is_pressed:
             #Check if the button is pressed for > 2sec
             if time.time() - previousTime > 2.0:
                 
                 if chromium_playing:
                     driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
-                    aplay("beep_catgen.wav")
-                    driver.execute_script('document.getElementsByTagName("audio")[0].play()')
+                aplay("beep_catgen.wav")
+              
                 if but1.is_pressed or but2.is_pressed or but3.is_pressed \
                 or but4.is_pressed or but5.is_pressed or but6.is_pressed \
                 or but7.is_pressed or but8.is_pressed or but9.is_pressed \
@@ -699,7 +699,7 @@ while True:
                 name_prefix=filepath.split(".")[1].split("/")[-1]
                 f.close()
                 led.fwd_blink("slow")
-                driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
+            #    driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
                 chromium_playing=False
                 #os.system("pkill -9 aplay") # to stop playing recorded audio (if it was)
                 print("Gencat comment recording started")
@@ -716,7 +716,7 @@ while True:
                 else:
                     arecord(".",recFileName+".wav")    
                 # scan for button press to stop recording
-                but11.wait_for_press(3)
+                but11.wait_for_press(300)
                 os.system("pkill -9 arecord")
                 os.system("pkill -9 aplay")
                 aplay("Catgen_stop.wav")
@@ -768,7 +768,7 @@ while True:
                     arecord(".",recFileName+".wav")    
 
                 # scan for button press to stop recording
-                but11.wait_for_press(300)
+                but11.wait_for_press(30000)
                 os.system("pkill -9 arecord")
                 os.system("pkill -9 aplay")
                 aplay("Catgen_stop.wav")
