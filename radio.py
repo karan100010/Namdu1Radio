@@ -717,9 +717,10 @@ while True:
                 #time.sleep(1.4)
                 print("Gencat recording stopped")
                 
-                previewplay(".",recFileName+".wav")
-                time.sleep(10)
-                #driver.execute_script('document.getElementsByTagName("audio")[0].play()')
+                # previewplay(".",recFileName+".wav")
+                # time.sleep(10)
+                
+                driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                 os.system("lame -b 320 "+recFileName+".wav " "/var/www/html/new/.upload/gencat/"+recFileName+".mp3")
                 os.system("rm "+recFileName)
                 
@@ -768,11 +769,12 @@ while True:
                 #time.sleep(1.4)
                 print("Gencat recording stopped")
                 #time.sleep(5.0)
-                previewplay(".",recFileName+".wav")
+                #previewplay(".",recFileName+".wav")
                 time.sleep(5)
                 # driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                 os.system("lame -b 320 "+recFileName+".wav " "/var/www/html/new/.upload/gencat/"+recFileName+".mp3")
                 os.system("rm "+recFileName)
+                
                 
                 led.fwd_on()
                 longpress = False
@@ -788,7 +790,7 @@ while True:
 
             if gencatpreview == True:
                 gencatpreview = False
-                driver.execute_script('document.getElementsByTagName("audio")[0].play()')
+                
                 print("Gen cat preview stopped")
                 os.system("pkill -9 aplay")
             elif playpause == True:
