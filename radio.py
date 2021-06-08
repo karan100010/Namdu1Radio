@@ -788,7 +788,7 @@ while True:
 
             if gencatpreview == True:
                 gencatpreview = False
-                driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
+                driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                 print("Gen cat preview stopped")
                 os.system("pkill -9 aplay")
             elif playpause == True:
