@@ -34,7 +34,7 @@ from selenium.webdriver.chrome.options import Options
 option = Options()
 option.add_argument("--autoplay-policy=no-user-gesture-required")
 driver= webdriver.Chrome(chrome_options=option)
-coloredlogs.install()
+
 
 
 
@@ -61,6 +61,9 @@ console.setFormatter(formatter)
 # add the handler to the root logger
 logging.getLogger('').addHandler(console)
 
+logger1 = logging.getLogger('myapp.area1')
+logger2 = logging.getLogger('myapp.area2')
+
 
 #def wavFilesJoin(file1,file):
     #a, fs, enc = audiolab.wavread('file1')
@@ -76,13 +79,15 @@ GPIO.setmode(GPIO.BCM)
 #time.sleep(10.0)
 led.fwd_on()
 #Pi started indication audio
-logging.info("pi Started")
+logger1.info("pi Started")
+logger2.info("pi Started")
 #Test folder to verify local backup play
 aplay("lappiready.wav")
 #time.sleep(3.0)
 
 while True:
-    logging.info("pi Running")
+    logger1.info("pi Running")
+    logger2.info("pi Running")
     #led.off()
     #led.fwd_on()
     #Check whether local server connected
@@ -90,7 +95,8 @@ while True:
     if is_onradio() and is_connected(local_server) and cntr:
         os.system("pkill -9 aplay")
         time.sleep(0.1)
-        logging.info ("starting namma school radio....from local server ")
+        logger1.info ("starting namma school radio....from local server ")
+        logger2.info ("starting namma school radio....from local server ")
         aplay("radiostart.wav")
         #time.sleep(3)
         aplay("radiostart.wav")
@@ -102,8 +108,10 @@ while True:
         playpause = True
     # #Check whether the internet is available to play from the website
     elif cntr == True:
-        logging.info ("Local and remote server not available")
-        logging.info ("Audio starts from localhost")
+        logger1.info ("Local and remote server not available")
+        logger2.info ("Local and remote server not available")
+        logger1.info ("Audio starts from localhost")
+        logger2.info ("Audio starts from localhost")
         os.system("pkill -9 aplay")
         src_renamPath = r'/var/www/html/indexgencat.php'
         dst_renamPath = r'/var/www/html/index.php'
@@ -122,7 +130,8 @@ while True:
     ''' if button1 is pressed - Category 1 functionality button '''
     
     if but1.is_pressed:                                     #changeing for testing form but1.ispressed to true change back when done testing
-        logging.info("button1 pressed")
+        logger1.info("button1 pressed")
+        logger2.info("button1 pressed")
         previousTime = time.time()
         time.sleep(0.2)
        
@@ -134,7 +143,8 @@ while True:
                 (but8.is_pressed) or (but9.is_pressed) or (but10.is_pressed) or (but11.is_pressed)):
                     #if any of the buttons 2 to 9 is also pressed and held, then shutdown the Pi
                    # shutdownPi()
-                   logging.info("hi")
+                   logger1.info("hi")
+                   logger2.info("hi")
                 #if the button is pressed for more than two seconds, then longpress is True
                 longpress = True
                 aplay("beep_cat1.wav")
@@ -157,7 +167,8 @@ while True:
             
     ''' if button2 is pressed - Category 2 functionality button '''
     if but2.is_pressed:
-        logging.info("button2 pressed")
+        logger1.info("button2 pressed")
+        logger2.info("button2 pressed")
         previousTime = time.time()
         while but2.is_pressed:
             #Check if the button is pressed for > 2sec
@@ -189,7 +200,8 @@ while True:
             pfiles = os.listdir(uploadpathcat2)
             if cat2preview == True:
                 cat2preview = False
-                logging.info("Cat2 preview stopped")
+                logger1.info("Cat2 preview stopped")
+                logger2.info("Cat2 preview stopped")
                 os.system("pkill -9 aplay")
             elif cat2playpause == True:
 
@@ -201,7 +213,8 @@ while True:
                 playpause = True
                 cat2playpause = True
             elif not pfiles:
-                logging.info("No files to play in cat2")
+                logger1.info("No files to play in cat2")
+                logger2.info("No files to play in cat2")
                 aplay("NofilesinCat2.wav")
             else:
                 os.system("pkill -9 aplay")
@@ -219,7 +232,8 @@ while True:
             led2.off()
     ''' if button3 is pressed - Category 3 functionality button '''
     if but3.is_pressed:
-        logging.info("button3 pressed")
+        logger1.info("button3 pressed")
+        logger2.info("button3 pressed")
         previousTime = time.time()
         while but3.is_pressed:
             #Check if the button is pressed for > 2sec
@@ -250,7 +264,8 @@ while True:
             pfiles = os.listdir(uploadpathcat3)
             if cat3preview == True:
                 cat3preview = False
-                logging.info("Cat3 preview stopped")
+                logger1.info("Cat3 preview stopped")
+                logger2.info("Cat3 preview stopped")
                 os.system("pkill -9 aplay")
             elif cat3playpause == True:
                 stop_radio()
@@ -261,7 +276,8 @@ while True:
                 playpause = True
                 cat3playpause = True
             elif not pfiles:
-                logging.info("No files to play in cat3")
+                logger1.info("No files to play in cat3")
+                logger2.info("No files to play in cat3")
                 aplay("NofilesinCat3.wav")
             else:
                 os.system("pkill -9 aplay")
@@ -279,7 +295,8 @@ while True:
             #led3.off()
     ''' if button4 is pressed - Category 4 functionality button '''
     if but4.is_pressed:
-        logging.info("button4 pressed")
+        logger1.info("button4 pressed")
+        logger2.info("button4 pressed")
         previousTime = time.time()
         while but4.is_pressed:
             #Check if the button is pressed for > 2sec
@@ -307,7 +324,8 @@ while True:
             pfiles = os.listdir(uploadpathcat4)
             if cat4preview == True:
                 cat4preview = False
-                logging.info("Cat4 preview stopped")
+                logger1.info("Cat4 preview stopped")
+                logger2.info("Cat4 preview stopped")
                 os.system("pkill -9 aplay")
             elif cat4playpause == True:
                 stop_radio()
@@ -318,7 +336,8 @@ while True:
                 playpause = True
                 cat4playpause = True
             elif not pfiles:
-                logging.info("No files to play in cat4")
+                logger1.info("No files to play in cat4")
+                logger2.info("No files to play in cat4")
                 aplay("NofilesinCat4.wav")
             else:
                 os.system("pkill -9 aplay")
@@ -336,7 +355,8 @@ while True:
             led4.off()
     ''' if button5 is pressed - Category 5 functionality button '''
     if but5.is_pressed:
-        logging.info("button5 pressed")
+        logger1.info("button5 pressed")
+        logger2.info("button5 pressed")
         previousTime = time.time()
         while but5.is_pressed:
             #Check if the button is pressed for > 2sec
@@ -364,7 +384,8 @@ while True:
             pfiles = os.listdir(uploadpathcat5)
             if cat5preview == True:
                 cat5preview = False
-                logging.info("Cat5 preview stopped")
+                logger1.info("Cat5 preview stopped")
+                logger2.info("Cat5 preview stopped")
                 os.system("pkill -9 aplay")
             elif cat5playpause == True:
                 stop_radio()
@@ -375,7 +396,8 @@ while True:
                 playpause = True
                 cat5playpause = True
             elif not pfiles:
-                logging.info("No files to play in cat5")
+                logger1.info("No files to play in cat5")
+                logger2.info("No files to play in cat5")
                 aplay("NofilesinCat5.wav")
             else:
                 os.system("pkill -9 aplay")
@@ -393,7 +415,8 @@ while True:
             led5.off()
     ''' if button6 is pressed - Category 6 functionality button '''
     if but6.is_pressed:
-        logging.info("button6 pressed")
+        logger1.info("button6 pressed")
+        logger2.info("button6 pressed")
         previousTime = time.time()
         while but6.is_pressed:
             #Check if the button is pressed for > 2sec
@@ -421,7 +444,8 @@ while True:
             pfiles = os.listdir(uploadpathcat6)
             if cat6preview == True:
                 cat6preview = False
-                logging.info("Cat6 preview stopped")
+                logger1.info("Cat6 preview stopped")
+                logger2.info("Cat6 preview stopped")
                 os.system("pkill -9 aplay")
             elif cat6playpause == True:
                 stop_radio()
@@ -432,7 +456,8 @@ while True:
                 playpause = True
                 cat6playpause = True
             elif not pfiles:
-                logging.info("No files to play in cat6")
+                logger1.info("No files to play in cat6")
+                logger2.info("No files to play in cat6")
                 aplay("NofilesinCat6.wav")
             else:
                 os.system("pkill -9 aplay")
@@ -450,7 +475,8 @@ while True:
             led6.off()
     ''' if button7 is pressed - Category 7 functionality button '''
     if but7.is_pressed:
-        logging.info("button7 pressed")
+        logger1.info("button7 pressed")
+        logger2.info("button7 pressed")
         previousTime = time.time()
         while but7.is_pressed:
             #Check if the button is pressed for > 2sec
@@ -478,7 +504,8 @@ while True:
             pfiles = os.listdir(uploadpathcat7)
             if cat7preview == True:
                 cat7preview = False
-                logging.info("Cat7 preview stopped")
+                logger1.info("Cat7 preview stopped")
+                logger2.info("Cat7 preview stopped")
                 os.system("pkill -9 aplay")
             elif cat7playpause == True:
                 stop_radio()
@@ -490,7 +517,8 @@ while True:
                 playpause = True
                 cat7playpause = True
             elif not pfiles:
-                logging.info("No files to play in cat7")
+                logger1.info("No files to play in cat7")
+                logger2.info("No files to play in cat7")
                 aplay("NofilesinCat7.wav")
             else:
                 os.system("pkill -9 aplay")
@@ -509,7 +537,8 @@ while True:
     ''' if button8 is pressed - Category 8 functionality button '''
 
     if but8.is_pressed:
-        logging.info("button8 pressed")
+        logger1.info("button8 pressed")
+        logger2.info("button8 pressed")
         previousTime = time.time()
         while but8.is_pressed:
             #Check if the button is pressed for > 2sec
@@ -537,7 +566,8 @@ while True:
             pfiles = os.listdir(uploadpathcat8)
             if cat8preview == True:
                 cat8preview = False
-                logging.info("Cat8 preview stopped")
+                logger1.info("Cat8 preview stopped")
+                logger2.info("Cat8 preview stopped")
                 os.system("pkill -9 aplay")
             elif cat8playpause == True:
                 stop_radio()
@@ -548,7 +578,8 @@ while True:
                 playpause = True
                 cat8playpause = True
             elif not pfiles:
-                logging.info("No files to play in cat8")
+                logger1.info("No files to play in cat8")
+                logger2.info("No files to play in cat8")
                 aplay("NofilesinCat8.wav")
             else:
                 os.system("pkill -9 aplay")
@@ -566,7 +597,8 @@ while True:
             led8.off()
     ''' if button9 is pressed - Category 9 functionality button '''
     if but9.is_pressed:
-        logging.info("button9 pressed")
+        logger1.info("button9 pressed")
+        logger2.info("button9 pressed")
         previousTime = time.time()
         while but9.is_pressed:
             #Check if the button is pressed for > 2sec
@@ -594,7 +626,8 @@ while True:
             pfiles = os.listdir(uploadpathcat9)
             if cat9preview == True:
                 cat9preview = False
-                logging.info("Cat9 preview stopped")
+                logger1.info("Cat9 preview stopped")
+                logger2.info("Cat9 preview stopped")
                 os.system("pkill -9 aplay")
             elif cat9playpause == True:
                 stop_radio()
@@ -605,7 +638,8 @@ while True:
                 playpause = True
                 cat9playpause = True
             elif not pfiles:
-                logging.info("No files to play in cat9")
+                logger1.info("No files to play in cat9")
+                logger2.info("No files to play in cat9")
                 aplay("NofilesinCat9.wav")
             else:
                 os.system("pkill -9 aplay")
@@ -623,7 +657,8 @@ while True:
             led9.off()
     ''' if button10 is pressed - Category 10 functionality button '''
     if but10.is_pressed:
-        logging.info("button10 pressed")
+        logger1.info("button10 pressed")
+        logger2.info("button10 pressed")
         previousTime = time.time()
         while but10.is_pressed:
             #Check if the button is pressed for > 2sec
@@ -651,7 +686,8 @@ while True:
             pfiles = os.listdir(uploadpathcat10)
             if cat10preview == True:
                 cat10preview = False
-                logging.info("Cat10 preview stopped")
+                logger1.info("Cat10 preview stopped")
+                logger2.info("Cat10 preview stopped")
                 os.system("pkill -9 aplay")
             elif cat10playpause == True:
                 stop_radio()
@@ -662,7 +698,8 @@ while True:
                 playpause = True
                 cat10playpause = True
             elif not pfiles:
-                logging.info("No files to play in cat10")
+                logger1.info("No files to play in cat10")
+                logger2.info("No files to play in cat10")
                 aplay("NofilesinCat10.wav")
             else:
                 os.system("pkill -9 aplay")
@@ -683,7 +720,8 @@ while True:
     if but11.is_pressed:
         #os.system("killall chromium-browser")
         #os.system("pkill -o chromium")
-        logging.info("buttons 11 pressed")
+        logger1.info("buttons 11 pressed")
+        logger2.info("buttons 11 pressed")
         previousTime = time.time()
         
         
@@ -701,7 +739,8 @@ while True:
                 or but10.is_pressed :
                     #if any of the buttons 1 to 9 is also pressed and held, then shutdown the Pi
                    #shutdownPi()
-                   logging.info("hi")
+                   logger1.info("hi")
+                   logger2.info("hi")
                 # if the button is pressed for more than two seconds, then longpress is True
                 longpress = True
                 break
@@ -722,17 +761,20 @@ while True:
             #    driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
                 chromium_playing=False
                 #os.system("pkill -9 aplay") # to stop playing recorded audio (if it was)
-                logging.info("Gencat comment recording started")
+                logger1.info("Gencat comment recording started")
+                logger2.info("Gencat comment recording started")
                 
                 time.sleep(2)
                # aplay("beep_catgen.wav")
                 time.sleep(2)
                 recFileName = name_prefix+"_comment"+datetime.now().strftime('%d%b%Y_%H_%M_%S')
-                logging.info(recFileName)
+                logger1.info(recFileName)
+                logger2.info(recFileName)
                 # records with 48000 quality
 
                 if os.system("arecord "+recFileName+".wav" +" &")==0:
-                    logging.info("audio getting recorded")
+                    logger1.info("audio getting recorded")
+                    logger2.info("audio getting recorded")
                 else:
                     arecord(".",recFileName+".wav")    
                 # scan for button press to stop recording
@@ -742,7 +784,8 @@ while True:
                 aplay("Catgen_stop.wav")
                 
                 #time.sleep(1.4)
-                logging.info("Gencat recording stopped")
+                logger1.info("Gencat recording stopped")
+                logger2.info("Gencat recording stopped")
                 
                 # previewplay(".",recFileName+".wav")
                 #time.sleep(10)
@@ -771,7 +814,8 @@ while True:
                 
                 #os.system("pkill -9 aplay") # to stop playing recorded audio (if it was)
 
-                logging.info("Gencat recording started")
+                logger1.info("Gencat recording started")
+                logger2.info("Gencat recording started")
                 
                 # driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
                 # chromium_playing=False
@@ -780,10 +824,12 @@ while True:
                 #time.sleep(1.0)
                 recFileName = "recorded@"+datetime.now().strftime('%d%b%Y_%H_%M_%S')
                 # records with 48000 quality
-                logging.info(recFileName)
+                logger1.info(recFileName)
+                logger2.info(recFileName)
                 # records with 48000 quality
                 if os.system("arecord "+recFileName+".wav" +" &")==0:
-                    logging.info("audio getting recorded")
+                    logger1.info("audio getting recorded")
+                    logger2.info("audio getting recorded")
                 else:
                     arecord(".",recFileName+".wav")    
 
@@ -795,7 +841,8 @@ while True:
                 time.sleep(5)
                 
                 #time.sleep(1.4)
-                logging.info("Gencat recording stopped")
+                logger1.info("Gencat recording stopped")
+                logger2.info("Gencat recording stopped")
                 #time.sleep(5.0)
                 #previewplay(".",recFileName+".wav")
                 time.sleep(5)
@@ -819,11 +866,13 @@ while True:
             if gencatpreview == True:
                 gencatpreview = False
                 
-                logging.info("Gen cat preview stopped")
+                logger1.info("Gen cat preview stopped")
+                logger2.info("Gen cat preview stopped")
                 os.system("pkill -9 aplay")
             elif playpause == True:
                 playpause = False
-                logging.info ("echo closing radio !!!")
+                logger1.info ("echo closing radio !!!")
+                logger2.info ("echo closing radio !!!")
                 # os.system("killall chromium-browser")
                 # os.system("pkill -o chromium")
                 #driver=webdriver.Chrome(chrome_options=option)
@@ -843,7 +892,8 @@ while True:
                # driver=webdriver.Chrome(chrome_options=option)
                 
                 
-                logging.info ("starting namma school radio....from local server ")
+                logger1.info ("starting namma school radio....from local server ")
+                logger2.info ("starting namma school radio....from local server ")
                 time.sleep(0.4)
                 aplay("radiostart.wav")
                 time.sleep(0.4)
@@ -859,7 +909,8 @@ while True:
                 # start_radio_from_internet()                      
                 # playpause = True
             else:
-                logging.info ("Button11 general playback started")
+                logger1.info ("Button11 general playback started")
+                logger2.info ("Button11 general playback started")
                 # os.system("pkill -9 aplay")
                 # os.system("pkill -o chromium")
                 # driver.close()
@@ -869,7 +920,8 @@ while True:
                 dst_renamPath = r'/var/www/html/index.php'
                 shutil.copy(src_renamPath, dst_renamPath)
                 #Starts playing mp3 from .upload folder
-                logging.info("starting audio form localhost in gencat")
+                logger1.info("starting audio form localhost in gencat")
+                logger2.info("starting audio form localhost in gencat")
                 driver.get("http://localhost/new")
                 chromium_playing=True
                 time.sleep(3)
