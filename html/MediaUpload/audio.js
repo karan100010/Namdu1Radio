@@ -19,7 +19,9 @@
             playlist.find('a').click(function(e){
             e.preventDefault();
             link = $(this);
+            console.log(link)
             current = link.parent().index();
+            link
          //   console.log(audio[0])
             run(link, audio[0]);
             
@@ -33,21 +35,17 @@
               
            //   console.log(link.href)
               
-           $.post("./MediaUpload/write_link.php",
-           {
-             link: link.href,
-             
-           },
-     
-           //console.log(x)
            
-           )
             }
           else{
               link = playlist.find('a')[current]; 
              // console.log(x)
               //let x={"link":link.href};
-              $.post("./MediaUpload/write_link.php",
+              
+            }
+            if(typeof link!=='undefined'){
+            run($(link),audio[0]);
+            $.post("./MediaUpload/write_link.php",
               {
                 link: link.href,
                 
@@ -57,8 +55,9 @@
               
               )
             }
-            run($(link),audio[0]);
-            });
+          else{
+            current++
+          }});
        }
        function run(link, player){
           player.src = link.attr('href');

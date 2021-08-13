@@ -1,1 +1,1 @@
-http://localhost:8080/.upload/gencat/beep_cat2.wav
+http://localhost:8080/.upload/gencat/y.wav
