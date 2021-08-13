@@ -42,7 +42,7 @@ driver= webdriver.Chrome(chrome_options=option)
 
 # *** Global Variables *** #
 
-coloredlogs.install()
+#coloredlogs.install()
 
 
 # set up logging to file - see previous section for more details
