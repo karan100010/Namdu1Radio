@@ -43,7 +43,7 @@ coloredlogs.install()
 # *** Global Variables *** #
 
 coloredlogs.install()
-import logging
+
 
 # set up logging to file - see previous section for more details
 logging.basicConfig(level=logging.INFO,
