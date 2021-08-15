@@ -151,8 +151,13 @@ def main_fuction(logger,catname,driver):
                 
                 
         if chromium_playing:
-            driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
-            aplay("beep_catgen.wav")
+            try:
+                driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
+                aplay("beep_catgen.wav")
+            except Exception as e:
+                logger.info("no audios to play")
+                logger.error(e)
+                    
               
 #                 # if the button is pressed for more than two seconds, then longpress is True
                  #longpress = True
