@@ -136,52 +136,195 @@ def stop_radio():
     aplay("radiostop.wav")       
 
 
-def start_radio_from_internet():
-    os.system("killall chromium-browser")
-    os.system("pkill -o chromium")
-    print ("starting namma school radio from internet")
-    os.system("pkill -9 aplay")
-    time.sleep(0.4)
-    aplay("radiostart.wav")
-    time.sleep(3.0)
-    os.system("chromium-browser --kiosk --app=https://www.namdu1radio.com/thanmayi-school-radio &")     
-#use first letter as a capital latter while defining catname
-def playaudio(catname,led=None,preview_status=None):
-            if led:                 
-                led.on()
-            global cat1playpause
-            global playpause
-            pfiles = os.listdir(uploadpathcat1)
-            if preview_status == True:
-                preview_status = False
-                print(catname+" preview stopped")
+def main_fuction(logger,catname):
+        global chromium_playing
+        global driver
+        #global button_press
+        global longpress
+        global playpause
+        global btn
+        #while button_press==1:
+            
+            #Check if the button is pressed for > 2sec
+#             if time.time() - previousTime > 2.0:
+                
+                
+        if chromium_playing:
+            driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
+            aplay("beep_catgen.wav")
+              
+#                 # if the button is pressed for more than two seconds, then longpress is True
+                 #longpress = True
+#                 break
+#                 #aplay("beep_catgen.wav")
+         
+
+#    # if longpress is True, record audio after a 'beep'
+#         if time.time() - previousTime < 0.1: 
+#             continue
+#         time.sleep(0.5)
+        if btn.is_pressed:
+            
+            if chromium_playing:
+                f = open("/var/www/html/new/MediaUpload/current_link.txt", "r")
+                filepath=f.readline()
+                name_prefix=filepath.split(".")[1].split("/")[-1]
+                f.close()
+                #led.fwd_blink("slow")
+            #    driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
+                chromium_playing=False
+                #os.system("pkill -9 aplay") # to stop playing recorded audio (if it was)
+                logger.info(" comment recording started")
+                
+                time.sleep(2)
+               # aplay("beep_catgen.wav")
+                time.sleep(2)
+                recFileName = name_prefix+"_comment"+datetime.now().strftime('%d%b%Y_%H_%M_%S')
+                logger.info(recFileName)
+                # records with 48000 quality
+
+                if os.system("arecord "+recFileName+".wav" +" &")==0:
+                    logger.info("audio getting recorded")
+                else:
+                    arecord(".",recFileName+".wav")    
+                # scan for button press to stop recording
+                btn.wait_for_press(300)
+                os.system("pkill -9 arecord")
+                os.system("pkill -9 aplay")
+                aplay("Catgen_stop.wav")
+                
+                #time.sleep(1.4)
+                logger.info(catname+" recording stopped")
+                
+                # previewplay(".",recFileName+".wav")
+                #time.sleep(10)
+                
+                driver.execute_script('document.getElementsByTagName("audio")[0].play()')
+                os.system("lame -b 320 "+recFileName+".wav " "/var/www/html/new/.upload/"+catname+"/"+recFileName+".mp3")
+                os.system("rm "+recFileName)
+                
+                
+                # os.system("lxterminal -e python "+projectpath+"/Wav2Mp3Convert.py  &")
+                # shutil.copyfile(recordingpathcat11+"/"+recFileName+".mp3","/var/www/html/new/.upload/"+recFileName+"mp3")
+                # os.system("rm "+recFileName)
+                #led.fwd_on()
+                longpress = False
+                gencatpreview = True
+                p=False
+                chromium_playing=True
+               
+
+                 
+                 
+
+            else:    
+                #led.fwd_blink("slow")
+                
+                
+                #os.system("pkill -9 aplay") # to stop playing recorded audio (if it was)
+
+                logger.info(catname+" recording started")
+                
+                # driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
+                # chromium_playing=False
+
+              #  aplay("beep_catgen.wav")
+                #time.sleep(1.0)
+                recFileName = "recorded@"+datetime.now().strftime('%d%b%Y_%H_%M_%S')
+                # records with 48000 quality
+                logger.info(recFileName)
+                # records with 48000 quality
+                if os.system("arecord "+recFileName+".wav" +" &")==0:
+                    logger.info("audio getting recorded")
+                else:
+                    arecord(".",recFileName+".wav")    
+
+                # scan for button press to stop recording
+                btn.wait_for_press(30000)
+                os.system("pkill -9 arecord")
+                os.system("pkill -9 aplay")
+                aplay("Catgen_stop.wav")
+                time.sleep(5)
+                
+                #time.sleep(1.4)
+                logger.info(catname+" recording stopped")
+                #time.sleep(5.0)
+                #previewplay(".",recFileName+".wav")
+                time.sleep(5)
+                # driver.execute_script('document.getElementsByTagName("audio")[0].play()')
+                os.system("lame -b 320 "+recFileName+".wav " "/var/www/html/new/.upload/"+catname+"/"+recFileName+".mp3")
+                os.system("rm "+recFileName)
+
+                
+                #led.fwd_on()
+                longpress = False
+                p=False
+
+
+                gencatpreview = True
+                
+            
+        
+           
+        else:
+
+            if gencatpreview == True:
+                gencatpreview = False
+                
+                logger.info("Gen cat preview stopped")
+                os.system("pkill -9 aplay")
+            elif playpause == True:
+                playpause = False
+                logger.info ("echo closing radio !!!")
+                # os.system("killall chromium-browser")
+                # os.system("pkill -o chromium")
+                #driver=webdriver.Chrome(chrome_options=option)
+                driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
+                chromium_playing=False
+                os.system("pkill -9 aplay")
+                time.sleep(0.2)
+                aplay("radiostop.wav")
+                #break
+            #Check whether the local server is connected    
+            elif is_onradio() and is_connected(local_server):
                 os.system("pkill -9 aplay")
                 
-            elif cat1playpause == True:
-                stop_radio()
+                # os.system("killall chromium-browser")
+                # os.system("pkill -o chromium")
+               # driver.close()
+               # driver=webdriver.Chrome(chrome_options=option)
+                
+                
+                logger.info ("starting namma school radio....from local server ")
+                time.sleep(0.4)
+                aplay("radiostart.wav")
+                time.sleep(0.4)
+                #driver.get("http://localhost/new")
+                driver.get("http://localhost/")
+                chromium_playing=True
+                #time.sleep(3)
 
-                cat1playpause = False
-                playpause = False
-            elif is_connected(remote_server):
-                start_radio_from_internet()
-                   
+                
                 playpause = True
-                cat1playpause = True
-            elif not pfiles:
-                print("No files to play in "+catname)
-             #   aplay("NofilesinCat1.wav") ask girish ji about these files.
+            # Check whether the internet is available to play from the website
+            # elif is_connected(remote_server):
+                # start_radio_from_internet()                      
+                # playpause = True
             else:
-                os.system("pkill -9 aplay")
-                time.sleep(0.4)
-                aplay(catname+".wav")
-                time.sleep(0.4)
-                os.system("killall chromium-browser")
-                os.system("pkill -o chromium")
-                src_renamPath = "/".join(uploadpath.split("/")[1:4])+'/indexcat1.php'
-                dst_renamPath = "/".join(uploadpath.split("/")[1:4])+'/index.php'
+                logger.info ("Button11 general playback started")
+                # os.system("pkill -9 aplay")
+                # os.system("pkill -o chromium")
+                # driver.close()
+                # driver=webdriver.Chrome(chrome_options=option)
+                aplay("radiostart.wav")
+                src_renamPath = r'/var/www/html/index'+catname+'.php'
+                dst_renamPath = r'/var/www/html/index.php'
                 shutil.copy(src_renamPath, dst_renamPath)
-                os.system("chromium-browser localhost &")
+                #Starts playing mp3 from .upload folder
+                logger.info("starting audio form localhost in gencat")
+                driver.get("http://localhost/")
+                chromium_playing=True
+                time.sleep(3)
+                # driver.execute_script('document.getElementsByTagName("audio")[0].play()')
+                
                 time.sleep(0.2)
-                playpause = True
-                if led:               
-                    led.off()

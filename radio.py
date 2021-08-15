@@ -171,39 +171,7 @@ while True:
     
     if rotater_value==1:                                     #changeing for testing form but1.ispressed to true change back when done testing
         logger1.info("button1 pressed")
-        logger2.info("button1 pressed")
-        previousTime = time.time()
-        time.sleep(0.2)
-       
-        while but1.is_pressed:
-            #Check if the button is pressed for > 2sec
-            if time.time() - previousTime > 2.0:
-                if((but2.is_pressed) or (but3.is_pressed) or (but4.is_pressed)or  
-                (but5.is_pressed) or (but6.is_pressed) or (but7.is_pressed) or 
-                (but8.is_pressed) or (but9.is_pressed) or (but10.is_pressed) or (but11.is_pressed)):
-                    #if any of the buttons 2 to 9 is also pressed and held, then shutdown the Pi
-                   # shutdownPi()
-                   logger1.info("hi")
-                   logger2.info("hi")
-                #if the button is pressed for more than two seconds, then longpress is True
-                longpress = True
-                aplay("beep_cat1.wav")
-                #break
-        if time.time() - previousTime < 0.1: continue
-        time.sleep(0.5)
-    
-        if longpress:
-            record(but1,stop_audio["Cat1"],recordingpathcat1,uploadpathcat1,led1)           
-            #os.system("rm "+recordingpathcat1+"/recorded_audio.wav") #remove the recorded file
-            longpress = False
-            cat1playpause = True
-            cat1preview = True
-            led1.off()
-            
-            #break
-        else:
-            cat1playpause=False
-            playaudio("Cat1",led1,cat10preview)
+        main_fuction(logger1,"cat1")
             
     ''' if button2 is pressed - Category 2 functionality button '''
     if rotater_value==2:
