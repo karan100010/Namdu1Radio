@@ -43,6 +43,46 @@ driver= webdriver.Chrome(chrome_options=option)
 # *** Global Variables *** #
 
 #coloredlogs.install()
+#code for the rotry swich
+
+from RPi_GPIO_Rotary import rotary
+
+## Define Callback functions
+
+rotater_value=0
+def cwTurn():
+
+    logger1.info("CW Turn")
+
+def ccwTurn():
+    logger1.info("CCW Turn")
+
+def buttonPushed():
+    logger1.info("Button Pushed")
+
+
+def valueChanged(count):
+    global rotater_value
+    rotater_value = count%10
+    print(count%10) ## Current Counter value
+
+
+
+
+
+## Initialise (clk, dt, sw, ticks)
+obj = rotary.Rotary(23,24,25,2)
+
+ ## Register callbacks
+obj.register(increment=cwTurn, decrement=ccwTurn)
+
+## Register more callbacks
+obj.register(pressed=buttonPushed, onchange=valueChanged) 
+
+## Start monitoring the encoder
+obj.start() 
+
+
 
 
 # set up logging to file - see previous section for more details
@@ -129,7 +169,7 @@ while True:
     
     ''' if button1 is pressed - Category 1 functionality button '''
     
-    if but1.is_pressed:                                     #changeing for testing form but1.ispressed to true change back when done testing
+    if rotater_value==1:                                     #changeing for testing form but1.ispressed to true change back when done testing
         logger1.info("button1 pressed")
         logger2.info("button1 pressed")
         previousTime = time.time()
@@ -166,7 +206,7 @@ while True:
             playaudio("Cat1",led1,cat10preview)
             
     ''' if button2 is pressed - Category 2 functionality button '''
-    if but2.is_pressed:
+    if rotater_value==2:
         logger1.info("button2 pressed")
         logger2.info("button2 pressed")
         previousTime = time.time()
@@ -231,7 +271,7 @@ while True:
                 playpause = True               
             led2.off()
     ''' if button3 is pressed - Category 3 functionality button '''
-    if but3.is_pressed:
+    if rotater_value==3:
         logger1.info("button3 pressed")
         logger2.info("button3 pressed")
         previousTime = time.time()
@@ -294,7 +334,7 @@ while True:
                 playpause = True               
             #led3.off()
     ''' if button4 is pressed - Category 4 functionality button '''
-    if but4.is_pressed:
+    if rotater_value==4:
         logger1.info("button4 pressed")
         logger2.info("button4 pressed")
         previousTime = time.time()
@@ -354,7 +394,7 @@ while True:
                 playpause = True               
             led4.off()
     ''' if button5 is pressed - Category 5 functionality button '''
-    if but5.is_pressed:
+    if rotater_value==5:
         logger1.info("button5 pressed")
         logger2.info("button5 pressed")
         previousTime = time.time()
@@ -414,7 +454,7 @@ while True:
                 playpause = True               
             led5.off()
     ''' if button6 is pressed - Category 6 functionality button '''
-    if but6.is_pressed:
+    if rotater_value==6:
         logger1.info("button6 pressed")
         logger2.info("button6 pressed")
         previousTime = time.time()
@@ -474,7 +514,7 @@ while True:
                 playpause = True               
             led6.off()
     ''' if button7 is pressed - Category 7 functionality button '''
-    if but7.is_pressed:
+    if rotater_value==7:
         logger1.info("button7 pressed")
         logger2.info("button7 pressed")
         previousTime = time.time()
@@ -536,7 +576,7 @@ while True:
             led7.off()
     ''' if button8 is pressed - Category 8 functionality button '''
 
-    if but8.is_pressed:
+    if rotater_value==8:
         logger1.info("button8 pressed")
         logger2.info("button8 pressed")
         previousTime = time.time()
@@ -596,7 +636,7 @@ while True:
                 playpause = True               
             led8.off()
     ''' if button9 is pressed - Category 9 functionality button '''
-    if but9.is_pressed:
+    if rotater_value==9:
         logger1.info("button9 pressed")
         logger2.info("button9 pressed")
         previousTime = time.time()
@@ -656,7 +696,7 @@ while True:
                 playpause = True               
             led9.off()
     ''' if button10 is pressed - Category 10 functionality button '''
-    if but10.is_pressed:
+    if rotater_value==10:
         logger1.info("button10 pressed")
         logger2.info("button10 pressed")
         previousTime = time.time()
@@ -717,7 +757,7 @@ while True:
             led10.off()   
     '''upload and backup play functionality'''
     p=True
-    if but11.is_pressed:
+    if rotater_value==0:
         #os.system("killall chromium-browser")
         #os.system("pkill -o chromium")
         logger1.info("buttons 11 pressed")
