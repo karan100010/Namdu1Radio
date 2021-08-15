@@ -143,6 +143,7 @@ def main_fuction(logger,catname):
         global longpress
         global playpause
         global btn
+        gencatpreview=False
         #while button_press==1:
             
             #Check if the button is pressed for > 2sec
