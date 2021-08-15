@@ -171,7 +171,7 @@ while True:
     
     if rotater_value==1:                                     #changeing for testing form but1.ispressed to true change back when done testing
         logger1.info("button1 pressed")
-        main_fuction(logger1,"cat1")
+        main_fuction(logger1,"cat1",driver)
             
     ''' if button2 is pressed - Category 2 functionality button '''
     if rotater_value==2:

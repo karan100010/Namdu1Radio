@@ -136,9 +136,9 @@ def stop_radio():
     aplay("radiostop.wav")       
 
 
-def main_fuction(logger,catname):
+def main_fuction(logger,catname,driver):
         global chromium_playing
-        global driver
+       
         #global button_press
         global longpress
         global playpause
