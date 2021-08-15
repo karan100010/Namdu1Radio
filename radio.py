@@ -66,7 +66,7 @@ def valueChanged(count):
     rotater_value = count%10
     print(count%10) ## Current Counter value
 
-s
+
 
 
 
