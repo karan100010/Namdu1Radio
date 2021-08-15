@@ -92,31 +92,31 @@ uploadpathcat10 = uploadpath + "/cat10"
 uploadpathcat11 = uploadpath + "/gencat"
 #LED's config:
 #------------
-led1 = LED(18) #GPIO18 - LED1
-led2 = LED(23) #GPIO23 - LED2
-#led3 = LED(24) #GPIO24 - LED3
-led4 = LED(25) #GPIO25 - LED4
-led5 = LED(8)  #GPIO8  - LED5
-led6 = LED(7)  #GPIO7  - LED6
-led7 = LED(12) #GPIO12 - LED7
-led8 = LED(16) #GPIO16 - LED8
-led9 = LED(20) #GPIO20 - LED9
-#led11 = LED(21) #GPIO21 - LED11
-led10 = LED(14) #GPIO14 - LED10
+# led1 = LED(18) #GPIO18 - LED1
+# led2 = LED(23) #GPIO23 - LED2
+# #led3 = LED(24) #GPIO24 - LED3
+# led4 = LED(25) #GPIO25 - LED4
+# led5 = LED(8)  #GPIO8  - LED5
+# led6 = LED(7)  #GPIO7  - LED6
+# led7 = LED(12) #GPIO12 - LED7
+# led8 = LED(16) #GPIO16 - LED8
+# led9 = LED(20) #GPIO20 - LED9
+# #led11 = LED(21) #GPIO21 - LED11
+# led10 = LED(14) #GPIO14 - LED10
 
-led = None
-led = DualLED(21,24)
+# led = None
+# led = DualLED(21,24)
 
-#GPIO's config:
-#-------------
-but1 = Button(17) #17 - cat1
-but2 = Button(27) #27 - cat2
-but3 = Button(22) #22 - cat3
-but4 = Button(10) #10 - cat4
-but5 = Button(9)  #9  - cat5
-but6 = Button(11) #11 - cat6
-but7 = Button(5)  #5  - cat7
-but8 = Button(6)  #6  - cat8
-but9 = Button(13) #13 - cat9
-but10 = Button(19)#19 - cat10
-but11 = Button(26)#26 - cat11
+# #GPIO's config:
+# #-------------
+# but1 = Button(17) #17 - cat1
+# but2 = Button(27) #27 - cat2
+# but3 = Button(22) #22 - cat3
+# but4 = Button(10) #10 - cat4
+# but5 = Button(9)  #9  - cat5
+# but6 = Button(11) #11 - cat6
+# but7 = Button(5)  #5  - cat7
+# but8 = Button(6)  #6  - cat8
+# but9 = Button(13) #13 - cat9
+# but10 = Button(19)#19 - cat10
+# but11 = Button(26)#26 - cat11
