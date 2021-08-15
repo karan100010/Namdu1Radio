@@ -117,7 +117,7 @@ logger2 = logging.getLogger('myapp.area2')
 # *** Setting up GPIO of Pi *** #
 GPIO.setmode(GPIO.BCM)
 #time.sleep(10.0)
-led.fwd_on()
+#led.fwd_on()
 #Pi started indication audio
 logger1.info("pi Started")
 logger2.info("pi Started")
