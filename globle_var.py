@@ -4,7 +4,7 @@ from dualled import DualLED
 
 import os
 
-stop_audio_list=[i for i in os.listdir("/home/pi/Namdu1Radio/audio-alert/") if "stop" in i]
+stop_audio_list=[i for i in os.listdir("/home/pi/Documents/Namdu1Radio/audio-alert/") if "stop" in i]
 names=[]
 
 for i in stop_audio_list:
