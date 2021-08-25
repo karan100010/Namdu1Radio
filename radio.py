@@ -169,12 +169,14 @@ while True:
     
     ''' if button1 is pressed - Category 1 functionality button '''
     
-    if rotater_value==1:                                     #changeing for testing form but1.ispressed to true change back when done testing
+    if rotater_value==1: 
+        rotater_value="x"                                    #changeing for testing form but1.ispressed to true change back when done testing
         logger1.info("button1 pressed")
         main_fuction(logger1,"cat1",driver)
             
     ''' if button2 is pressed - Category 2 functionality button '''
     if rotater_value==2:
+        rotater_value="x"
         logger1.info("button2 pressed")
         logger2.info("button2 pressed")
         previousTime = time.time()
@@ -240,6 +242,7 @@ while True:
             led2.off()
     ''' if button3 is pressed - Category 3 functionality button '''
     if rotater_value==3:
+        rotater_value="x"
         logger1.info("button3 pressed")
         logger2.info("button3 pressed")
         previousTime = time.time()
@@ -303,6 +306,7 @@ while True:
             #led3.off()
     ''' if button4 is pressed - Category 4 functionality button '''
     if rotater_value==4:
+        rotater_value="x"
         logger1.info("button4 pressed")
         logger2.info("button4 pressed")
         previousTime = time.time()
@@ -363,6 +367,7 @@ while True:
             led4.off()
     ''' if button5 is pressed - Category 5 functionality button '''
     if rotater_value==5:
+        rotater_value="x"
         logger1.info("button5 pressed")
         logger2.info("button5 pressed")
         previousTime = time.time()
@@ -423,6 +428,7 @@ while True:
             led5.off()
     ''' if button6 is pressed - Category 6 functionality button '''
     if rotater_value==6:
+        rotater_value="x"
         logger1.info("button6 pressed")
         logger2.info("button6 pressed")
         previousTime = time.time()
@@ -483,6 +489,7 @@ while True:
             led6.off()
     ''' if button7 is pressed - Category 7 functionality button '''
     if rotater_value==7:
+        rotater_value="x"
         logger1.info("button7 pressed")
         logger2.info("button7 pressed")
         previousTime = time.time()
@@ -545,6 +552,7 @@ while True:
     ''' if button8 is pressed - Category 8 functionality button '''
 
     if rotater_value==8:
+        rotater_value="x"
         logger1.info("button8 pressed")
         logger2.info("button8 pressed")
         previousTime = time.time()
@@ -605,6 +613,7 @@ while True:
             led8.off()
     ''' if button9 is pressed - Category 9 functionality button '''
     if rotater_value==9:
+        rotater_value="x"
         logger1.info("button9 pressed")
         logger2.info("button9 pressed")
         previousTime = time.time()
@@ -665,6 +674,7 @@ while True:
             led9.off()
     ''' if button10 is pressed - Category 10 functionality button '''
     if rotater_value==10:
+        rotater_value="x"
         logger1.info("button10 pressed")
         logger2.info("button10 pressed")
         previousTime = time.time()
@@ -726,6 +736,7 @@ while True:
     '''upload and backup play functionality'''
     p=True
     if rotater_value==0:
+        rotater_value="x"
         #os.system("killall chromium-browser")
         #os.system("pkill -o chromium")
         logger1.info("buttons 11 pressed")
