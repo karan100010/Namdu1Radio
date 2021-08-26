@@ -195,32 +195,32 @@ while True:
     if rotater_value==5:
         rotater_value="x"
         logger1.info("button5 pressed")
-         main_fuction(logger1,"cat5",driver)
+        main_fuction(logger1,"cat5",driver)
     ''' if button6 is pressed - Category 6 functionality button '''
     if rotater_value==6:
         rotater_value="x"
         logger1.info("button6 pressed")
-         main_fuction(logger1,"cat6",driver)
+        main_fuction(logger1,"cat6",driver)
     ''' if button7 is pressed - Category 7 functionality button '''
     if rotater_value==7:
         rotater_value="x"
         logger1.info("button7 pressed")
-         main_fuction(logger1,"cat7",driver)
+        main_fuction(logger1,"cat7",driver)
     ''' if button8 is pressed - Category 8 functionality button '''
 
     if rotater_value==8:
         rotater_value="x"
         logger1.info("button8 pressed")
-         main_fuction(logger1,"cat8",driver)
+        main_fuction(logger1,"cat8",driver)
     ''' if button9 is pressed - Category 9 functionality button '''
     if rotater_value==9:
         rotater_value="x"
         logger1.info("button9 pressed")
-      main_fuction(logger1,"cat9",driver)
+        main_fuction(logger1,"cat9",driver)
     if rotater_value==10:
         rotater_value="x"
         logger1.info("button10 pressed")
-         main_fuction(logger1,"cat10",driver)
+        main_fuction(logger1,"cat10",driver)
     if rotater_value==0:
         rotater_value="x"
         #os.system("killall chromium-browser")
