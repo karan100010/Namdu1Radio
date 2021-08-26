@@ -183,7 +183,7 @@ while True:
     if rotater_value==3:
         rotater_value="x"
         logger1.info("button3 pressed")
-         main_fuction(logger1,"cat3",driver)
+        main_fuction(logger1,"cat3",driver)
         
             #led3.off()
     ''' if button4 is pressed - Category 4 functionality button '''
