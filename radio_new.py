@@ -140,7 +140,7 @@ while True:
         aplay("radiostart.wav")
         #time.sleep(3)
         aplay("radiostart.wav")
-        driver.get("http://localhost/new")  
+        driver.get("http://localhost")  
         chromium_playing=True
         #time.sleep(3)
       #  driver.execute_script('document.getElementsByTagName("audio")[0].play()')   
@@ -207,7 +207,6 @@ while True:
         logger1.info("button7 pressed")
         main_fuction(logger1,"cat7",driver)
     ''' if button8 is pressed - Category 8 functionality button '''
-
     if rotater_value==8:
         rotater_value="x"
         logger1.info("button8 pressed")
