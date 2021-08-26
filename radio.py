@@ -71,7 +71,7 @@ def valueChanged(count):
 
 
 ## Initialise (clk, dt, sw, ticks)
-obj = rotary.Rotary(21,20,16,2)
+obj = rotary.Rotary(21,20,2)
 
  ## Register callbacks
 obj.register(increment=cwTurn, decrement=ccwTurn)
@@ -182,12 +182,12 @@ while True:
         previousTime = time.time()
         while but2.is_pressed:
             #Check if the button is pressed for > 2sec
-            if time.time() - previousTime > 2.0:
-                if((but1.is_pressed) or (but3.is_pressed) or (but4.is_pressed)or  
-                (but5.is_pressed) or (but6.is_pressed) or (but7.is_pressed) or 
-                (but8.is_pressed) or (but9.is_pressed) or (but10.is_pressed) or (but11.is_pressed)):
-                    #if any of the buttons 2 to 9 is also pressed and held, then shutdown the Pi
-                    shutdownPi()
+            # if time.time() - previousTime > 2.0:
+            #     if((but1.is_pressed) or (but3.is_pressed) or (but4.is_pressed)or  
+            #     (but5.is_pressed) or (but6.is_pressed) or (but7.is_pressed) or 
+            #     (but8.is_pressed) or (but9.is_pressed) or (but10.is_pressed) or (but11.is_pressed)):
+            #         #if any of the buttons 2 to 9 is also pressed and held, then shutdown the Pi
+            #         shutdownPi()
                 #if the button is pressed for more than two seconds, then longpress is True
                 longpress = True
                 aplay("beep_cat2.wav")
@@ -248,12 +248,12 @@ while True:
         previousTime = time.time()
         while but3.is_pressed:
             #Check if the button is pressed for > 2sec
-            if time.time() - previousTime > 2.0:
-                if((but1.is_pressed) or (but2.is_pressed) or (but4.is_pressed)or  
-                (but5.is_pressed) or (but6.is_pressed) or (but7.is_pressed) or 
-                (but8.is_pressed) or (but9.is_pressed) or (but10.is_pressed) or (but11.is_pressed)):
-                    #if any of the buttons 2 to 9 is also pressed and held, then shutdown the Pi
-                    shutdownPi()
+            # if time.time() - previousTime > 2.0:
+            #     if((but1.is_pressed) or (but2.is_pressed) or (but4.is_pressed)or  
+            #     (but5.is_pressed) or (but6.is_pressed) or (but7.is_pressed) or 
+            #     (but8.is_pressed) or (but9.is_pressed) or (but10.is_pressed) or (but11.is_pressed)):
+            #         #if any of the buttons 2 to 9 is also pressed and held, then shutdown the Pi
+            #         shutdownPi()
                 #if the button is pressed for more than two seconds, then longpress is True
                 longpress = True
                 aplay("beep_cat3.wav")
@@ -313,11 +313,11 @@ while True:
         while but4.is_pressed:
             #Check if the button is pressed for > 2sec
             if time.time() - previousTime > 2.0:
-                if((but1.is_pressed) or (but2.is_pressed) or (but3.is_pressed)or  
-                (but5.is_pressed) or (but6.is_pressed) or (but7.is_pressed) or 
-                (but8.is_pressed) or (but9.is_pressed) or (but10.is_pressed) or (but11.is_pressed)):
-                    #if any of the buttons 2 to 9 is also pressed and held, then shutdown the Pi
-                    shutdownPi()
+                # if((but1.is_pressed) or (but2.is_pressed) or (but3.is_pressed)or  
+                # (but5.is_pressed) or (but6.is_pressed) or (but7.is_pressed) or 
+                # (but8.is_pressed) or (but9.is_pressed) or (but10.is_pressed) or (but11.is_pressed)):
+                #     #if any of the buttons 2 to 9 is also pressed and held, then shutdown the Pi
+                #     shutdownPi()
                 #if the button is pressed for more than two seconds, then longpress is True
                 longpress = True
                 aplay("beep_cat4.wav")
@@ -374,11 +374,11 @@ while True:
         while but5.is_pressed:
             #Check if the button is pressed for > 2sec
             if time.time() - previousTime > 2.0:
-                if((but1.is_pressed) or (but2.is_pressed) or (but3.is_pressed)or  
-                (but4.is_pressed) or (but6.is_pressed) or (but7.is_pressed) or 
-                (but8.is_pressed) or (but9.is_pressed) or (but10.is_pressed) or (but11.is_pressed)):
-                    #if any of the buttons 2 to 9 is also pressed and held, then shutdown the Pi
-                    shutdownPi()
+                # if((but1.is_pressed) or (but2.is_pressed) or (but3.is_pressed)or  
+                # (but4.is_pressed) or (but6.is_pressed) or (but7.is_pressed) or 
+                # (but8.is_pressed) or (but9.is_pressed) or (but10.is_pressed) or (but11.is_pressed)):
+                #     #if any of the buttons 2 to 9 is also pressed and held, then shutdown the Pi
+                #     shutdownPi()
                 #if the button is pressed for more than two seconds, then longpress is True
                 longpress = True
                 aplay("beep_cat5.wav")
@@ -435,11 +435,11 @@ while True:
         while but6.is_pressed:
             #Check if the button is pressed for > 2sec
             if time.time() - previousTime > 2.0:
-                if((but1.is_pressed) or (but2.is_pressed) or (but3.is_pressed)or  
-                (but4.is_pressed) or (but5.is_pressed) or (but7.is_pressed) or 
-                (but8.is_pressed) or (but9.is_pressed) or (but10.is_pressed) or (but11.is_pressed)):
-                    #if any of the buttons 2 to 9 is also pressed and held, then shutdown the Pi
-                    shutdownPi()
+                # if((but1.is_pressed) or (but2.is_pressed) or (but3.is_pressed)or  
+                # (but4.is_pressed) or (but5.is_pressed) or (but7.is_pressed) or 
+                # (but8.is_pressed) or (but9.is_pressed) or (but10.is_pressed) or (but11.is_pressed)):
+                #     #if any of the buttons 2 to 9 is also pressed and held, then shutdown the Pi
+                #     shutdownPi()
                 #if the button is pressed for more than two seconds, then longpress is True
                 longpress = True
                 aplay("beep_cat6.wav")
@@ -496,11 +496,11 @@ while True:
         while but7.is_pressed:
             #Check if the button is pressed for > 2sec
             if time.time() - previousTime > 2.0:
-                if((but1.is_pressed) or (but2.is_pressed) or (but3.is_pressed)or  
-                (but4.is_pressed) or (but5.is_pressed) or (but6.is_pressed) or 
-                (but8.is_pressed) or (but9.is_pressed) or (but10.is_pressed) or (but11.is_pressed)):
-                    #if any of the buttons 2 to 9 is also pressed and held, then shutdown the Pi
-                    shutdownPi()
+                # if((but1.is_pressed) or (but2.is_pressed) or (but3.is_pressed)or  
+                # (but4.is_pressed) or (but5.is_pressed) or (but6.is_pressed) or 
+                # (but8.is_pressed) or (but9.is_pressed) or (but10.is_pressed) or (but11.is_pressed)):
+                #     #if any of the buttons 2 to 9 is also pressed and held, then shutdown the Pi
+                #     shutdownPi()
                 #if the button is pressed for more than two seconds, then longpress is True
                 longpress = True
                 aplay("beep_cat7.wav")
@@ -559,11 +559,11 @@ while True:
         while but8.is_pressed:
             #Check if the button is pressed for > 2sec
             if time.time() - previousTime > 2.0:
-                if((but1.is_pressed) or (but2.is_pressed) or (but3.is_pressed)or  
-                (but4.is_pressed) or (but5.is_pressed) or (but6.is_pressed) or 
-                (but7.is_pressed) or (but9.is_pressed) or (but10.is_pressed) or (but11.is_pressed)):
-                    #if any of the buttons 2 to 9 is also pressed and held, then shutdown the Pi
-                    shutdownPi()
+                # if((but1.is_pressed) or (but2.is_pressed) or (but3.is_pressed)or  
+                # (but4.is_pressed) or (but5.is_pressed) or (but6.is_pressed) or 
+                # (but7.is_pressed) or (but9.is_pressed) or (but10.is_pressed) or (but11.is_pressed)):
+                #     #if any of the buttons 2 to 9 is also pressed and held, then shutdown the Pi
+                #     shutdownPi()
                 #if the button is pressed for more than two seconds, then longpress is True
                 longpress = True
                 aplay("beep_cat8.wav")
@@ -620,11 +620,11 @@ while True:
         while but9.is_pressed:
             #Check if the button is pressed for > 2sec
             if time.time() - previousTime > 2.0:
-                if((but1.is_pressed) or (but2.is_pressed) or (but3.is_pressed)or  
-                (but4.is_pressed) or (but5.is_pressed) or (but6.is_pressed) or 
-                (but7.is_pressed) or (but8.is_pressed) or (but10.is_pressed) or (but11.is_pressed)):
-                    #if any of the buttons 2 to 9 is also pressed and held, then shutdown the Pi
-                    shutdownPi()
+                # if((but1.is_pressed) or (but2.is_pressed) or (but3.is_pressed)or  
+                # (but4.is_pressed) or (but5.is_pressed) or (but6.is_pressed) or 
+                # (but7.is_pressed) or (but8.is_pressed) or (but10.is_pressed) or (but11.is_pressed)):
+                #     #if any of the buttons 2 to 9 is also pressed and held, then shutdown the Pi
+                #     shutdownPi()
                 #if the button is pressed for more than two seconds, then longpress is True
                 longpress = True
                 aplay("beep_cat9.wav")
@@ -681,11 +681,11 @@ while True:
         while but10.is_pressed:
             #Check if the button is pressed for > 2sec
             if time.time() - previousTime > 2.0:
-                if((but1.is_pressed) or (but2.is_pressed) or (but3.is_pressed)or  
-                (but4.is_pressed) or (but5.is_pressed) or (but6.is_pressed) or 
-                (but7.is_pressed) or (but8.is_pressed) or (but9.is_pressed) or (but11.is_pressed)):
-                    #if any of the buttons 2 to 9 is also pressed and held, then shutdown the Pi
-                    shutdownPi()
+                # if((but1.is_pressed) or (but2.is_pressed) or (but3.is_pressed)or  
+                # (but4.is_pressed) or (but5.is_pressed) or (but6.is_pressed) or 
+                # (but7.is_pressed) or (but8.is_pressed) or (but9.is_pressed) or (but11.is_pressed)):
+                #     #if any of the buttons 2 to 9 is also pressed and held, then shutdown the Pi
+                #     shutdownPi()
                 #if the button is pressed for more than two seconds, then longpress is True
                 longpress = True
                 aplay("beep_cat10.wav")
@@ -752,12 +752,12 @@ while True:
                     driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
                 aplay("beep_catgen.wav")
               
-                if but1.is_pressed or but2.is_pressed or but3.is_pressed \
-                or but4.is_pressed or but5.is_pressed or but6.is_pressed \
-                or but7.is_pressed or but8.is_pressed or but9.is_pressed \
-                or but10.is_pressed :
-                    #if any of the buttons 1 to 9 is also pressed and held, then shutdown the Pi
-                   #shutdownPi()
+                # if but1.is_pressed or but2.is_pressed or but3.is_pressed \
+                # or but4.is_pressed or but5.is_pressed or but6.is_pressed \
+                # or but7.is_pressed or but8.is_pressed or but9.is_pressed \
+                # or but10.is_pressed :
+                #     #if any of the buttons 1 to 9 is also pressed and held, then shutdown the Pi
+                #    #shutdownPi()
                    logger1.info("hi")
                    logger2.info("hi")
                 # if the button is pressed for more than two seconds, then longpress is True

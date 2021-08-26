@@ -118,5 +118,5 @@ uploadpathcat11 = uploadpath + "/gencat"
 # but7 = Button(5)  #5  - cat7
 # but8 = Button(6)  #6  - cat8
 # but9 = Button(13) #13 - cat9
-btn = Button(19)#19 - cat10
+btn = Button(19) #19 - cat10
 # but11 = Button(26)#26 - cat11

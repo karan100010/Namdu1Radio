@@ -155,7 +155,7 @@ def main_fuction(logger,catname,driver):
                 driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
                 aplay("beep_catgen.wav")
             except Exception as e:
-                logger.info("no audios to play")
+                logger.info("no audios to play in cat "+catname)
                 logger.error(e)
                     
               
