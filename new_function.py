@@ -329,7 +329,7 @@ def main_fuction(logger,catname,driver):
                 shutil.copy(src_renamPath, dst_renamPath)
                 #Starts playing mp3 from .upload folder
                 logger.info("starting audio form localhost in gencat")
-                driver.get("http://localhost/")
+                driver.get("http://localhost/index"+catname+".php")
                 chromium_playing=True
                 time.sleep(3)
                 # driver.execute_script('document.getElementsByTagName("audio")[0].play()')
