@@ -248,6 +248,7 @@ while True:
         logger2.info("button3 pressed")
         previousTime = time.time()
         while but3.is_pressed:
+            
             #Check if the button is pressed for > 2sec
             # if time.time() - previousTime > 2.0:
             #     if((but1.is_pressed) or (but2.is_pressed) or (but4.is_pressed)or  
