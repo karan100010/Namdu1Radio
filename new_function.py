@@ -158,7 +158,8 @@ def main_fuction(logger,catname,driver):
                 logger.info("no audios to play in cat "+catname)
                 logger.error(e)
                     
-              
+        while btn.is_pressed:
+            driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
 #                 # if the button is pressed for more than two seconds, then longpress is True
                  #longpress = True
 #                 break
@@ -169,7 +170,7 @@ def main_fuction(logger,catname,driver):
 #         if time.time() - previousTime < 0.1: 
 #             continue
 #         time.sleep(0.5)
-        if btn.is_pressed:
+        if longpress:
             
             if chromium_playing:
                 f = open("/var/www/html/new/MediaUpload/current_link.txt", "r")

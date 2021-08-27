@@ -137,9 +137,11 @@ while True:
         time.sleep(0.1)
         logger1.info ("starting namma school radio....from local server ")
         logger2.info ("starting namma school radio....from local server ")
+       #
+       
         aplay("radiostart.wav")
         #time.sleep(3)
-        aplay("radiostart.wav")
+        # aplay("radiostart.wav")
         driver.get("http://localhost")  
         chromium_playing=True
         #time.sleep(3)
@@ -158,7 +160,7 @@ while True:
         shutil.copy(src_renamPath, dst_renamPath)
         time.sleep(3)
         aplay("radiostart.wav")
-        driver.get("http://localhost/new")
+        driver.get("http://localhost/")
         chromium_playing=True
         time.sleep(3)
       #  driver.execute_script('document.getElementsByTagName("audio")[0].play()')
