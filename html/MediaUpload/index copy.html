@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <title>Make Selection</title>
+</head>
+
+<body>
+    <div id="main">
+        <div class="container" id="main">
+            <div class="d-flex flex-row justify-content-around align-items-center" id="menubox">
+                <a href="gallery.php"><button type="button" class="btn btn-primary">Goto Gallery</button></a>
+                <a href="upload.html"><button type="button" class="btn btn-warning">Upload Your Media</button></a>
+	    <div class="d-flex flex-row justify-content-around">
+                <a href="/"><button type="button" class="btn btn-danger">Go Back</button></a>
+            </div>
+            </div>
+  	     
+        </div>
+    </div>
+    <script>
+        var mainbox = document.getElementById('main');
+        var menubox = document.getElementById('menubox');
+        var backgroundImageStyle = "background-image: url('assets/images/background.png'); width:100%;  background-size: cover; ";
+        menubox.setAttribute("style", "height: " + window.innerHeight + "px;");
+        mainbox.setAttribute("style", backgroundImageStyle);
+
+    </script>
+</body>
+
+</html>
