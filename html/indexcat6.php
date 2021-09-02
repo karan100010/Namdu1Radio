@@ -1,65 +1,20 @@
+
 <html>
  <head>
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <style type="text/css">
     #playlist,audio{background:#666;width:400px;padding:20px;}
     .active a{color:#5DB0E6;text-decoration:none;}
     li a{color:#eeeedd;background:#333;padding:5px;display:block;}
     li a:hover{text-decoration:none;}
-  </style>
-  <script
-    type="text/javascript"
-    src="./jquery-1.7.js"
     
-  ></script>
+  </style>
+ 
+  <!-- added page loader due to delay in the page loading -->
 
-  <script type="text/javascript">
-
-
-    $(window).load(function(){
-      
-    var audio;
-    var playlist;
-    var tracks;
-    var current;
-
-    init();
-    function init(){
-       	current = 0;
-	audio = $('#audio');
-    	playlist = $('#playlist');
-    	tracks = playlist.find('li a');
-    	len = tracks.length - 1;
-    	audio[0].volume = .90;
-    	playlist.find('a').click(function(e){
-          e.preventDefault();
-          link = $(this);
-          current = link.parent().index();
-          run(link, audio[0]);
-    	});
-    	audio[0].addEventListener('ended',function(e){
-          current++;
-          if(current > len){
-            current = 0;
-            link = playlist.find('a')[0];
-          }
-	  else{
-            link = playlist.find('a')[current];    
-          }
-          run($(link),audio[0]);
-    	});
-     }
-     function run(link, player){
-        player.src = link.attr('href');
-        par = link.parent();
-        par.addClass('active').siblings().removeClass('active');
-        audio[0].load();
-        audio[0].play();
-     }
-
-    });
-
-  </script>
+<script src='file_upload.js'></script>
+<!-- loader css ends here  -->
  </head>
  <body>
   <div id="topMenu" style="display:flex; flex-direction: row;">
@@ -72,38 +27,75 @@
    <font size="10px">  Programs </font> 
 
    <br><br>	
+   
  <?php
     
      // Opens directory
-     $myDirectory=opendir("/var/www/html/.upload/cat6/");
+     //$myDirectory=opendir("./.upload/cat6/");
 
      // Gets each entry
-     while($entryName=readdir($myDirectory)) {
-      $dirArray[]=$entryName;
-     }
+     //while($entryName=readdir($myDirectory)) {
+     // $dirArray[]=$entryName;
+     //}
+ $dirArray=array_diff(scandir("./.upload/cat6/"), array('.', '..'));
+ rsort($dirArray);
+ $filename=array();
+ $comments=array();
+for($index=0; $index < count($dirArray); $index++){
+  if (strpos($dirArray[$index], '_comment')!==FALSE){
+    
+    array_push($comments,$dirArray[$index]);
+  }
+
+  
+  else{
+    array_push($filename,$dirArray[$index]);
+
+  }
+    
+
+} 
+
+$dirArray=array();
+
+for($i=0;$i<count($filename);$i++){
+  //echo(substr($filename[$i],0,-4));
+ array_push($dirArray,$filename[$i]);
+  for($j=0;$j<count($comments);$j++){ 
+    //echo(strpos($comments[$j],substr($filename[$i],0,-4)));
+    if(strpos($comments[$j],substr($filename[$i],0,-4))!==FALSE){
+     // echo("hello");  
+      array_push($dirArray,$comments[$j]);
+    }
+
+  }
+
+}
 
      // Finds extensions of files
-     function findexts($filename) {
+/*      function findexts($filename) {
       for ($i=0;$filename[$i]!=NULL;$i++){}
-	$exts = $filename[$i-1];
+	$exts = $filename[$i];
       return $exts;
-     }
+     } */
 
      // Closes directory
-     closedir($myDirectory);
+     //closedir($myDirectory);
 
      // Counts elements in array
      $indexCount=count($dirArray);
 
      // Sorts files
      //sort($dirArray);
-       rsort($dirArray);//sorting in descending order
+    //   sort($dirArray);//sorting in descendi
+      
+      // print($indexCount);
 	
      $flag=0;
      
      
      // (Randomly) Loops through the array of files
-     for($index=rand(0,$indexCount); $index < $indexCount; $index++) {
+     for($index=0; $index < $indexCount; $index++) {
       
       //Loops through the array of files
       //for($index=0; $index < $indexCount; $index++) {
@@ -111,45 +103,112 @@
       // Gets File Names
       $name=$dirArray[$index];
       $namehref=$dirArray[$index];	
-      $ext = findexts($name);
+    //  $ext = findexts($name);
 	
-      if ($ext=='3'){
+      if (strlen($name)>='3'){
+        $str_index=strval($index);
+        $fileid = "inputFile".$str_index;
+     //   echo($fileid);
+        $inputid="inputFileUploadButton".$str_index;
+        $inputlab="inputFileLabel".$str_index;
+        
+
 	
 	if ($flag==0){
-	 // Print 'em
-  	 print("
+	 // echo 'em
+ 
+  	 echo("
 	  <audio autoplay id='audio' preload='auto' tabindex= '0' controls='' type='audio/mpeg'>
-           <source src='./.upload/cat6/$namehref'>
+           <source src='.upload/cat6/$namehref'>
            Sorry, your browser does not support HTML5 audio.
           </audio>
 		
-
 	  <ul id='playlist'>
-     	 ");
-      	 print("
+     	 
       	  
            <li class='active'>
- 	    <a href='./.upload/cat6/$namehref'>$name</a>
- 	   </li>
-	        <button>Click</button>
-	     ");
+ 	    <a href='.upload/cat6/$namehref'>$name</a>
+       <div>
+       <div class='input-group'>
+         <div class='custom-file'>
+         <p class='comment'> Share a comment</p> 
+           <input type='file' accept='audio/*' class='custom-file-input' id='$fileid' aria-describedby='inputGroupFileAddon04'>
+           <label class='custom-file-label' id='$inputlab' for='$fileid'>Choose file</label>
+         </div>
+         <div class='input-group-append'>
+         <button class='btn btn-primary' type='button' id='$inputid' >Upload</button>
+       </div>
+     </div>
+     <div class='progress'>
+       <div id='progressbar' class='progress-bar bg-success' role='progressbar' style='width: 5%' aria-valuenow='0'
+         aria-valuemin='0' aria-valuemax='100'></div>
+     </div> 
+     <script>
+     var $fileid = document.getElementById('$fileid');
+     var $inputlab = document.getElementById('$inputlab');
+     var submitBtn = document.getElementById('$inputid');
+     var progressBar = document.getElementById('progressbar');
+     
+     $fileid.addEventListener('change', function(){handleFileupload($fileid,$inputlab)});
+     submitBtn.addEventListener('click', function(){uploadFile('$name',$fileid)});
+     </script>
+     
+ "
+    );
+  
+ 
+  
 	 $flag=1;
 	}
-	else{      
-         // Print 'em
-         print("
+	else{    
+         // echo 'em
+         echo("
           
            <li>
 	     <a href='./.upload/cat6/$namehref'>$name</a>
 	   </li>
-	 ");
+     <div>
+  <div class='input-group'>
+    <div class='custom-file'>
+    <p class='comment'> Share a comment</p> 
+      <input type='file' accept='audio/*' class='custom-file-input' id='$fileid' aria-describedby='inputGroupFileAddon04'>
+    
+      <label class='custom-file-label' id='$inputlab' for='$fileid'>Choose file</label>
+    </div>
+ <div class='input-group-append'>
+    <button class='btn btn-primary' type='button' id='$inputid' >Upload</button>
+    
+  </div>
+</div>
+<div class='progress'>
+  <div id='progressbar' class='progress-bar bg-success' role='progressbar' style='width: 5%' aria-valuenow='0'
+    aria-valuemin='0' aria-valuemax='100'></div>
+</div> 
+<script>
+var $fileid = document.getElementById('$fileid');
+var $inputlab = document.getElementById('$inputlab');
+var submitBtn = document.getElementById('$inputid');
+var progressBar = document.getElementById('progressbar');
+$fileid.addEventListener('change', function(){handleFileupload($fileid,$inputlab)});
+submitBtn.addEventListener('click', function(){uploadFile('$name',$fileid)});
+</script>");
         }
        }
       }
       
     ?>
+      
+</center>
 	
    </ul> 	
-  </center>
+
  </body>
+ <script
+    type="text/javascript"
+    src="./jquery-1.7.js"
+    
+  ></script>
+  <script src='./MediaUpload/audio.js'></script>
+  
+ 
 </html>

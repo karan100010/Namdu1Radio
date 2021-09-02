@@ -14,6 +14,17 @@
         audio = $('#audio');
             playlist = $('#playlist');
             tracks = playlist.find('li a');
+            console.log(tracks[0]["href"])
+           
+
+              
+            $.post("MediaUpload/write_link.php",{link:tracks[0]["href"]},function(d,s){console.log(s);
+                console.log(d)}
+              
+              )
+            
+              
+            
             len = tracks.length - 1;
             audio[0].volume = .90;
             playlist.find('a').click(function(e){
@@ -21,8 +32,8 @@
             link = $(this);
             console.log(link)
             current = link.parent().index();
-            link
-         //   console.log(audio[0])
+            
+            console.log(audio[0])
             run(link, audio[0]);
             
             });
@@ -45,32 +56,39 @@
             }
             if(typeof link!=='undefined'){
             run($(link),audio[0]);
-            $.post("./MediaUpload/write_link.php",
-              {
-                link: link.href,
-                
-              },
-        
-              //console.log(x)
-              
+            $.post(
               )
+            
             }
           else{
             current++
           }});
        }
+               function sendFilename(x){      
+        $.post("MediaUpload/write_link.php",
+              x
+              //console.log(x)
+              
+              ,function(d,s){console.log(s);
+                console.log(d)})}
        function run(link, player){
           player.src = link.attr('href');
           par = link.parent();
           par.addClass('active').siblings().removeClass('active');
           audio[0].load();
           audio[0].play();
-          $.post("./MediaUpload/write_link.php",
+          $.post("MediaUpload/write_link.php",
               {
                 link: player.src,
                 
-              })
+              },
+        
+              function(d,s){console.log(s);
+                console.log(d)}
+              
+              )
+          
        }
-  
+ 
       });
   
