@@ -14,6 +14,8 @@
         audio = $('#audio');
             playlist = $('#playlist');
             tracks = playlist.find('li a');
+            
+            console.log(link)  
             len = tracks.length - 1;
             audio[0].volume = .90;
             playlist.find('a').click(function(e){
@@ -22,7 +24,7 @@
             console.log(link)
             current = link.parent().index();
             link
-         //   console.log(audio[0])
+        
             run(link, audio[0]);
             
             });
@@ -45,7 +47,7 @@
             }
             if(typeof link!=='undefined'){
             run($(link),audio[0]);
-            $.post("./MediaUpload/write_link.php",
+            $.post("MediaUpload/write_link.php",
               {
                 link: link.href,
                 
@@ -65,7 +67,7 @@
           par.addClass('active').siblings().removeClass('active');
           audio[0].load();
           audio[0].play();
-          $.post("./MediaUpload/write_link.php",
+          $.post("MediaUpload/write_link.php",
               {
                 link: player.src,
                 

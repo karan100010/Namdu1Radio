@@ -159,7 +159,7 @@ def record(driver,catname,logger):
                 
                 # scan for button press to stop recording
                 preview=True
-                btn.wait_for_press(300)
+                btn.wait_for_press(90000)
                 rec_end_time=time.time()
                 os.system("pkill -9 arecord")
                 os.system("pkill -9 aplay")
@@ -232,7 +232,7 @@ def record(driver,catname,logger):
                         arecord(".",recFileName+".wav")    
 
                     # scan for button press to stop recording
-                    btn.wait_for_press(30000)
+                    btn.wait_for_press(90000)
                     os.system("pkill -9 arecord")
                     os.system("pkill -9 aplay")
                     aplay("Catgen_stop.wav")
