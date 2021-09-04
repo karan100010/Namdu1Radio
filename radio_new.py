@@ -31,7 +31,7 @@ from globle_var import *
 from selenium.webdriver.chrome.options import Options
 #import logs
 option = Options()
-#option.add_argument("--headless")
+option.add_argument("--headless")
 option.add_argument("--autoplay-policy=no-user-gesture-required")
 driver= webdriver.Chrome(chrome_options=option)
 volume_mode=False
