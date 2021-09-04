@@ -90,9 +90,11 @@
             
          $.post("./MediaUpload/write_link.php",
          {
-           link: link.href,
+           link: link.href},function(d,s){
+             console.log(s)
+           }
            
-         },
+    
    
          //console.log(x)
          
