@@ -1,7 +1,7 @@
-444#but11!/usr/bin/python
-# @brief: Script to record and upload the audio files
-#         GPIO's are used for recording and uploading
-#         LED's  used for indicating respective category
+#but11!/usr/bin/python
+# @brief: Script to record and upload the audio files                        
+#         GPIO's are used for recording and uploading    
+#         LED's  used for indicating respective category              
 #
 # @ver: 1.0
 #----------------------------------------------------------------#
@@ -33,13 +33,16 @@ from selenium.webdriver.chrome.options import Options
 option = Options()
 option.add_argument("--headless")
 option.add_argument("--autoplay-policy=no-user-gesture-required")
-driver= webdriver.Chrome(chrome_options=option)
-volume_mode=False
+driver= webdriver.Chrome(chrome_options=option) 
+channel_mode=False
 preview=False
-disable_pauseplay=False
 cw_turn=False
 ccw_turn=False
 playpause=False
+turn=False
+disable_pauseplay=False
+disable_longpress=False
+val=0
 
 
 mapping=["gencat","cat1","cat2","cat3","cat4","cat5","cat6","cat7","cat8","cat9","cat10"]
@@ -55,8 +58,9 @@ def main_fuction(logger,catname,driver):
         gencatpreview=False
         try:
             driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
+            logging.info("audio paused")
         except Exception as e:
-            logging.error('e')
+            logging.error(e)
         
         #while button_press==1:
             
@@ -88,6 +92,7 @@ def main_fuction(logger,catname,driver):
             #driver.get("http://localhost/new")
             driver.get("http://localhost/")
             chromium_playing=True
+            
             #time.sleep(3)
 
             
@@ -108,7 +113,7 @@ def main_fuction(logger,catname,driver):
             dst_renamPath = r'/var/www/html/index.php'
             shutil.copy(src_renamPath, dst_renamPath)
             #Starts playing mp3 from .upload folder
-            logger.info("starting audio form localhost in gencat")
+            logger.info("starting audio form localhost in "+catname)
             driver.get("http://localhost/index"+catname+".php")
             
             #time.sleep(3)
@@ -145,8 +150,9 @@ def record(driver,catname,logger):
                 logger.info(" comment recording started")                
                 time.sleep(2)
                 
-                time.sleep(2)
+                
                 recFileName = name_prefix+"_comment"+datetime.now().strftime('%d%b%Y_%H_%M_%S')
+                recFileName="".join(recFileName.split("%20"))
                 logger.info(recFileName)
                 
                 # records with 48000 quality
@@ -155,7 +161,7 @@ def record(driver,catname,logger):
                 if os.system("arecord "+recFileName+".wav" +" &")==0:
                     logger.info("audio getting recorded")
                 else:
-                    arecord(".",recFileName+".wav")   
+                    arecord(".",recFileName+".wav")
                 
                 # scan for button press to stop recording
                 preview=True
@@ -173,6 +179,7 @@ def record(driver,catname,logger):
                 t=round(rec_end_time-rec_start_time)
                 btn.wait_for_press(t)
                 os.system("pkill -9 aplay")
+                
                 try:
                     driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                     chromium_playing=True
@@ -194,7 +201,7 @@ def record(driver,catname,logger):
                     logger.error(e)    
                 os.system("rm "+recFileName+".wav")
                 
-                
+                os.system("sudo chmod -R 777 /var/www/html/.upload/")
                 # os.system("lxterminal -e python "+projectpath+"/Wav2Mp3Convert.py  &")
                 # shutil.copyfile(recordingpathcat11+"/"+recFileName+".mp3","/var/www/html/new/.upload/"+recFileName+"mp3")
                 # os.system("rm "+recFileName)
@@ -248,7 +255,7 @@ def record(driver,catname,logger):
                     try:
                         driver.execute_script('document.getElementsByTagName("audio")[0].play()')
                     except Exception as e:
-                        logging.error('e')
+                        logging.error(e)
                     
                     logger.info(rec_start_time-rec_end_time)
                    
@@ -257,7 +264,8 @@ def record(driver,catname,logger):
                         os.system("sudo lame -b 320 "+recFileName+".wav " "/var/www/html/.upload/"+catname+"/"+recFileName+".mp3")
                     except Exception as e:
                         logger.error(e)    
-                    os.system("rm "+recFileName+".wav")    
+                    os.system("rm "+recFileName+".wav")
+                    os.system("sudo chmod -R 777 /var/www/html/.upload/")    
                         
                     
                     longpress = False
@@ -298,26 +306,32 @@ logging.basicConfig(level=logging.INFO,
 console = logging.StreamHandler()
 console.setLevel(logging.INFO)
 # set a format which is simpler for console use
-formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
+formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s %(funcName)s %(lineno)d')
 # tell the handler to use this format
 console.setFormatter(formatter)
 # add the handler to the root logger
 logging.getLogger('').addHandler(console)
 
-logger1 = logging.getLogger('myapp.area1')
-logger2 = logging.getLogger('myapp.area2')
+logger1 = logging.getLogger('cdr.main_func')
+logger2 = logging.getLogger('cdr.recording')
 
 
 rotater_value=0
 def cwTurn():
-    global cw_turn
 
+    global cw_turn
+    global turn
     logger1.info("CW Turn")
+    turn=True
+    
     cw_turn= True
 
 def ccwTurn():
     global ccw_turn
+    global turn
     logger1.info("CCW Turn")
+
+    turn=True
     ccw_turn=True
 
 def buttonPushed():
@@ -327,7 +341,8 @@ def buttonPushed():
     
 
 def valueChanged(count):
-    if not volume_mode:
+    global channel_mode
+    if channel_mode:
 
         global rotater_value
         rotater_value = count%11
@@ -375,6 +390,7 @@ while True:
     #led.off()
     #led.fwd_on()
     #Check whether local server connected
+    #logging.info(chromium_playing)
  
     if is_onradio() and is_connected(local_server) and cntr:
         os.system("pkill -9 aplay")
@@ -382,6 +398,7 @@ while True:
         logger1.info ("starting namma school radio....from local server ")
         logger2.info ("starting namma school radio....from local server ")
         aplay("radiostart.wav")
+
         #time.sleep(3)
         
         
@@ -399,140 +416,207 @@ while True:
         src_renamPath = r'/var/www/html/indexgencat.php'
         dst_renamPath = r'/var/www/html/index.php'
         shutil.copy(src_renamPath, dst_renamPath)
-        time.sleep(3)
-  
-       
-        time.sleep(3)
+        driver.get("http://localhost")
+        rotater_value='x'
       #  driver.execute_script('document.getElementsByTagName("audio")[0].play()')
         cntr = False
         playpause = True
         time.sleep(0.2)
         
     ''' if button1 is pressed - Category 1 functionality button '''
-    if btn.is_pressed:
-        disable_longpress=False
-        if  disable_pauseplay==False:
-            print("button pressed")
-            previousTime = time.time()
-            while btn.is_pressed:
-                if cw_turn:
-                   
-                    os.system("amixer set Master 10%+")
-                    logger1.info("audio increased by 10%")
-                    volume_mode=True
-                    cw_turn=False
-                   
-                if ccw_turn:
-                    
-                    
-                    os.system("amixer set Master 10%-") 
-                    logger1.info("audio decreased by 10%") 
-                    ccw_turn=False
-                    volume_mode=True
-                #Check if the button is pressed for > 2sec
-                   
-                if time.time() - previousTime > 2.0:
-                    if not volume_mode:
-                            longpress=True
+    if btn.is_pressed :
+        
+        logger1.info("button pressed")
+        previousTime = time.time()
+        
             
-            if chromium_playing:
+        while btn.is_pressed:
+                    
+            if time.time() - previousTime > 2.0:
+                 
+                         longpress=True
+        if chromium_playing:
+            if not disable_pauseplay:
                 try:
                     driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
                     chromium_playing=False
-                    logging.info(chromium_playing)
+                    logging.info("pausing audio")
                 except Exception as e:
-                    logger1.info(e)    
+                   logger1.info(e)
+                   
             else:
+                time.sleep(1)
+                disable_pauseplay=False
+                
+        else:
+            if not disable_pauseplay:
                 try:
                     driver.execute_script('document.getElementsByTagName("audio")[0].play()')
+                    logger1.info('played audio')
                     chromium_playing=True
                 except Exception as e:
                     logger1.info(e)    
-        logging.info(chromium_playing)            
+                    
+            else:
+                time.sleep(1)
+                disable_pauseplay=False              
+                         
+            while turn:
+                disable_pauseplay=True
+                disable_longpress=True
+                channel_mode=True
+                
+                        
+        
+                
+            
+                if rotater_value==1: 
+                    val=1  
+                    
+                    
+                    turn=False
+                                                      #changeing for testing form but1.ispressed to true change back when done testing
+                    logger1.info("button1 pressed")
+                    main_fuction(logger1,"cat1",driver)
+                    rotater_value="x"
+                        
+                ''' if button2 is pressed - Category 2 functionality button '''
+                if rotater_value==2:
+                    val=2
+                    
+                    turn=False 
+                    rotater_value="x"
+                    logger1.info("button2 pressed")
+                    main_fuction(logger1,"cat2",driver)
+                ''' if button3 is pressed - Category 3 functionality button '''
+                if rotater_value==3:
+                    val=3
+                    
+                    turn=False
+                    rotater_value="x"
+                    logger1.info("button3 pressed")
+                    main_fuction(logger1,"cat3",driver)
+                    
+                        #led3.off()
+                ''' if button4 is pressed - Category 4 functionality button '''
+                if rotater_value==4:
+                    val=4
+                    
+                    turn=False
+                    rotater_value="x"
+                    logger1.info("button4 pressed")
+                    main_fuction(logger1,"cat4",driver)
+                ''' if button5 is pressed - Category 5 functionality button '''
+                if rotater_value==5:
+                    val=5
+                    
+                    turn=False
+                    rotater_value="x"
+                    logger1.info("button5 pressed")
+                    main_fuction(logger1,"cat5",driver)
+                ''' if button6 is pressed - Category 6 functionality button '''
+                if rotater_value==6:
+                    val=6
+                    
+                    turn=False
+                    rotater_value="x"
+                    logger1.info("button6 pressed")
+                    main_fuction(logger1,"cat6",driver)
+                ''' if button7 is pressed - Category 7 functionality button '''
+                if rotater_value==7:
+                    val=7
+                    
+                    turn=False
+                    rotater_value="x"
+                    logger1.info("button7 pressed")
+                    main_fuction(logger1,"cat7",driver)
+                ''' if button8 is pressed - Category 8 functionality button '''
+                if rotater_value==8:
+                    val=8
+                    
+                    turn=False
+                    rotater_value="x"
+                    logger1.info("button8 pressed")
+                    main_fuction(logger1,"cat8",driver)
+                ''' if button9 is pressed - Category 9 functionality button '''
+                if rotater_value==9:
+                    val=9
+                    turn=False
+                    rotater_value="x"
+                    logger1.info("button9 pressed")
+                    main_fuction(logger1,"cat9",driver)
+                if rotater_value==10:
+                    val=10
+                    
+                    turn=False
+                    rotater_value="x"
+                    logger1.info("button10 pressed")
+                    main_fuction(logger1,"cat10",driver)
+                if rotater_value==0:
+                    val=0
+                    
+                    turn=False
+                    #os.system("killall chromium-browser")
+                    #os.system("pkill -o chromium")
+                    logger1.info("buttons 11 pressed")
+                    main_fuction(logger1,"gencat",driver)
+                    rotater_value="x"
+                turn=False    
+                time.sleep(3)
+                
+                
+                
+                disable_longpress=False
+                disable_pauseplay=False
+                channel_mode=False  
+                
+                                    
+                   
+                
+                
+            
+                   
         if longpress:
-            try:
-                    driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
-            except Exception as e:
-                        logging.error(e)
-            
-            logging.info(chromium_playing)
-            logger1.info('a longpress')
-            aplay("beep_catgen.wav")
-            record(driver,mapping[val],logger1)
-            longpress=False
-            
+            if not disable_longpress:
+                try:
+                        driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
+                        logger1.info('paused audio')
+                except Exception as e:
+                            logging.error(e)
+                
+                logging.info(chromium_playing)
+                logger1.info('a longpress')
+                aplay("beep_catgen.wav")
+                record(driver,mapping[val],logger1)
+                longpress=False
+            else:
+                time.sleep(1)
+                disable_longpress=False
+                
                    
                           
                           
-                            #if the button is pressed for more than two seconds, ten longpress is Tr
-    if not volume_mode:
-        if rotater_value==1: 
-            val=1                                    #changeing for testing form but1.ispressed to true change back when done testing
-            logger1.info("button1 pressed")
-            main_fuction(logger1,"cat1",driver)
-            rotater_value="x"
-                
-        ''' if button2 is pressed - Category 2 functionality button '''
-        if rotater_value==2:
-            val=2
-            rotater_value="x"
-            logger1.info("button2 pressed")
-            main_fuction(logger1,"cat2",driver)
-        ''' if button3 is pressed - Category 3 functionality button '''
-        if rotater_value==3:
-            val=3
-            rotater_value="x"
-            logger1.info("button3 pressed")
-            main_fuction(logger1,"cat3",driver)
+                            
+    if not  channel_mode:
+        if cw_turn:
+                   
+                    os.system("amixer set Master 10%+")
+                    logger1.info("audio increased by 10%")
+       #                channel_mode=True
+                    cw_turn=False
+                   
+        if ccw_turn:
             
-                #led3.off()
-        ''' if button4 is pressed - Category 4 functionality button '''
-        if rotater_value==4:
-            val=4
-            rotater_value="x"
-            logger1.info("button4 pressed")
-            main_fuction(logger1,"cat4",driver)
-        ''' if button5 is pressed - Category 5 functionality button '''
-        if rotater_value==5:
-            val=5
-            rotater_value="x"
-            logger1.info("button5 pressed")
-            main_fuction(logger1,"cat5",driver)
-        ''' if button6 is pressed - Category 6 functionality button '''
-        if rotater_value==6:
-            val=6
-            rotater_value="x"
-            logger1.info("button6 pressed")
-            main_fuction(logger1,"cat6",driver)
-        ''' if button7 is pressed - Category 7 functionality button '''
-        if rotater_value==7:
-            val=7
-            rotater_value="x"
-            logger1.info("button7 pressed")
-            main_fuction(logger1,"cat7",driver)
-        ''' if button8 is pressed - Category 8 functionality button '''
-        if rotater_value==8:
-            val=8
-            rotater_value="x"
-            logger1.info("button8 pressed")
-            main_fuction(logger1,"cat8",driver)
-        ''' if button9 is pressed - Category 9 functionality button '''
-        if rotater_value==9:
-            val=9
-            rotater_value="x"
-            logger1.info("button9 pressed")
-            main_fuction(logger1,"cat9",driver)
-        if rotater_value==10:
-            val=10
-            rotater_value="x"
-            logger1.info("button10 pressed")
-            main_fuction(logger1,"cat10",driver)
-        if rotater_value==0:
-            val=0
-            #os.system("killall chromium-browser")
-            #os.system("pkill -o chromium")
-            logger1.info("buttons 11 pressed")
-            main_fuction(logger1,"gencat",driver)
-            rotater_value="x"
-    volume_mode=False    
-
+            
+            os.system("amixer set Master 10%-") 
+            logger1.info("audio decreased by 10%") 
+            ccw_turn=False
+#               channel_mode=True
+                #Check if the button is pressed for > 2sec
+                
+              
+                
+    
+                        
+  
+              

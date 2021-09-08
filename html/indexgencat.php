@@ -72,6 +72,7 @@ for($i=0;$i<count($filename);$i++){
 
 }
 
+
      // Finds extensions of files
 /*      function findexts($filename) {
       for ($i=0;$filename[$i]!=NULL;$i++){}
