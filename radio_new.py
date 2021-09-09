@@ -31,7 +31,7 @@ from globle_var import *
 from selenium.webdriver.chrome.options import Options
 #import logs
 option = Options()
-option.add_argument("--headless")
+#option.add_argument("--headless")
 option.add_argument("--autoplay-policy=no-user-gesture-required")
 driver= webdriver.Chrome(chrome_options=option) 
 channel_mode=False
@@ -87,10 +87,11 @@ def main_fuction(logger,catname,driver):
             
             logger.info ("starting namma school radio....from local server ")
             time.sleep(0.4)
-            aplay("radiostart.wav")
+            name=catname[0].upper()+catname[1:]
+            aplay(name+".wav")
             time.sleep(0.4)
             #driver.get("http://localhost/new")
-            driver.get("http://localhost/")
+            driver.get("http://localhost/indexcat1.php")
             chromium_playing=True
             
             #time.sleep(3)
@@ -102,12 +103,13 @@ def main_fuction(logger,catname,driver):
             # start_radio_from_internet()                      
             # playpause = True
         else:
-            logger.info ("Button11 general playback started")
+            logger.info (catname+" playback started")
             # os.system("pkill -9 aplay")
             # os.system("pkill -o chromium")
             # driver.close()
             # driver=webdriver.Chrome(chrome_options=option)
-            aplay("radiostart.wav")
+            name=catname[0].upper()+catname[1:]
+            aplay(name+".wav")
             src_renamPath = r'/var/www/html/index'+catname+'.php'
             chromium_playing=True
             dst_renamPath = r'/var/www/html/index.php'
@@ -353,7 +355,7 @@ def valueChanged(count):
 
 
 ## Initialise (clk, dt, sw, ticks)
-obj = rotary.Rotary(16,20,21,2)
+obj = rotary.Rotary(16,20,21,1)
 
  ## Register callbacks
 obj.register(increment=cwTurn, decrement=ccwTurn)
@@ -390,7 +392,8 @@ while True:
     #led.off()
     #led.fwd_on()
     #Check whether local server connected
-    #logging.info(chromium_playing)
+    logging.info(turn)
+    logging.info(btn.is_pressed)
  
     if is_onradio() and is_connected(local_server) and cntr:
         os.system("pkill -9 aplay")
@@ -408,11 +411,9 @@ while True:
         playpause = True
     # #Check whether the internet is available to play from the website
     elif cntr == True:
-        logger1.info ("Local and remote server not available")
-        logger2.info ("Local and remote server not available")
-        logger1.info ("Audio starts from localhost")
+        
         logger2.info ("Audio starts from localhost")
-        os.system("pkill -9 aplay")
+    
         src_renamPath = r'/var/www/html/indexgencat.php'
         dst_renamPath = r'/var/www/html/index.php'
         shutil.copy(src_renamPath, dst_renamPath)
@@ -428,44 +429,26 @@ while True:
         
         logger1.info("button pressed")
         previousTime = time.time()
+                    
+        
+          
+        while btn.is_pressed:
+            if time.time() - previousTime > 2.0:
+             
+                     longpress=True
+            
+          
         
             
-        while btn.is_pressed:
-                    
-            if time.time() - previousTime > 2.0:
-                 
-                         longpress=True
-        if chromium_playing:
-            if not disable_pauseplay:
-                try:
-                    driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
-                    chromium_playing=False
-                    logging.info("pausing audio")
-                except Exception as e:
-                   logger1.info(e)
-                   
-            else:
-                time.sleep(1)
-                disable_pauseplay=False
-                
-        else:
-            if not disable_pauseplay:
-                try:
-                    driver.execute_script('document.getElementsByTagName("audio")[0].play()')
-                    logger1.info('played audio')
-                    chromium_playing=True
-                except Exception as e:
-                    logger1.info(e)    
-                    
-            else:
-                time.sleep(1)
-                disable_pauseplay=False              
+        
+       
+            
                          
             while turn:
                 disable_pauseplay=True
                 disable_longpress=True
                 channel_mode=True
-                
+                time.sleep(1)
                         
         
                 
@@ -475,6 +458,8 @@ while True:
                     
                     
                     turn=False
+                    cw_turn=False
+                    ccw_turn=False
                                                       #changeing for testing form but1.ispressed to true change back when done testing
                     logger1.info("button1 pressed")
                     main_fuction(logger1,"cat1",driver)
@@ -485,13 +470,16 @@ while True:
                     val=2
                     
                     turn=False 
+                    cw_turn=False
+                    ccw_turn=False
                     rotater_value="x"
                     logger1.info("button2 pressed")
                     main_fuction(logger1,"cat2",driver)
                 ''' if button3 is pressed - Category 3 functionality button '''
                 if rotater_value==3:
                     val=3
-                    
+                    cw_turn=False
+                    ccw_turn=False
                     turn=False
                     rotater_value="x"
                     logger1.info("button3 pressed")
@@ -501,7 +489,8 @@ while True:
                 ''' if button4 is pressed - Category 4 functionality button '''
                 if rotater_value==4:
                     val=4
-                    
+                    cw_turn=False
+                    ccw_turn=False
                     turn=False
                     rotater_value="x"
                     logger1.info("button4 pressed")
@@ -509,7 +498,8 @@ while True:
                 ''' if button5 is pressed - Category 5 functionality button '''
                 if rotater_value==5:
                     val=5
-                    
+                    cw_turn=False
+                    ccw_turn=False
                     turn=False
                     rotater_value="x"
                     logger1.info("button5 pressed")
@@ -517,7 +507,8 @@ while True:
                 ''' if button6 is pressed - Category 6 functionality button '''
                 if rotater_value==6:
                     val=6
-                    
+                    cw_turn=False
+                    ccw_turn=False
                     turn=False
                     rotater_value="x"
                     logger1.info("button6 pressed")
@@ -525,7 +516,8 @@ while True:
                 ''' if button7 is pressed - Category 7 functionality button '''
                 if rotater_value==7:
                     val=7
-                    
+                    cw_turn=False
+                    ccw_turn=False
                     turn=False
                     rotater_value="x"
                     logger1.info("button7 pressed")
@@ -533,6 +525,8 @@ while True:
                 ''' if button8 is pressed - Category 8 functionality button '''
                 if rotater_value==8:
                     val=8
+                    cw_turn=False
+                    ccw_turn=False
                     
                     turn=False
                     rotater_value="x"
@@ -541,13 +535,16 @@ while True:
                 ''' if button9 is pressed - Category 9 functionality button '''
                 if rotater_value==9:
                     val=9
+                    cw_turn=False
+                    ccw_turn=False
                     turn=False
                     rotater_value="x"
                     logger1.info("button9 pressed")
                     main_fuction(logger1,"cat9",driver)
                 if rotater_value==10:
                     val=10
-                    
+                    cw_turn=False
+                    ccw_turn=False
                     turn=False
                     rotater_value="x"
                     logger1.info("button10 pressed")
@@ -556,19 +553,49 @@ while True:
                     val=0
                     
                     turn=False
+                    cw_turn=False
+                    ccw_turn=False
                     #os.system("killall chromium-browser")
                     #os.system("pkill -o chromium")
                     logger1.info("buttons 11 pressed")
                     main_fuction(logger1,"gencat",driver)
                     rotater_value="x"
-                turn=False    
-                time.sleep(3)
+                    
+                turn=False
+                
+        
+        
+        
+                             
+                
+        if chromium_playing:
+            if not disable_pauseplay:
+                try:
+                    driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
+                    chromium_playing=False
+                    logging.info("pausing audio")
+                except Exception as e:
+                   logger1.info(e)
+               
+                else:
+                    time.sleep(1)
+                    disable_pauseplay=False
+        
+        else:
+            if not disable_pauseplay:
+                try:
+                    driver.execute_script('document.getElementsByTagName("audio")[0].play()')
+                    logger1.info('played audio')
+                    chromium_playing=True
+                except:
+                    logger1.info("not working")
+            else:
+                time.sleep(1)
+                disable_pauseplay=False                     
+        
+        
                 
                 
-                
-                disable_longpress=False
-                disable_pauseplay=False
-                channel_mode=False  
                 
                                     
                    
@@ -592,8 +619,10 @@ while True:
             else:
                 time.sleep(1)
                 disable_longpress=False
-                
-                   
+        disable_longpress=False
+        disable_pauseplay=False
+        channel_mode=False         
+           
                           
                           
                             
@@ -604,6 +633,8 @@ while True:
                     logger1.info("audio increased by 10%")
        #                channel_mode=True
                     cw_turn=False
+                    turn=False
+                    
                    
         if ccw_turn:
             
@@ -611,6 +642,9 @@ while True:
             os.system("amixer set Master 10%-") 
             logger1.info("audio decreased by 10%") 
             ccw_turn=False
+            turn=False
+            
+            
 #               channel_mode=True
                 #Check if the button is pressed for > 2sec
                 
