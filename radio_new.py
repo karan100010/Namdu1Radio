@@ -143,7 +143,10 @@ def record(driver,catname,logger):
     if not chromium_playing:
                 f = open("/var/www/html/MediaUpload/current_link.txt", "r")
                 filepath=f.readline()
-                name_prefix=filepath.split(".")[1].split("/")[-1]
+                try:
+                    name_prefix=filepath.split(".")[1].split("/")[-1]
+                except:
+                    name_prefix='default'    
                 f.close()
                 #led.fwd_blink("slow")
             #    driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
