@@ -31,13 +31,13 @@
  <?php
     
      // Opens directory
-     //$myDirectory=opendir("./.upload/cat10/");
+     //$myDirectory=opendir("./.upload/gencat/");
 
      // Gets each entry
      //while($entryName=readdir($myDirectory)) {
      // $dirArray[]=$entryName;
      //}
- $dirArray=array_diff(scandir("./.upload/cat10/"), array('.', '..'));
+ $dirArray=array_diff(scandir("./.upload/gencat/"), array('.', '..'));
  rsort($dirArray);
  $filename=array();
  $comments=array();
@@ -71,6 +71,7 @@ for($i=0;$i<count($filename);$i++){
   }
 
 }
+
 
      // Finds extensions of files
 /*      function findexts($filename) {
@@ -119,7 +120,7 @@ for($i=0;$i<count($filename);$i++){
  
   	 echo("
 	  <audio autoplay id='audio' preload='auto' tabindex= '0' controls='' type='audio/mpeg'>
-           <source src='.upload/cat10/$namehref'>
+           <source src='.upload/gencat/$namehref'>
            Sorry, your browser does not support HTML5 audio.
           </audio>
 		
@@ -127,7 +128,7 @@ for($i=0;$i<count($filename);$i++){
      	 
       	  
            <li class='active'>
- 	    <a href='.upload/cat10/$namehref'>$name</a>
+ 	    <a href='.upload/gencat/$namehref'>$name</a>
        <div>
        <div class='input-group'>
          <div class='custom-file'>
@@ -165,7 +166,7 @@ for($i=0;$i<count($filename);$i++){
          echo("
           
            <li>
-	     <a href='./.upload/cat10/$namehref'>$name</a>
+	     <a href='./.upload/gencat/$namehref'>$name</a>
 	   </li>
      <div>
   <div class='input-group'>

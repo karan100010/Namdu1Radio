@@ -350,8 +350,8 @@ def valueChanged(count):
     if channel_mode:
 
         global rotater_value
-        rotater_value = count%11
-        print(count%11) ## Current Counter value
+        rotater_value = int((count%22)/2)
+        print(int((count%22)/2)) ## Current Counter value
 
 
 
