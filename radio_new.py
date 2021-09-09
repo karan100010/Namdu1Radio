@@ -347,9 +347,11 @@ def buttonPushed():
 
 def valueChanged(count):
     global channel_mode
+    global val
     if channel_mode:
 
         global rotater_value
+        count=int(val+22/22)*2
         rotater_value = int((count%22)/2)
         print(int((count%22)/2)) ## Current Counter value
 
