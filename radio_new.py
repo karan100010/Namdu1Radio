@@ -43,6 +43,7 @@ turn=False
 disable_pauseplay=False
 disable_longpress=False
 val=0
+c=0                    #counter
 
 
 mapping=["gencat","cat1","cat2","cat3","cat4","cat5","cat6","cat7","cat8","cat9","cat10"]
@@ -323,21 +324,23 @@ logger2 = logging.getLogger('cdr.recording')
 
 rotater_value=0
 def cwTurn():
-
-    global cw_turn
-    global turn
-    logger1.info("CW Turn")
-    turn=True
     
-    cw_turn= True
+
+        global cw_turn
+        global turn
+        logger1.info("CW Turn")
+        turn=True
+    
+    #cw_turn= True
 
 def ccwTurn():
+    
     global ccw_turn
     global turn
     logger1.info("CCW Turn")
 
     turn=True
-    ccw_turn=True
+    #ccw_turn=True
 
 def buttonPushed():
     logger1.info("Button Pushed")
@@ -348,18 +351,24 @@ def buttonPushed():
 def valueChanged(count):
     global channel_mode
     global val
+    global c
+    global rotater_value
+    
+    logger1.info("getting called")
     if channel_mode:
+        logger1.info("getting called here too")
+        
+        
+        c=count
+        logger1.info(count)
+        rotater_value = int((c%22)/2)
+        print(int((c%22)/2)) ## Current Counter value
 
-        global rotater_value
-        count=int(val+22/22)*2
-        rotater_value = int((count%22)/2)
-        print(int((count%22)/2)) ## Current Counter value
 
 
 
 
-
-## Initialise (clk, dt, sw, ticks)
+## Initialise (clk, dt, sw, tick*s)
 obj = rotary.Rotary(16,20,21,1)
 
  ## Register callbacks
@@ -377,6 +386,48 @@ obj.start()
     #c = scipy.vstack((a,b))
     #audiolab.wavwrite(c, 'file3.wav', fs, enc)
     #return file3.wav
+
+
+def cwTurn1():
+
+    global cw_turn
+    logger1.info("CW1 Turn")
+    #turn=True
+    
+    cw_turn= True
+
+def ccwTurn1():
+    global ccw_turn
+    logger1.info("CCW1 Turn")
+
+    #turn=True
+    ccw_turn=True
+
+def buttonPushed1():
+    logger1.info("Button Pushed")
+    return True
+
+    
+
+def valueChanged1(count):
+    
+    logger1.info("changed")
+
+
+
+
+
+## Initialise (clk, dt, sw, tick*s)
+obj1 = rotary.Rotary(16,20,21,1)
+
+ ## Register callbacks
+obj1.register(increment=cwTurn1, decrement=ccwTurn1)
+
+## Register more callbacks
+obj1.register(pressed=buttonPushed1, onchange=valueChanged1) 
+
+## Start monitoring the encoder
+obj1.start() 
 
 
 
@@ -397,8 +448,8 @@ while True:
     #led.off()
     #led.fwd_on()
     #Check whether local server connected
-    logging.info(turn)
-    logging.info(btn.is_pressed)
+    logging.info(c)
+    #logging.info(btn.is_pressed)
  
     if is_onradio() and is_connected(local_server) and cntr:
         os.system("pkill -9 aplay")
@@ -446,26 +497,21 @@ while True:
         
             
         
-       
             
+            logger1.info("xo")
                          
             while turn:
                 disable_pauseplay=True
                 disable_longpress=True
                 channel_mode=True
                 time.sleep(1)
-                        
+                logger1.info("channel mode")
         
-                
-            
                 if rotater_value==1: 
                     val=1  
                     
                     
-                    turn=False
-                    cw_turn=False
-                    ccw_turn=False
-                                                      #changeing for testing form but1.ispressed to true change back when done testing
+                    turn=False                        #changeing for testing form but1.ispressed to true change back when done testing
                     logger1.info("button1 pressed")
                     main_fuction(logger1,"cat1",driver)
                     rotater_value="x"
@@ -475,16 +521,14 @@ while True:
                     val=2
                     
                     turn=False 
-                    cw_turn=False
-                    ccw_turn=False
+                    
                     rotater_value="x"
                     logger1.info("button2 pressed")
                     main_fuction(logger1,"cat2",driver)
                 ''' if button3 is pressed - Category 3 functionality button '''
                 if rotater_value==3:
                     val=3
-                    cw_turn=False
-                    ccw_turn=False
+                    
                     turn=False
                     rotater_value="x"
                     logger1.info("button3 pressed")
@@ -494,8 +538,7 @@ while True:
                 ''' if button4 is pressed - Category 4 functionality button '''
                 if rotater_value==4:
                     val=4
-                    cw_turn=False
-                    ccw_turn=False
+                    
                     turn=False
                     rotater_value="x"
                     logger1.info("button4 pressed")
@@ -503,8 +546,7 @@ while True:
                 ''' if button5 is pressed - Category 5 functionality button '''
                 if rotater_value==5:
                     val=5
-                    cw_turn=False
-                    ccw_turn=False
+                    
                     turn=False
                     rotater_value="x"
                     logger1.info("button5 pressed")
@@ -512,8 +554,7 @@ while True:
                 ''' if button6 is pressed - Category 6 functionality button '''
                 if rotater_value==6:
                     val=6
-                    cw_turn=False
-                    ccw_turn=False
+                    
                     turn=False
                     rotater_value="x"
                     logger1.info("button6 pressed")
@@ -521,8 +562,7 @@ while True:
                 ''' if button7 is pressed - Category 7 functionality button '''
                 if rotater_value==7:
                     val=7
-                    cw_turn=False
-                    ccw_turn=False
+                    
                     turn=False
                     rotater_value="x"
                     logger1.info("button7 pressed")
@@ -530,8 +570,7 @@ while True:
                 ''' if button8 is pressed - Category 8 functionality button '''
                 if rotater_value==8:
                     val=8
-                    cw_turn=False
-                    ccw_turn=False
+                    
                     
                     turn=False
                     rotater_value="x"
@@ -540,16 +579,14 @@ while True:
                 ''' if button9 is pressed - Category 9 functionality button '''
                 if rotater_value==9:
                     val=9
-                    cw_turn=False
-                    ccw_turn=False
+                    
                     turn=False
                     rotater_value="x"
                     logger1.info("button9 pressed")
                     main_fuction(logger1,"cat9",driver)
                 if rotater_value==10:
                     val=10
-                    cw_turn=False
-                    ccw_turn=False
+                    
                     turn=False
                     rotater_value="x"
                     logger1.info("button10 pressed")
@@ -558,17 +595,15 @@ while True:
                     val=0
                     
                     turn=False
-                    cw_turn=False
-                    ccw_turn=False
+                    
                     #os.system("killall chromium-browser")
                     #os.system("pkill -o chromium")
                     logger1.info("buttons 11 pressed")
                     main_fuction(logger1,"gencat",driver)
                     rotater_value="x"
-                    
+              
                 turn=False
                 
-        
         
         
                              
@@ -638,7 +673,7 @@ while True:
                     logger1.info("audio increased by 10%")
        #                channel_mode=True
                     cw_turn=False
-                    turn=False
+                   
                     
                    
         if ccw_turn:
@@ -647,7 +682,7 @@ while True:
             os.system("amixer set Master 10%-") 
             logger1.info("audio decreased by 10%") 
             ccw_turn=False
-            turn=False
+           
             
             
 #               channel_mode=True
