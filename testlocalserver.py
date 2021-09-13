@@ -1,14 +1,11 @@
 import RPi.GPIO as GPIO
 from gpiozero import LED, Button
-import time
+
 import os
 import socket
-import subprocess
-import wave
-import contextlib
-from datetime import datetime
+
 from subprocess import check_output
-import shutil
+
 
 
 

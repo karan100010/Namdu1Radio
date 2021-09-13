@@ -1,13 +1,7 @@
 import time
-import os,sys
+import os
 import socket
-import subprocess
-import wave
-import contextlib
-from datetime import datetime
 from subprocess import check_output
-import shutil
-import logging
 from globle_var import *
 
 

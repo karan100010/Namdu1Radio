@@ -18,7 +18,6 @@ import logging
 import os
 from datetime import datetime
 import shutil
-from dualled import DualLED
 from new_function import *
 import sys
 from selenium import webdriver

@@ -12,7 +12,6 @@
 #----------------------------------------------------------------#
 # *** Libraries *** #
 import os
-import time
 from datetime import datetime
 import fnmatch
 import shutil
