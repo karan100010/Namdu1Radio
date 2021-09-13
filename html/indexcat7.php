@@ -39,7 +39,7 @@
      //}
  $dirArray=glob('.upload/cat7/*.mp3');
  usort($dirArray, function($a, $b) {
-     return filemtime($a) - filemtime($b);
+     return filemtime($b) - filemtime($a);
  });
 
 // print_r($dirArray);
