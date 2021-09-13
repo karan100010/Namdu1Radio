@@ -102,7 +102,7 @@ foreach($dirArray as $key => $val) {
  
  // Gets File Names
  $name=$key;
- $namehref=$key;	
+ $name=$key;	
 //  $ext = findexts($name);
 
  if (strlen($name)>='3'){
@@ -121,7 +121,7 @@ if ($flag==0){
 
 echo("
 <audio autoplay id='audio' preload='auto' tabindex= '0' controls='' type='audio/mpeg'>
-      <source src='.upload/gencat/$namehref'>
+      <source src='.upload/gencat/$name'>
       Sorry, your browser does not support HTML5 audio.
      </audio>
      <div class='accordion' id='playlist'>
@@ -190,7 +190,7 @@ else{
     echo("
      
       
-  <a href='./.upload/gencat/$namehref'>$name</a>
+  <a href='./.upload/gencat/$name'>$name</a>
   <button class='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapseOne$div_index' aria-expanded='false' aria-controls='collapseOne$div_index'>
   see comments for $name </button>
 

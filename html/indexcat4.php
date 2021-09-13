@@ -42,7 +42,7 @@
      return filemtime($a) - filemtime($b);
  });
 
- print_r($dirArray);
+// print_r($dirArray);
  //rsort($dirArray);
  $filename=array();
  $comments=array();
@@ -111,7 +111,7 @@ for($i=0;$i<count($filename);$i++){
       // $z=end($m);
       // print($z);
       $name=end($m);
-      $namehref=$dirArray[$index];	
+      
     //  $ext = findexts($name);
 	
       if (strlen($name)>='3'){
@@ -128,7 +128,7 @@ for($i=0;$i<count($filename);$i++){
  
   	 echo("
 	  <audio autoplay id='audio' preload='auto' tabindex= '0' controls='' type='audio/mpeg'>
-           <source src='.upload/cat4/$namehref'>
+           <source src='.upload/cat4/$name'>
            Sorry, your browser does not support HTML5 audio.
           </audio>
 		
@@ -136,7 +136,7 @@ for($i=0;$i<count($filename);$i++){
      	 
       	  
            <li class='active'>
- 	    <a href='.upload/cat4/$namehref'>$name</a>
+ 	    <a href='.upload/cat4/$name'>$name</a>
        <div>
        <div class='input-group'>
          <div class='custom-file'>
@@ -174,7 +174,7 @@ for($i=0;$i<count($filename);$i++){
          echo("
           
            <li>
-	     <a href='./.upload/cat4/$namehref'>$name</a>
+	     <a href='./.upload/cat4/$name'>$name</a>
 	   </li>
      <div>
   <div class='input-group'>

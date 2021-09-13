@@ -111,7 +111,7 @@
       
       // Gets File Names
       $name=$dirArray[$index];
-      $namehref=$dirArray[$index];	
+      
       $ext = findexts($name);
 	
       if ($ext=='3'){
@@ -120,7 +120,7 @@
 	 // Print 'em
   	 print("
 	  <audio autoplay id='audio' preload='auto' tabindex= '0' controls='' type='audio/mpeg'>
-           <source src='./.upload/gencat/$namehref'>
+           <source src='./.upload/gencat/$name'>
            Sorry, your browser does not support HTML5 audio.
           </audio>
 		
@@ -130,7 +130,7 @@
       	 print("
       	  
            <li class='active'>
- 	    <a href='./.upload/gencat/$namehref'>$name</a>
+ 	    <a href='./.upload/gencat/$name'>$name</a>
  	   </li>
 	        <button>Click</button>
 	     ");
@@ -141,7 +141,7 @@
          print("
           
            <li>
-	     <a href='./.upload/gencat/$namehref'>$name</a>
+	     <a href='./.upload/gencat/$name'>$name</a>
 	   </li>
 	 ");
         }
