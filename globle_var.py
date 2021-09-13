@@ -1,6 +1,6 @@
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 from gpiozero import LED, Button
-from dualled import DualLED
+#from dualled import DualLED
 
 import os
 

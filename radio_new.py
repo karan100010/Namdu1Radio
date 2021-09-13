@@ -14,14 +14,9 @@
 # *** Libraries *** #
 import RPi.GPIO as GPIO
 import time
-import logging,coloredlogs
+import logging
 import os
-import socket
-import subprocess
-import wave
-import contextlib
 from datetime import datetime
-from subprocess import check_output
 import shutil
 from dualled import DualLED
 from new_function import *
@@ -159,7 +154,10 @@ def record(driver,catname,logger):
                 
                 
                 recFileName = name_prefix+"_comment"+datetime.now().strftime('%d%b%Y_%H_%M_%S')
-                recFileName="".join(recFileName.split("%20"))
+                try:
+                    recFileName=" ".join(recFileName.split("%20"))
+                except:
+                    recFileName=recFileName   
                 logger.info(recFileName)
                 
                 # records with 48000 quality
