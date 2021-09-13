@@ -31,14 +31,19 @@
  <?php
     
      // Opens directory
-     //$myDirectory=opendir("./.upload/cat6/");
+     //$myDirectory=opendir("./.upload/gencat/");
 
      // Gets each entry
      //while($entryName=readdir($myDirectory)) {
      // $dirArray[]=$entryName;
      //}
- $dirArray=array_diff(scandir("./.upload/cat6/"), array('.', '..'));
- rsort($dirArray);
+ $dirArray=glob('.upload/gencat/*.mp3');
+ usort($dirArray, function($a, $b) {
+     return filemtime($a) - filemtime($b);
+ });
+
+ print_r($dirArray);
+ //rsort($dirArray);
  $filename=array();
  $comments=array();
 for($index=0; $index < count($dirArray); $index++){
@@ -72,6 +77,7 @@ for($i=0;$i<count($filename);$i++){
 
 }
 
+
      // Finds extensions of files
 /*      function findexts($filename) {
       for ($i=0;$filename[$i]!=NULL;$i++){}
@@ -101,7 +107,10 @@ for($i=0;$i<count($filename);$i++){
       //for($index=0; $index < $indexCount; $index++) {
       
       // Gets File Names
-      $name=$dirArray[$index];
+      $m=explode('/',$dirArray[$index]);
+      // $z=end($m);
+      // print($z);
+      $name=end($m);
       $namehref=$dirArray[$index];	
     //  $ext = findexts($name);
 	
@@ -119,7 +128,7 @@ for($i=0;$i<count($filename);$i++){
  
   	 echo("
 	  <audio autoplay id='audio' preload='auto' tabindex= '0' controls='' type='audio/mpeg'>
-           <source src='.upload/cat6/$namehref'>
+           <source src='.upload/gencat/$namehref'>
            Sorry, your browser does not support HTML5 audio.
           </audio>
 		
@@ -127,7 +136,7 @@ for($i=0;$i<count($filename);$i++){
      	 
       	  
            <li class='active'>
- 	    <a href='.upload/cat6/$namehref'>$name</a>
+ 	    <a href='.upload/gencat/$namehref'>$name</a>
        <div>
        <div class='input-group'>
          <div class='custom-file'>
@@ -165,7 +174,7 @@ for($i=0;$i<count($filename);$i++){
          echo("
           
            <li>
-	     <a href='./.upload/cat6/$namehref'>$name</a>
+	     <a href='./.upload/gencat/$namehref'>$name</a>
 	   </li>
      <div>
   <div class='input-group'>

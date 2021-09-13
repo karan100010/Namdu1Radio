@@ -37,8 +37,13 @@
      //while($entryName=readdir($myDirectory)) {
      // $dirArray[]=$entryName;
      //}
- $dirArray=array_diff(scandir("./.upload/gencat/"), array('.', '..'));
- rsort($dirArray);
+ $dirArray=glob('.upload/gencat/*.mp3');
+ usort($dirArray, function($a, $b) {
+     return filemtime($a) - filemtime($b);
+ });
+
+ print_r($dirArray);
+ //rsort($dirArray);
  $filename=array();
  $comments=array();
 for($index=0; $index < count($dirArray); $index++){
@@ -102,7 +107,10 @@ for($i=0;$i<count($filename);$i++){
       //for($index=0; $index < $indexCount; $index++) {
       
       // Gets File Names
-      $name=$dirArray[$index];
+      $m=explode('/',$dirArray[$index]);
+      // $z=end($m);
+      // print($z);
+      $name=end($m);
       $namehref=$dirArray[$index];	
     //  $ext = findexts($name);
 	
