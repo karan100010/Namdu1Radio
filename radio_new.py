@@ -1,3 +1,4 @@
+
 #but11!/usr/bin/python
 # @brief: Script to record and upload the audio files                        
 #         GPIO's are used for recording and uploading    
@@ -328,18 +329,31 @@ def cwTurn():
 
         global cw_turn
         global turn
+        global c
+        global btn
         logger1.info("CW Turn")
-        turn=True
-    
-    #cw_turn= True
+        if btn.is_pressed:
+            logger1.info('channel mode')
+            turn=True
+            c+=1
+        else:  
+            cw_turn= True
 
 def ccwTurn():
     
-    global ccw_turn
-    global turn
-    logger1.info("CCW Turn")
+        global ccw_turn
+        global turn
+        global c
+        global btn
+        logger1.info("CCW Turn")
+        if btn.is_pressed:
+            logger1.info('channel mode')
+            turn=True
+            c-=1
+        else:  
+            ccw_turn= True
 
-    turn=True
+  
     #ccw_turn=True
 
 def buttonPushed():
@@ -351,15 +365,12 @@ def buttonPushed():
 def valueChanged(count):
     global channel_mode
     global val
-    global c
     global rotater_value
-    
-    logger1.info("getting called")
+    global c
     if channel_mode:
-        logger1.info("getting called here too")
+
         
-        
-        c=count
+    #    c=count
         logger1.info(count)
         rotater_value = int((c%22)/2)
         print(int((c%22)/2)) ## Current Counter value
@@ -385,51 +396,6 @@ obj.start()
     #b, fs, enc = audiolab.wavread('file2')
     #c = scipy.vstack((a,b))
     #audiolab.wavwrite(c, 'file3.wav', fs, enc)
-    #return file3.wav
-
-
-def cwTurn1():
-
-    global cw_turn
-    logger1.info("CW1 Turn")
-    #turn=True
-    
-    cw_turn= True
-
-def ccwTurn1():
-    global ccw_turn
-    logger1.info("CCW1 Turn")
-
-    #turn=True
-    ccw_turn=True
-
-def buttonPushed1():
-    logger1.info("Button Pushed")
-    return True
-
-    
-
-def valueChanged1(count):
-    
-    logger1.info("changed")
-
-
-
-
-
-## Initialise (clk, dt, sw, tick*s)
-obj1 = rotary.Rotary(16,20,21,1)
-
- ## Register callbacks
-obj1.register(increment=cwTurn1, decrement=ccwTurn1)
-
-## Register more callbacks
-obj1.register(pressed=buttonPushed1, onchange=valueChanged1) 
-
-## Start monitoring the encoder
-obj1.start() 
-
-
 
 
 # *** Setting up GPIO of Pi *** #
@@ -497,15 +463,15 @@ while True:
         
             
         
+       
             
-            logger1.info("xo")
                          
-            while turn:
+            if turn:
                 disable_pauseplay=True
                 disable_longpress=True
                 channel_mode=True
                 time.sleep(1)
-                logger1.info("channel mode")
+                        
         
                 if rotater_value==1: 
                     val=1  
@@ -601,9 +567,10 @@ while True:
                     logger1.info("buttons 11 pressed")
                     main_fuction(logger1,"gencat",driver)
                     rotater_value="x"
-              
+                    
                 turn=False
                 
+        
         
         
                              
