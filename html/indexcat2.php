@@ -37,7 +37,7 @@
      //while($entryName=readdir($myDirectory)) {
      // $dirArray[]=$entryName;
      //}
- $dirArray=glob('.upload/cat2/*.mp3');
+ $dirArray=glob('.upload/cat2/*.*');
  usort($dirArray, function($a, $b) {
      return filemtime($b) - filemtime($a);
  });
