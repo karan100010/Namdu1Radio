@@ -24,6 +24,7 @@ from selenium import webdriver
 sys.path.append("/home/pi/Namdu1Radio/")
 from globle_var import *
 from selenium.webdriver.chrome.options import Options
+from local_sync import *
 #import logs
 option = Options()
 option.add_argument("--headless")
@@ -92,7 +93,6 @@ def main_fuction(logger,catname,driver):
             
             #time.sleep(3)
 
-            
             playpause = True
         # Check whether the internet is available to play from the website
         # elif is_connected(remote_server):
@@ -126,6 +126,7 @@ def record(driver,catname,logger):
     global chromium_playing
     global preview
     global disable_pauseplay
+    global val
     disable_pauseplay=True
     try:
         driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
@@ -206,10 +207,16 @@ def record(driver,catname,logger):
                 os.system("rm "+recFileName+".wav")
                 
                 os.system("sudo chmod -R 777 /var/www/html/.upload/")
+                with open("ip_list.txt") as file:
+                    lines = file.readlines()
+                    ipmap = [line.rstrip() for line in lines]
+
+                sync_background(catname=mapping[val],ipmap=ipmap,logger=logger1)
                 # os.system("lxterminal -e python "+projectpath+"/Wav2Mp3Convert.py  &")
                 # shutil.copyfile(recordingpathcat11+"/"+recFileName+".mp3","/var/www/html/new/.upload/"+recFileName+"mp3")
                 # os.system("rm "+recFileName)
                 #led.fwd_on()
+
                 longpress = False
                 gencatpreview = True
                 p=False
@@ -270,6 +277,11 @@ def record(driver,catname,logger):
                         logger.error(e)    
                     os.system("rm "+recFileName+".wav")
                     os.system("sudo chmod -R 777 /var/www/html/.upload/")    
+                    with open("ip_list.txt") as file:
+                        lines = file.readlines()
+                        ipmap = [line.rstrip() for line in lines]
+
+                    sync_background(catname=mapping[val],ipmap=ipmap,logger=logger1)
                         
                     
                     longpress = False
