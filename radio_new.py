@@ -12,6 +12,8 @@
 # #   ## #  # #     # ###  ####  ### #    # #  # ###  ##### #### #
 #----------------------------------------------------------------#
 # *** Libraries *** #
+import sys
+sys.path.append("/home/pi")
 from local_sync import *
 import RPi.GPIO as GPIO
 import time
@@ -20,7 +22,7 @@ import os
 from datetime import datetime
 import shutil
 from new_function import *
-import sys
+
 from selenium import webdriver
 sys.path.append("/home/pi/Namdu1Radio/")
 from globle_var import *
