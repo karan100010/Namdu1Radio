@@ -1,5 +1,6 @@
-import sys
-sys.path.append("/home/pi/")
+import os
+
+os.chdir("/home/pi/")
 import nmap
 from subprocess import Popen
 from multiprocessing import Process
