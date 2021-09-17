@@ -13,7 +13,7 @@
 #----------------------------------------------------------------#
 # *** Libraries *** #
 import sys
-sys.path.append("/home/pi")
+sys.path.append("/home/pi/")
 from local_sync import *
 import RPi.GPIO as GPIO
 import time

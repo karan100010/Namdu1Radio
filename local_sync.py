@@ -1,5 +1,5 @@
 import sys
-sys.path.append("~")
+sys.path.append("/home/pi/")
 import nmap
 from subprocess import Popen
 from multiprocessing import Process
