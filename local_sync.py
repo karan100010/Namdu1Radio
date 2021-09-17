@@ -1,14 +1,7 @@
-import os
 
-os.chdir("/home/pi/")
-import nmap
 from subprocess import Popen
 from multiprocessing import Process
 
-def get_lan_ip():
-    nm=nmap.PortScanner()
-    nm.scan('192.168.1.1/24','22')
-    return nm.all_hosts()
     
 def sync(catname,ipmap,logger):
     for i in ipmap:
