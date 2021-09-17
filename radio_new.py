@@ -12,6 +12,7 @@
 # #   ## #  # #     # ###  ####  ### #    # #  # ###  ##### #### #
 #----------------------------------------------------------------#
 # *** Libraries *** #
+from local_sync import *
 import RPi.GPIO as GPIO
 import time
 import logging
@@ -24,7 +25,6 @@ from selenium import webdriver
 sys.path.append("/home/pi/Namdu1Radio/")
 from globle_var import *
 from selenium.webdriver.chrome.options import Options
-from local_sync import *
 #import logs
 option = Options()
 option.add_argument("--headless")
