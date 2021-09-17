@@ -1,3 +1,5 @@
+import sys
+sys.path.append("~")
 import nmap
 from subprocess import Popen
 from multiprocessing import Process
@@ -28,4 +30,3 @@ def sync_background(catname,ipmap,logger):
     p.start()
     logger.info("syncing running in the background")
 
-    
