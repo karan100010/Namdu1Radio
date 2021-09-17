@@ -15,4 +15,4 @@ while True:
     with open('ip_list.txt', 'w') as f:
         for item in ip_list:
             f.write("%s\n" % item)
-    sleep(300)
+    sleep(30)
