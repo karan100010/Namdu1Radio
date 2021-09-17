@@ -595,16 +595,7 @@ while True:
                     logger1.info("not working")
             else:
                 time.sleep(1)
-                disable_pauseplay=False                     
-        
-        
-                
-                
-                
-                                    
-                   
-                
-                
+                disable_pauseplay=False                                     
             
                    
         if longpress:
