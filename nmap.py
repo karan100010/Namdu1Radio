@@ -1,10 +1,7 @@
-import sys
 
-
-import sys
-sys.path.append("/home/pi/")
+import os
+os.chdir("/home/pi/")
 import nmap
-from subprocess import Popen
 from time import sleep
 
 def get_lan_ip():
