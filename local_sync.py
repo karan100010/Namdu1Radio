@@ -1,5 +1,6 @@
 import nmap
 from subprocess import Popen
+from multiprocessing import Process
 
 def get_lan_ip():
     nm=nmap.PortScanner()
@@ -19,3 +20,10 @@ def sync(catname,ipmap,logger):
             logger("following exception occred "+e+" while tranferring to "+i)     
 
 
+def sync_background(catname,ipmap,logger):
+
+    p = Process(target=sync, args=(catname,ipmap,logger,))
+            # you have to set daemon true to not have to wait for the process to join
+    p.daemon = True
+    p.start()
+    logger.info("syncing running in the background")
