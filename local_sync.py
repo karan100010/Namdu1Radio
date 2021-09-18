@@ -7,7 +7,7 @@ import os
 def sync(catname,ipmap,logger):
     for i in ipmap:
         try:
-            os.system("sshpass -f 'sshpass' rsync -azP /var/www/html/.upload/"+catname+" pi@"+i+":/var/www/html/.upload/"+catname+" --ignore-existing")
+            os.system("sshpass -f 'sshpass' rsync -azP /var/www/html/.upload/"+catname+"/ pi@"+i+":/var/www/html/.upload/"+catname+" --ignore-existing")
         except Exception as e:
             logger.info("error occerd while pushing to  "+i) 
 
