@@ -612,7 +612,7 @@ while True:
                    logger1.info(e)
                
                 else:
-                    time.sleep(1)
+                 #   time.sleep(1)
                     disable_pauseplay=False
         
         else:
@@ -624,7 +624,7 @@ while True:
                 except:
                     logger1.info("not working")
             else:
-                time.sleep(1)
+                #time.sleep(1)
                 disable_pauseplay=False                                     
             
                    
@@ -642,7 +642,7 @@ while True:
                 record(driver,mapping[val],logger1)
                 longpress=False
             else:
-                time.sleep(1)
+               # time.sleep(1)
                 disable_longpress=False
         disable_longpress=False
         disable_pauseplay=False
