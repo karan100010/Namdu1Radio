@@ -12,9 +12,9 @@ def sync(catname,ipmap,logger):
             logger.info("error occerd while pushing to  "+i) 
 
         try:
-            os.system("sshpass -f '/home/pi/Documents/Namdu1Radio/sshpass' rsync -azP pi@"+i+":/var/www/html/.upload/"+catname+"/ /var/www/html/.upload/"+catname+" --ignore-existing")
+            os.system("sshpass -f '/home/pi/Documents/Namdu1Radio/sshpass' rsync -azP pi@"+i+":/var/www/html/.upload/"+catname+" /var/www/html/.upload/"+catname+"/ --ignore-existing")
         except Exception as e:
-            logger.info("error occerd while pushing to  "+i)    
+            logger.info("error occerd while pulling form "+i)    
 
 
 def sync_background(catname,ipmap,logger):
