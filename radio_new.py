@@ -353,7 +353,7 @@ def cwTurn():
             os.system("amixer set Master 10%+")
             logger1.info("audio increased by 10%")
 #                channel_mode=True
-            cw_turn=False
+          
                    
                     
                    
@@ -375,10 +375,7 @@ def ccwTurn():
         else:
             os.system("amixer set Master 10%-") 
             logger1.info("audio decreased by 10%") 
-            ccw_turn=False  
-            cw_turn= True
-  
-            ccw_turn= True
+            
 
   
     #ccw_turn=True
