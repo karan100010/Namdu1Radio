@@ -483,12 +483,6 @@ while True:
              
                      longpress=True
             
-          
-        
-            
-        
-       
-            
                          
             if turn:
                 disable_pauseplay=True
@@ -649,12 +643,6 @@ while True:
                           
                             
 
-           
-            
-            
-#               channel_mode=True
-                #Check if the button is pressed for > 2sec
-                
               
                 
     

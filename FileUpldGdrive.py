@@ -565,37 +565,3 @@ while True:
                         else:
                             found = False
 
-    else:
-        for Dwnserver in range(50,251):
-        
-            #Get the available localserver ip
-            DwnserverIP = local_server+str(Dwnserver)
-            
-            #Check the local server is available
-            if is_connected(DwnserverIP):
-                print("Local server for downloading detected",DwnserverIP)
-
-            #loop for directories
-            for y in range(1, 12):
-            
-                if y == 11:
-                    path = uploadpathgencat
-                else:
-                    #src and dst path
-                    path = uploadpath1to9+str(y)
-                
-                dwnfiles = os.listdir(path)
-            
-                if not dwnfiles:
-                    print("No files to Download in cat",y)
-                    #aplay("NothingToUploadcat1.wav")
-                    continue
-                else:
-                    for k in dwnfiles:
-                        led.fwd_blink("fast")
-                        os.system("sshpass -p 'raspberry' rsync " "pi@"+DwnserverIP+":"+path+"/"+k+"  " +path+"/")
-                        led.off()
-            else:
-                print("Local server for downloading not detected",DwnserverIP)            
-
-#Info: Local server range 50 to 250 is defined in the router
