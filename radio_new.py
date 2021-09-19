@@ -347,9 +347,20 @@ def cwTurn():
             logger1.info('channel mode')
             turn=True
             c+=1
-        else:  
-            cw_turn= True
+        else:
 
+                   
+            os.system("amixer set Master 10%+")
+            logger1.info("audio increased by 10%")
+#                channel_mode=True
+            cw_turn=False
+                   
+                    
+                   
+
+            
+            
+           
 def ccwTurn():
     
         global ccw_turn
@@ -361,7 +372,12 @@ def ccwTurn():
             logger1.info('channel mode')
             turn=True
             c-=1
-        else:  
+        else:
+            os.system("amixer set Master 10%-") 
+            logger1.info("audio decreased by 10%") 
+            ccw_turn=False  
+            cw_turn= True
+  
             ccw_turn= True
 
   
@@ -477,110 +493,110 @@ while True:
        
             
                          
-            if turn:
-                disable_pauseplay=True
-                disable_longpress=True
-                channel_mode=True
-                time.sleep(1)
-                        
-        
-                if rotater_value==1: 
-                    val=1  
+        if turn:
+            disable_pauseplay=True
+            disable_longpress=True
+            channel_mode=True
+            time.sleep(1)
                     
+    
+            if rotater_value==1: 
+                val=1  
+                
+                
+                turn=False                        #changeing for testing form but1.ispressed to true change back when done testing
+                logger1.info("button1 pressed")
+                main_fuction(logger1,"cat1",driver)
+                rotater_value="x"
                     
-                    turn=False                        #changeing for testing form but1.ispressed to true change back when done testing
-                    logger1.info("button1 pressed")
-                    main_fuction(logger1,"cat1",driver)
-                    rotater_value="x"
-                        
-                ''' if button2 is pressed - Category 2 functionality button '''
-                if rotater_value==2:
-                    val=2
-                    
-                    turn=False 
-                    
-                    rotater_value="x"
-                    logger1.info("button2 pressed")
-                    main_fuction(logger1,"cat2",driver)
-                ''' if button3 is pressed - Category 3 functionality button '''
-                if rotater_value==3:
-                    val=3
-                    
-                    turn=False
-                    rotater_value="x"
-                    logger1.info("button3 pressed")
-                    main_fuction(logger1,"cat3",driver)
-                    
-                        #led3.off()
-                ''' if button4 is pressed - Category 4 functionality button '''
-                if rotater_value==4:
-                    val=4
-                    
-                    turn=False
-                    rotater_value="x"
-                    logger1.info("button4 pressed")
-                    main_fuction(logger1,"cat4",driver)
-                ''' if button5 is pressed - Category 5 functionality button '''
-                if rotater_value==5:
-                    val=5
-                    
-                    turn=False
-                    rotater_value="x"
-                    logger1.info("button5 pressed")
-                    main_fuction(logger1,"cat5",driver)
-                ''' if button6 is pressed - Category 6 functionality button '''
-                if rotater_value==6:
-                    val=6
-                    
-                    turn=False
-                    rotater_value="x"
-                    logger1.info("button6 pressed")
-                    main_fuction(logger1,"cat6",driver)
-                ''' if button7 is pressed - Category 7 functionality button '''
-                if rotater_value==7:
-                    val=7
-                    
-                    turn=False
-                    rotater_value="x"
-                    logger1.info("button7 pressed")
-                    main_fuction(logger1,"cat7",driver)
-                ''' if button8 is pressed - Category 8 functionality button '''
-                if rotater_value==8:
-                    val=8
-                    
-                    
-                    turn=False
-                    rotater_value="x"
-                    logger1.info("button8 pressed")
-                    main_fuction(logger1,"cat8",driver)
-                ''' if button9 is pressed - Category 9 functionality button '''
-                if rotater_value==9:
-                    val=9
-                    
-                    turn=False
-                    rotater_value="x"
-                    logger1.info("button9 pressed")
-                    main_fuction(logger1,"cat9",driver)
-                if rotater_value==10:
-                    val=10
-                    
-                    turn=False
-                    rotater_value="x"
-                    logger1.info("button10 pressed")
-                    main_fuction(logger1,"cat10",driver)
-                if rotater_value==0:
-                    val=0
-                    
-                    turn=False
-                    
-                    #os.system("killall chromium-browser")
-                    #os.system("pkill -o chromium")
-                    logger1.info("buttons 11 pressed")
-                    main_fuction(logger1,"gencat",driver)
-                    rotater_value="x"
-                    
+            ''' if button2 is pressed - Category 2 functionality button '''
+            if rotater_value==2:
+                val=2
+                
+                turn=False 
+                
+                rotater_value="x"
+                logger1.info("button2 pressed")
+                main_fuction(logger1,"cat2",driver)
+            ''' if button3 is pressed - Category 3 functionality button '''
+            if rotater_value==3:
+                val=3
+                
+                turn=False
+                rotater_value="x"
+                logger1.info("button3 pressed")
+                main_fuction(logger1,"cat3",driver)
+                
+                    #led3.off()
+            ''' if button4 is pressed - Category 4 functionality button '''
+            if rotater_value==4:
+                val=4
+                
+                turn=False
+                rotater_value="x"
+                logger1.info("button4 pressed")
+                main_fuction(logger1,"cat4",driver)
+            ''' if button5 is pressed - Category 5 functionality button '''
+            if rotater_value==5:
+                val=5
+                
+                turn=False
+                rotater_value="x"
+                logger1.info("button5 pressed")
+                main_fuction(logger1,"cat5",driver)
+            ''' if button6 is pressed - Category 6 functionality button '''
+            if rotater_value==6:
+                val=6
+                
+                turn=False
+                rotater_value="x"
+                logger1.info("button6 pressed")
+                main_fuction(logger1,"cat6",driver)
+            ''' if button7 is pressed - Category 7 functionality button '''
+            if rotater_value==7:
+                val=7
+                
+                turn=False
+                rotater_value="x"
+                logger1.info("button7 pressed")
+                main_fuction(logger1,"cat7",driver)
+            ''' if button8 is pressed - Category 8 functionality button '''
+            if rotater_value==8:
+                val=8
+                
+                
+                turn=False
+                rotater_value="x"
+                logger1.info("button8 pressed")
+                main_fuction(logger1,"cat8",driver)
+            ''' if button9 is pressed - Category 9 functionality button '''
+            if rotater_value==9:
+                val=9
+                
+                turn=False
+                rotater_value="x"
+                logger1.info("button9 pressed")
+                main_fuction(logger1,"cat9",driver)
+            if rotater_value==10:
+                val=10
+                
+                turn=False
+                rotater_value="x"
+                logger1.info("button10 pressed")
+                main_fuction(logger1,"cat10",driver)
+            if rotater_value==0:
+                val=0
+                
                 turn=False
                 
+                #os.system("killall chromium-browser")
+                #os.system("pkill -o chromium")
+                logger1.info("buttons 11 pressed")
+                main_fuction(logger1,"gencat",driver)
+                rotater_value="x"
+                
+            turn=False
+            
         
         
         
@@ -635,22 +651,7 @@ while True:
                           
                           
                             
-    if not  channel_mode:
-        if cw_turn:
-                   
-                    os.system("amixer set Master 10%+")
-                    logger1.info("audio increased by 10%")
-       #                channel_mode=True
-                    cw_turn=False
-                   
-                    
-                   
-        if ccw_turn:
-            
-            
-            os.system("amixer set Master 10%-") 
-            logger1.info("audio decreased by 10%") 
-            ccw_turn=False
+
            
             
             
