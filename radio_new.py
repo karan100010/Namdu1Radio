@@ -396,8 +396,8 @@ def valueChanged(count):
         
     #    c=count
         logger1.info(count)
-        rotater_value = int(c%22/2)
-        print(int(c%22/2)) ## Current Counter value
+        rotater_value = int(c%11)
+        print(int(c%11)) ## Current Counter value
 
 
 
