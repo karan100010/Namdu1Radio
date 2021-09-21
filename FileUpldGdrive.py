@@ -122,7 +122,7 @@ def getDevName():
 '''
 def copy2Gdrive(path1,path2,filename):
     #Upload the file to respective category in google drive
-    if "recorded" in filename or "commnet" in filename:
+    if "recorded" in filename or "comment" in filename:
         src_Path = 'rclone move'+" "+path1+"/"+filename+" "+path2+"/" 
         #dst_Path = destpath+"i"
         print(src_Path)
@@ -374,7 +374,7 @@ while True:
     if is_connected(remote_server):
     
         print("Downloading files to .upload from Gdrive")
-            
+
         #Loop for all the categories (Total 11 cat's) available
         for y in range(1, 12):
             
