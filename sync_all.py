@@ -1,4 +1,4 @@
-from local_sync import *
+from local_sync import sync
 from radio_new import logger1
 
 with open("ip_list.txt") as file:

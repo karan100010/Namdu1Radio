@@ -24,13 +24,13 @@ def download_file(catlist):
     global source_prefix
     for i in catlist:
         try:
-            os.system("rsync -azP "+remote_prefix+i+"/ "+source_prefix+i)
+            os.system("rsync -azP "+remote_prefix+i+"/ "+source_prefix+i +" --ignore-existing")
         except:
             print("error occured while tranfering from "+i)    
         os.system("sudo chmod -R 777 /var/www/html/.upload/")
 while True:
     if is_connected:
-        os.system("python3 ~/Documents/Namdu1Radio/mountdrive.py --ignore-existing")
+        os.system("python3 ~/Documents/Namdu1Radio/mountdrive.py")
         download_file(mapping)
 
     else:
