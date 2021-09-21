@@ -19,7 +19,7 @@ def is_connected(network):
     except:
         return False
 
-
+mapping=["gencat","cat1","cat2","cat3","cat4","cat5","cat6","cat7","cat8","cat9","cat10"]
 def download_file(catlist):
     global source_prefix
     for i in catlist:
@@ -27,7 +27,17 @@ def download_file(catlist):
             os.system("rsync -azP "+remote_prefix+i+"/ "+source_prefix+i)
         except:
             print("error occured while tranfering from "+i)    
-        
+        os.system("sudo chmod -R 777 /var/www/html/.upload/")
+while True:
+    if is_connected:
+        os.system("python3 ~/Documents/Namdu1Radio/m(ountdrive.py")
+        download_file(mapping)
+
+    else:
+        sleep(10)
+        print("sleeping for 10")    
+
+
          
 
 
