@@ -92,6 +92,7 @@ def is_onradio():
         return test
     except:
         return False
+os.system("fusermount -uz ~/mnt/gdrive")        
 os.system("python3 ~/Documents/Namdu1Radio/mountdrive.py")
 '''
     Macro for playing audio instructions - to keep the code simple
@@ -123,7 +124,7 @@ def getDevName():
 def copy2Gdrive(path1,path2,filename):
     #Upload the file to respective category in google drive
     if "recorded" in filename or "comment" in filename:
-        src_Path = 'rclone move'+" "+path1+"/"+filename+" "+path2+"/" 
+        src_Path = 'rclone copy'+" "+path1+"/"+filename+" "+path2+"/" 
         #dst_Path = destpath+"i"
         print(src_Path)
         #print(dst_Path)
