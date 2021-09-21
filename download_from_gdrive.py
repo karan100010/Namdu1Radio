@@ -31,6 +31,7 @@ def download_file(catlist):
 while True:
     if is_connected:
         os.system("python3 ~/Documents/Namdu1Radio/mountdrive.py")
+        sleep(10)
         download_file(mapping)
 
     else:
