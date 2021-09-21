@@ -28,6 +28,7 @@ def download_file(catlist):
         except:
             print("error occured while tranfering from "+i)    
         os.system("sudo chmod -R 777 /var/www/html/.upload/")
+os.system("fusermount -uz ~/mnt/gdrive")         
 os.system("python3 ~/Documents/Namdu1Radio/mountdrive.py")
 sleep(10)        
 while True:
