@@ -59,8 +59,8 @@ ret = None
 found = False
 
 #destination path - Do not change the path
-destpath_gdrive = "/home/pi/mnt/gdrive/cat"
-destpath_gdrivegencat = "/home/pi/mnt/gdrive/gencat"
+destpath_gdrive = "/home/pi/mnt/gdrive/Ready_To_Broadcast/cat"
+destpath_gdrivegencat = "/home/pi/mnt/gdrive/Ready_To_Broadcast/gencat"
 gdrivepath_broadcast = "/home/pi/mnt/gdrive/Ready_To_Broadcast/cat"
 gdrivepath_broadcastgencat = "/home/pi/mnt/gdrive/Ready_To_Broadcast/gencat"
 
@@ -122,13 +122,16 @@ def getDevName():
 '''
 def copy2Gdrive(path1,path2,filename):
     #Upload the file to respective category in google drive
-    src_Path = 'rclone move'+" "+path1+"/"+filename+" "+path2+"/" 
-    #dst_Path = destpath+"i"
-    print(src_Path)
-    #print(dst_Path)
-    os.system(src_Path)
-    print ("upload success !!!")
-    time.sleep(0.1)
+    if "recorded" in filename or "commnet" in filename:
+        src_Path = 'rclone move'+" "+path1+"/"+filename+" "+path2+"/" 
+        #dst_Path = destpath+"i"
+        print(src_Path)
+        #print(dst_Path)
+        os.system(src_Path)
+        print ("upload success !!!")
+        time.sleep(0.1)
+    else:
+        print("this is not a local recording")    
 
 led = None
 led = DualLED(18,23)

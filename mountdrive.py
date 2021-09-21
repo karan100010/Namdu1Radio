@@ -13,6 +13,7 @@
 import os
 import socket
 from subprocess import check_output
+from time import sleep
 
 ''' *** Global Functions *** '''
 '''
@@ -31,11 +32,12 @@ def is_connected(network):
 cntr = True
 # network verification variables
 remote_server = "www.google.com"
-
-if is_connected(remote_server):
-    if cntr == True:
-        os.system('rclone mount gdrive: $HOME/mnt/gdrive &')
-        print("gdrive mounted")
-        cntr = False
-else:
-    print("No internet!!! Cannot mount Gdrive")
+while True:
+    if is_connected(remote_server):
+        if cntr == True:
+            os.system('rclone mount gdrive: $HOME/mnt/gdrive &')
+            print("gdrive mounted")
+            cntr = False
+    else:
+        sleep(30)
+        print("No internet!!! Cannot mount Gdrive")
