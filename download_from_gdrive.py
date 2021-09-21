@@ -30,7 +30,7 @@ def download_file(catlist):
         os.system("sudo chmod -R 777 /var/www/html/.upload/")
 while True:
     if is_connected:
-        os.system("python3 ~/Documents/Namdu1Radio/m(ountdrive.py")
+        os.system("python3 ~/Documents/Namdu1Radio/mountdrive.py --ignore-existing")
         download_file(mapping)
 
     else:
