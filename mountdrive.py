@@ -32,12 +32,12 @@ def is_connected(network):
 cntr = True
 # network verification variables
 remote_server = "www.google.com"
-while True:
-    if is_connected(remote_server):
-        if cntr == True:
-            os.system('rclone mount gdrive: $HOME/mnt/gdrive &')
-            print("gdrive mounted")
-            cntr = False
-    else:
-        sleep(30)
-        print("No internet!!! Cannot mount Gdrive")
+
+if is_connected(remote_server):
+    if cntr == True:
+        os.system('rclone mount gdrive: $HOME/mnt/gdrive &')
+        print("gdrive mounted")
+        cntr = False
+else:
+    sleep(30)
+    print("No internet!!! Cannot mount Gdrive")
