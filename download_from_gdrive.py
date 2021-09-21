@@ -28,10 +28,11 @@ def download_file(catlist):
         except:
             print("error occured while tranfering from "+i)    
         os.system("sudo chmod -R 777 /var/www/html/.upload/")
+os.system("python3 ~/Documents/Namdu1Radio/mountdrive.py")
+sleep(10)        
 while True:
     if is_connected("www.google.com"):
-        os.system("python3 ~/Documents/Namdu1Radio/mountdrive.py")
-        sleep(10)
+        
         download_file(mapping)
 
     else:
