@@ -31,14 +31,14 @@ def download_file(catlist):
 os.system("fusermount -uz ~/mnt/gdrive")         
 os.system("python3 ~/Documents/Namdu1Radio/mountdrive.py")
 sleep(10)        
-while True:
-    if is_connected("www.google.com"):
-        
-        download_file(mapping)
 
-    else:
-        sleep(10)
-        print("sleeping for 10")    
+if is_connected("www.google.com"):
+    
+    download_file(mapping)
+
+else:
+    sleep(10)
+    print("sleeping for 10")    
 
 
          
