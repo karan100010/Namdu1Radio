@@ -374,7 +374,7 @@ while True:
     if is_connected(remote_server):
     
         print("Downloading files to .upload from Gdrive")
-        
+            
         #Loop for all the categories (Total 11 cat's) available
         for y in range(1, 12):
             
