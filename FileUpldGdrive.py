@@ -17,9 +17,6 @@ import time
 import os
 import socket
 import subprocess
-import wave
-import contextlib
-from datetime import datetime
 from subprocess import check_output
 import shutil
 from dualled import DualLED
@@ -28,18 +25,18 @@ from dualled import DualLED
 projectpath =  os.path.split(os.path.realpath(__file__))[0]
 audioguidepath = projectpath + "/audio-alert"
 #local categories .wav file save path
-recordingpath1to9 = projectpath + "/recordings/cat"
-recordingpathcat1 = projectpath + "/recordings/cat1"
-recordingpathcat2 = projectpath + "/recordings/cat2"
-recordingpathcat3 = projectpath + "/recordings/cat3"
-recordingpathcat4 = projectpath + "/recordings/cat4"
-recordingpathcat5 = projectpath + "/recordings/cat5"
-recordingpathcat6 = projectpath + "/recordings/cat6"
-recordingpathcat7 = projectpath + "/recordings/cat7"
-recordingpathcat8 = projectpath + "/recordings/cat8"
-recordingpathcat9 = projectpath + "/recordings/cat9"
-recordingpathcat10 = projectpath + "/recordings/cat10"
-recordingpathgencat = projectpath + "/recordings/gencat"
+recordingpath1to9 = projectpath +"/html/.upload/cat"
+recordingpathcat1 = projectpath +"/html/.upload/cat1"
+recordingpathcat2 = projectpath +"/html/.upload/cat2"
+recordingpathcat3 = projectpath +"/html/.upload/cat3"
+recordingpathcat4 = projectpath +"/html/.upload/cat4"
+recordingpathcat5 = projectpath +"/html/.upload/cat5"
+recordingpathcat6 = projectpath +"/html/.upload/cat6"
+recordingpathcat7 = projectpath +"/html/.upload/cat7"
+recordingpathcat8 = projectpath +"/html/.upload/cat8"
+recordingpathcat9 = projectpath +"/html/.upload/cat9"
+recordingpathcat10 = projectpath +"/html/.upload/cat10"
+recordingpathgencat = projectpath +"/html/.upload/gencat"
 
 #.upload categories .mp3 file save path
 uploadpath = "/var/www/html/.upload"
@@ -62,8 +59,8 @@ ret = None
 found = False
 
 #destination path - Do not change the path
-destpath_gdrive = "/home/pi/mnt/gdrive/cat"
-destpath_gdrivegencat = "/home/pi/mnt/gdrive/gencat"
+destpath_gdrive = "/home/pi/mnt/gdrive/Ready_To_Broadcast/cat"
+destpath_gdrivegencat = "/home/pi/mnt/gdrive/Ready_To_Broadcast/gencat"
 gdrivepath_broadcast = "/home/pi/mnt/gdrive/Ready_To_Broadcast/cat"
 gdrivepath_broadcastgencat = "/home/pi/mnt/gdrive/Ready_To_Broadcast/gencat"
 
@@ -95,7 +92,8 @@ def is_onradio():
         return test
     except:
         return False
-
+os.system("fusermount -uz ~/mnt/gdrive")        
+os.system("python3 ~/Documents/Namdu1Radio/mountdrive.py")
 '''
     Macro for playing audio instructions - to keep the code simple
 '''
@@ -125,13 +123,16 @@ def getDevName():
 '''
 def copy2Gdrive(path1,path2,filename):
     #Upload the file to respective category in google drive
-    src_Path = 'rclone move'+" "+path1+"/"+filename+" "+path2+"/" 
-    #dst_Path = destpath+"i"
-    print(src_Path)
-    #print(dst_Path)
-    os.system(src_Path)
-    print ("upload success !!!")
-    time.sleep(0.1)
+    if "recorded" in filename or "comment" in filename:
+        src_Path = 'rclone copy'+" "+path1+"/"+filename+" "+path2+"/" 
+        #dst_Path = destpath+"i"
+        print(src_Path)
+        #print(dst_Path)
+        os.system(src_Path)
+        print ("upload success !!!")
+        time.sleep(0.1)
+    else:
+        print("this is not a local recording")    
 
 led = None
 led = DualLED(18,23)
@@ -210,7 +211,7 @@ while True:
                     #get the list of files in destination folder
                     chkfiles = os.listdir(destpath)
                     
-                    #check is there any files presenr in a destination folder
+                    #check is there any files present in a destination folder
                     if not chkfiles:
                     
                         #start blinking the led as upload started
@@ -324,281 +325,5 @@ while True:
                             #Clear the flag
                             found = False                        
                     print ("Files copied to pendrive successfully !!!")                                
-            else:
-                
-                #Check for available local server's in a network
-                for Upserver in range(50,251):
-                    
-                    #Get the locar server IP
-                    UpserverIP = local_server+str(Upserver)
-                    
-                    #Check local server is available
-                    if is_connected(UpserverIP):
 
-                        print("Local server for uploading detected",UpserverIP)
-                        
-                        #Loop for files in a directory
-                        for i in upfiles:
 
-                            print("uploading to studio cat",x)
-                            
-                            #Check the present folder is gencat
-                            if x == 11:
-                                
-                                #Update dst path
-                                destpath = uploadpathgencat
-                            else:
-                                
-                                #dst path
-                                destpath = uploadpath1to9+str(x)
-                                
-                                #aplay("sUploadingcat1.wav")
-                            
-                            #Start blinking the led
-                            led.fwd_blink("fast")
-                            
-                            #Start syncing from pi to local server
-                            os.system("sshpass -p 'raspberry' rsync "+localpaths+"/"+i+ " pi@"+UpserverIP+":"+destpath+"/")
-                            
-                            #Stop the led blinking
-                            led.off()
-
-                        print ("upload to local server success !!!")
-                    else:
-                        print("Local server for uploading not detected",UpserverIP)
-
-    '''
-        The following code for downloading files from Gdrive/Pendrive/local server to .upload folder
-    '''
-    #Check internet is available or not           
-    if is_connected(remote_server):
-    
-        print("Downloading files to .upload from Gdrive")
-        
-        #Loop for all the categories (Total 11 cat's) available
-        for y in range(1, 12):
-            
-            #src path
-            gdrivepath = gdrivepath_broadcast+str(y)
-            
-            #dst path
-            destpath_up = uploadpath1to9+str(y)
-            
-            #Check if it is a gencat
-            if y == 11:
-                
-                #src path
-                gdrivepath = gdrivepath_broadcastgencat
-                
-                #dst path
-                destpath_up = uploadpathgencat
-            
-            #Get the list of files in a directory            
-            dwnfiles = os.listdir(gdrivepath)
-            
-            #Check if any files is present in a directory
-            if not dwnfiles:
-
-                print("No files to Download in cat",y)
-                continue                
-
-            else:
-                #Loop for files in a directory
-                for k in dwnfiles:
-         
-                    print("copying to upload folder cat",y)                    
-                    
-                    #Get source path
-                    src1 = gdrivepath+"/"+k
-                    
-                    #Get dest path
-                    dst1 = destpath_up+"/"+k
-                    
-                    #Get list of files in a directory
-                    chkfiles = os.listdir(destpath_up)
-                    
-                    #Check if any files present in a directory
-                    if not chkfiles:
-                        
-                        #Start blinking the led
-                        led.fwd_blink("fast")
-                        
-                        print("downloading to .upload cat",y)
-                        
-                        #Start copying the file
-                        shutil.copy(src1, dst1)
-                        
-                        #Remove the source file
-                        os.system("rm "+src1)
-                        
-                        #Stop led blinking
-                        led.off()
-                    else:
-                        #Loop for files in a dest folder
-                        for l in chkfiles:
-                            #Check the file is already present
-                            if k == l:
-                                
-                                #Set the flag
-                                found = True
-                                
-                                print("File already exists in pendrive:",k)
-                                
-                                #Remove the source file
-                                os.system("rm "+src1)
-                                
-                                continue
-                        #Check the flag is set or not
-                        if found == False:
-                            
-                            #Start blinking the led
-                            led.fwd_blink("fast")
-                            
-                            print("uploading to pendrive cat",y)
-                            
-                            #Start copying the file
-                            shutil.copy(src1, dst1)
-                            
-                            #Remove the source file
-                            os.system("rm "+src1)
-                            
-                            #Stop led blinking
-                            led.off()
-
-                        else:
-                           #Clear the flag
-                           found = False
-                    
-                    print ("Files copied to upload folder successfully !!!")
-    
-    #Check pendrive is available or not                
-    elif devname != None:
-
-        print("Downloading files to .upload from pendrive")
-        print("Pendrive name:",getDevName)
-        
-        #Loop for all the categories (Total 11 cat's) available
-        for y in range(1,12):
-
-            #src path
-            pensrcpath = destpath_pdrive+str(y)
-            
-            #dst path
-            updstpath = uploadpath1to9+str(y)
-            
-            #Check if it is a gencat
-            if y==11:
-                
-                #src path
-                pensrcpath = destpath_pdrivegencat
-                
-                #dst path
-                updstpath = uploadpathgencat
-            
-            dwnfiles = os.listdir(pensrcpath)
-            
-            #Check is there any files in a directory
-            if not dwnfiles:
-
-                print("No files to copy from pendrive to .upload cat",y)
-                continue              
-            else:
-                #Loop for files in a directory
-                for k in dwnfiles:
-            
-                    print("copying to upload folder cat",y)                    
-                    
-                    #Source path
-                    src1 = pensrcpath+"/"+k
-                    
-                    #Destination path
-                    dst1 = updstpath+"/"+k
-                    
-                    #Get the list of files
-                    chkfiles = os.listdir(updstpath)
-                    
-                    #Check is there any files in a directory
-                    if not chkfiles:
-                    
-                        #Start led blinking
-                        led.fwd_blink("fast")
-                        
-                        print("downloading to .upload cat",y)
-                        
-                        #Start copying the data
-                        shutil.copy(src1, dst1)
-                        
-                        #Remove the file
-                        os.system("rm "+src1)
-                        
-                        #Stop led blinking
-                        led.off()
-                    else:
-                        #Loop for files in a directory
-                        for l in chkfiles:
-                            #Check the file is already present in a dest folder
-                            if k == l:
-                            
-                                #Set the flag
-                                found = True
-                                
-                                print("File already exists in pendrive:",k)
-                                
-                                #Remove the file
-                                os.system("rm "+src1)
-                                continue
-                        
-                        #Check the flag is set or not
-                        if found == False:
-                            
-                            #Start blinking led
-                            led.fwd_blink("fast")
-                            
-                            print("uploading to pendrive cat",y)
-                            
-                            #Copy the file
-                            shutil.copy(src1, dst1)
-                            
-                            #Remove the file
-                            os.system("rm "+src1)
-                            
-                            #Stop led blinking
-                            led.off()
-
-                        else:
-                            found = False
-
-    else:
-        for Dwnserver in range(50,251):
-        
-            #Get the available localserver ip
-            DwnserverIP = local_server+str(Dwnserver)
-            
-            #Check the local server is available
-            if is_connected(DwnserverIP):
-                print("Local server for downloading detected",DwnserverIP)
-
-            #loop for directories
-            for y in range(1, 12):
-            
-                if y == 11:
-                    path = uploadpathgencat
-                else:
-                    #src and dst path
-                    path = uploadpath1to9+str(y)
-                
-                dwnfiles = os.listdir(path)
-            
-                if not dwnfiles:
-                    print("No files to Download in cat",y)
-                    #aplay("NothingToUploadcat1.wav")
-                    continue
-                else:
-                    for k in dwnfiles:
-                        led.fwd_blink("fast")
-                        os.system("sshpass -p 'raspberry' rsync " "pi@"+DwnserverIP+":"+path+"/"+k+"  " +path+"/")
-                        led.off()
-            else:
-                print("Local server for downloading not detected",DwnserverIP)            
-
-#Info: Local server range 50 to 250 is defined in the router

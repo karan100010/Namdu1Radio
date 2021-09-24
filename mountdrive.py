@@ -13,6 +13,7 @@
 import os
 import socket
 from subprocess import check_output
+from time import sleep
 
 ''' *** Global Functions *** '''
 '''
@@ -38,4 +39,5 @@ if is_connected(remote_server):
         print("gdrive mounted")
         cntr = False
 else:
+    sleep(30)
     print("No internet!!! Cannot mount Gdrive")

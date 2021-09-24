@@ -12,10 +12,9 @@
 #----------------------------------------------------------------#
 # *** Libraries *** #
 import os
-import time
 from datetime import datetime
 import fnmatch
-
+import shutil
 # setting folder paths
 projectpath =  os.path.split(os.path.realpath(__file__))[0]
 audioguidepath = projectpath + "/audio-alert"
@@ -40,7 +39,7 @@ recordingpathcat9 = projectpath + "/recordings/cat9"
 recordingpathcat10 = projectpath + "/recordings/cat10"
 recordingpathcat11 = projectpath + "/recordings/gencat"
 #.upload categories .mp3 file save path
-uploadpath = "/var/www/html/.upload"
+uploadpath = "/var/www/html/new/.upload"
 uploadpath1to9 = uploadpath + "/cat"
 uploadpathcat1 = uploadpath + "/cat1"
 uploadpathcat2 = uploadpath + "/cat2"
@@ -84,11 +83,12 @@ while True:
                     #Recorded file name
                     recFileName = "recorded@"+datetime.now().strftime('%d%b%Y_%H_%M_%S')
                     #start converting from .wav to mp3
-                    os.system("lame -b 320 "+srcpath+"/"+i+" " +srcpath+"/"+recFileName+".mp3")
+                    os.system("lame -b 320 "+srcpath+"/"+i+" " +srcpath+"/"+i+".mp3")
                     #copy converted .mp3 to .upload folders
-                    os.system("sudo cp "+srcpath+"/"+recFileName+".mp3 " +dstpath+"/"+recFileName+".mp3")
+                    shutil(srcpath+"/"+i+".mp3",dstpath+"/"+i+".mp3")
                     #remove the .wav file
-                    os.system("rm  "+recordingpathcat11+"/"+i)
+                    os.system("rm  "+recordingpathcat11+"/"+i+".wav")
+                    
                 else:
                     print("No .wav fies present for conversion")
 

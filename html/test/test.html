@@ -1,0 +1,40 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+
+    $('#selection').on('change', function() {
+      change($(this).val());
+    });
+  
+  });
+  
+  
+  function change(sourceUrl) {
+    var audio = document.getElementById("player");
+    var source = document.getElementById("mp3_src");
+  
+    audio.pause();
+  
+    if (sourceUrl) {
+      source.src = sourceUrl;
+      audio.load();
+      audio.play();
+    }
+  }
+  </script>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  
+  <label for="selection">Listen:</label>
+  <select id="selection">
+    <option value="">- Select track -</option>
+    <option value="http://www.culturedub.com/assets/04-Forward.mp3">Flying in clouds</option>
+    <option value="http://www.culturedub.com/assets/04-Moringa-JahYu-Remix-feat-BaNdula-1.mp3">Chilling on beach</option>
+  </select>
+  <br/>
+  
+  <audio id="player" controls="controls">
+    <source id="mp3_src" src="/teachings/2011_01_09_Cut.mp3" type="audio/mp3" />Your browser does not support the audio element.
+  </audio>
+  
+  Expand 
