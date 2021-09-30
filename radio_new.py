@@ -588,7 +588,7 @@ while True:
                     
                 turn=False
                 
-            w       
+               
         if chromium_playing:
             if not disable_pauseplay:
                 try:
