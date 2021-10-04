@@ -101,7 +101,8 @@ def main_fuction(logger,catname,driver):
             # start_radio_from_internet()                      
             # playpause = True
         else:
-            logger.info (catname+" playback started")
+            logger.info
+            (catname+" playback started")
             # os.system("pkill -9 aplay")
             # os.system("pkill -o chromium")
             # driver.close()
@@ -136,7 +137,7 @@ def record(driver,catname,logger):
         
     except Exception as e:
         logging.error(e)
-        chromium_playing=False
+        #chromium_playing=False
     gencatpreview=False
     logger.info(chromium_playing)
     if not chromium_playing:
