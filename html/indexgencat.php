@@ -31,13 +31,13 @@
  <?php
     
      // Opens directory
-     //$myDirectory=opendir("./.upload/cat10/");
+     //$myDirectory=opendir("./.upload/gencat/");
 
-     // Gets each entry
+     // Gets each entryF
      //while($entryName=readdir($myDirectory)) {
      // $dirArray[]=$entryName;
      //}
- $dirArray=glob('.upload/cat10/*.*');
+ $dirArray=glob('.upload/gencat/*.*');
  usort($dirArray, function($a, $b) {
      return filemtime($b) - filemtime($a);
  });
@@ -128,7 +128,7 @@ for($i=0;$i<count($filename);$i++){
  
   	 echo("
 	  <audio autoplay id='audio' preload='auto' tabindex= '0' controls='' type='audio/mpeg'>
-           <source src='.upload/cat10/$name'>
+           <source src='.upload/gencat/$name'>
            Sorry, your browser does not support HTML5 audio.
           </audio>
 		
@@ -136,7 +136,7 @@ for($i=0;$i<count($filename);$i++){
      	 
       	  
            <li class='active'>
- 	    <a href='.upload/cat10/$name'>$name</a>
+ 	    <a href='.upload/gencat/$name'>$name</a>
        <div>
        <div class='input-group'>
          <div class='custom-file'>
@@ -174,7 +174,7 @@ for($i=0;$i<count($filename);$i++){
          echo("
           
            <li>
-	     <a href='./.upload/cat10/$name'>$name</a>
+	     <a href='./.upload/gencat/$name'>$name</a>
 	   </li>
      <div>
   <div class='input-group'>
