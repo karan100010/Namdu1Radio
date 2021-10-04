@@ -466,6 +466,7 @@ while True:
         shutil.copy(src_renamPath, dst_renamPath)
         driver.get("http://localhost")
         rotater_value='x'
+        chromium_playing=True
       #  driver.execute_script('document.getElementsByTagName("audio")[0].play()')
         cntr = False
         playpause = True
