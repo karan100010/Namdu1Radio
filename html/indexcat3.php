@@ -31,7 +31,7 @@
  <?php
     
      // Opens directory
-     //$myDirectory=opendir("./.upload/cat1/");
+     //$myDirectory=opendir("./.upload/cat3/");
 
      // Gets each entry
      //while($entryName=readdir($myDirectory)) {
@@ -174,7 +174,7 @@ for($i=0;$i<count($filename);$i++){
          echo("
           
            <li>
-	     <a href='./.upload/cat1/$name'>$name</a>
+	     <a href='./.upload/cat3/$name'>$name</a>
 	   </li>
      <div>
   <div class='input-group'>
