@@ -347,7 +347,7 @@ def cwTurn():
         if btn.is_pressed:
             logger1.info('channel mode')
             turn=True
-            c+=1
+            c+=2
         else:
 
                    
@@ -372,7 +372,7 @@ def ccwTurn():
         if btn.is_pressed:
             logger1.info('channel mode')
             turn=True
-            c-=1
+            c-=2
         else:
             os.system("amixer set Master 10%-") 
             logger1.info("audio decreased by 10%") 
