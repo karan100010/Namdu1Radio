@@ -279,7 +279,7 @@ def record(driver,catname,logger):
                         logger.error(e)    
                     os.system("rm "+recFileName+".wav")
                     os.system("sudo chmod -R 777 /var/www/html/.upload/")    
-                    with open("ip_list.txt") as file:
+                    with open("/home/pi/ip_list.txt") as file:
                         lines = file.readlines()
                         ipmap = [line.rstrip() for line in lines]
 
