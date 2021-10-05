@@ -294,13 +294,6 @@ def record(driver,catname,logger):
                     gencatpreview = True
                     disable_pauseplay=False
                 
-            
-
-
-
-
-
-
 #logging.basicConfig(filename="/opt/logfilename.log", level=logging.INFO)
 
 # *** Global Variables *** #
@@ -311,9 +304,6 @@ def record(driver,catname,logger):
 from RPi_GPIO_Rotary import rotary
 
 ## Define Callback functions
-
-
-
 
 # set up logging to file - see previous section for more details
 logging.basicConfig(level=logging.INFO,
@@ -347,19 +337,13 @@ def cwTurn():
         if btn.is_pressed:
             logger1.info('channel mode')
             turn=True
-            c+=2
+            c+=1
         else:
 
                    
             os.system("amixer set Master 10%+")
             logger1.info("audio increased by 10%")
 #                channel_mode=True
-          
-                   
-                    
-                   
-
-            
             
            
 def ccwTurn():
@@ -372,7 +356,7 @@ def ccwTurn():
         if btn.is_pressed:
             logger1.info('channel mode')
             turn=True
-            c-=2
+            c-=1
         else:
             os.system("amixer set Master 10%-") 
             logger1.info("audio decreased by 10%") 
@@ -491,6 +475,7 @@ while True:
                 disable_longpress=True
                 channel_mode=True
                 time.sleep(1)
+                longpress=False
                         
         
                 if rotater_value==1: 
