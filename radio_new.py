@@ -413,6 +413,9 @@ GPIO.setmode(GPIO.BCM)
 #Pi started indication audio
 logger1.info("pi Started")
 logger2.info("pi Started")
+driver.get("http://localhost")
+rotater_value='x'
+chromium_playing=True
 #Test folder to verify local backup play
 aplay("lappiready.wav")
 #time.sleep(3.0)
@@ -447,9 +450,7 @@ while True:
         src_renamPath = r'/var/www/html/indexgencat.php'
         dst_renamPath = r'/var/www/html/index.php'
         shutil.copy(src_renamPath, dst_renamPath)
-        driver.get("http://localhost")
-        rotater_value='x'
-        chromium_playing=True
+
       #  driver.execute_script('document.getElementsByTagName("audio")[0].play()')
         cntr = False
         playpause = True
