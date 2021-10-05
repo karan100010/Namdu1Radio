@@ -469,7 +469,7 @@ while True:
                      longpress=True
             
                          
-            if turn:
+            if rotater_value != "x":
                 disable_pauseplay=True
                 longpress=False
                 channel_mode=True
