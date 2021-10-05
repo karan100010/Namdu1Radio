@@ -39,7 +39,6 @@ ccw_turn=False
 playpause=False
 turn=False
 disable_pauseplay=False
-disable_longpress=False
 val=0
 c=0                    #counter
 
@@ -472,7 +471,7 @@ while True:
                          
             if turn:
                 disable_pauseplay=True
-                disable_longpress=True
+                longpress=False
                 channel_mode=True
                 time.sleep(1)
                 longpress=False
@@ -603,7 +602,7 @@ while True:
             
                    
         if longpress:
-            if not disable_longpress:
+            
                 try:
                         driver.execute_script('document.getElementsByTagName("audio")[0].pause()')
                         logger1.info('paused audio')
@@ -615,10 +614,8 @@ while True:
                 aplay("beep_catgen.wav")
                 record(driver,mapping[val],logger1)
                 longpress=False
-            else:
-               # time.sleep(1)
-                disable_longpress=False
-        disable_longpress=False
+            
+       
         disable_pauseplay=False
         channel_mode=False         
            
