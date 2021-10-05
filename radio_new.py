@@ -454,22 +454,7 @@ while True:
         cntr = False
         playpause = True
         time.sleep(0.2)
-        
-    ''' if button1 is pressed - Category 1 functionality button '''
-    if btn.is_pressed :
-        
-        logger1.info("button pressed")
-        previousTime = time.time()
-                    
-        
-          
-        while btn.is_pressed:
-            if time.time() - previousTime > 2.0:
-             
-                     longpress=True
-            
-                         
-        if rotater_value != "x":
+    if rotater_value != "x":
             disable_pauseplay=True
             longpress=False
             channel_mode=True
@@ -572,7 +557,23 @@ while True:
                 main_fuction(logger1,"gencat",driver)
                 rotater_value="x"
                 
-            turn=False
+            turn=False    
+        
+    ''' if button1 is pressed - Category 1 functionality button '''
+    if btn.is_pressed :
+        
+        logger1.info("button pressed")
+        previousTime = time.time()
+                    
+        
+          
+        while btn.is_pressed:
+            if time.time() - previousTime > 2.0:
+             
+                     longpress=True
+            
+                         
+        
             
                
         if chromium_playing:
