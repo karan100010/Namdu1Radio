@@ -120,7 +120,7 @@ if ($flag==0){
 // echo 'em
 
 echo("
-<audio autoplay id='audio' preload='auto' tabindex= '0' controls='' type='audio/mpeg'>
+<audio autoplay id='audio' preload='none' tabindex= '0' controls='' type='audio/mpeg'>
       <source src='.upload/gencat/$name'>
       Sorry, your browser does not support HTML5 audio.
      </audio>
