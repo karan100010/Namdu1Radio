@@ -33,7 +33,7 @@
      // Opens directory
      //$myDirectory=opendir("./.upload/gencat/");
 
-     // Gets each entry
+     // Gets each entryF
      //while($entryName=readdir($myDirectory)) {
      // $dirArray[]=$entryName;
      //}

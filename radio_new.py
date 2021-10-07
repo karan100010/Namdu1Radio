@@ -388,7 +388,7 @@ def valueChanged(count):
 
 
 ## Initialise (clk, dt, sw, tick*s)
-obj = rotary.Rotary(16,20,21,1)
+obj = rotary.Rotary(16,4,21,1)
 
  ## Register callbacks
 obj.register(increment=cwTurn, decrement=ccwTurn)
