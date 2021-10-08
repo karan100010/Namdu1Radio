@@ -178,7 +178,7 @@ def record(driver,catname,logger):
                 os.system("pkill -9 aplay")
                 aplay("Catgen_stop.wav")
                 
-                #time.sleep(1.4)
+                time.sleep(2)
                 logger.info(catname+" recording stopped")
                 
                 
@@ -257,7 +257,7 @@ def record(driver,catname,logger):
                     os.system("pkill -9 aplay")
                     aplay("Catgen_stop.wav")
                 
-                    #time.sleep(1.4)
+                    time.sleep(2)
                     logger.info(catname+" recording stopped")
                     rec_end_time=time.time()
                     
@@ -422,7 +422,7 @@ while True:
     #led.off()
     #led.fwd_on()
     #Check whether local server connected
-    logging.info(c)
+      #logging.info(c)
     #logging.info(btn.is_pressed)
  
     if is_onradio() and is_connected(local_server) and cntr:
