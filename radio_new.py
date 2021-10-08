@@ -613,7 +613,9 @@ while True:
                 logging.info(chromium_playing)
                 logger1.info('a longpress')
                 aplay("beep_catgen.wav")
+                led.blink()
                 record(driver,mapping[val],logger1)
+                led.off()
                 longpress=False
             
        

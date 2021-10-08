@@ -92,7 +92,7 @@ uploadpathcat10 = uploadpath + "/cat10"
 uploadpathcat11 = uploadpath + "/gencat"
 #LED's config:
 #------------
-# led1 = LED(18) #GPIO18 - LED1
+led = LED(19) 
 # led2 = LED(23) #GPIO23 - LED2
 # #led3 = LED(24) #GPIO24 - LED3
 # led4 = LED(25) #GPIO25 - LED4
