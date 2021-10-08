@@ -282,6 +282,7 @@ def record(driver,catname,logger):
                     with open("/home/pi/ip_list.txt") as file:
                         lines = file.readlines()
                         ipmap = [line.rstrip() for line in lines]
+                    print(ipmap)    
 
                     sync_background(catname=mapping[val],ipmap=ipmap,logger=logger1)
                         
