@@ -41,8 +41,7 @@ if not gdrive_path.is_dir():
     sleep(30)
 else:
     print("gdrive already mounted")    
-        
-gdrive_path='/home/pi/mnt/gdrive/Ready_To_Broadcast'
+
 while True:
     if gdrive_path.is_dir():
         
