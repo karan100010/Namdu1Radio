@@ -2,6 +2,8 @@ import os
 import socket
 from subprocess import check_output
 from time import sleep
+from pathlib import Path
+from typing import Tuple
 
 ''' *** Global Functions *** '''
 '''
@@ -26,21 +28,24 @@ def download_file(catlist):
         try:
             os.system("rsync -azP "+remote_prefix+i+"/ "+source_prefix+i +" --ignore-existing")
         except:
-            print("error occured while tranfering from "+i)    
-        os.system("sudo chmod -R 777 /var/www/html/.upload/")
-os.system("fusermount -uz ~/mnt/gdrive")         
+            print("error occured while tranfering from "+i)
+
+
+       
+#os.system("fusermount -uz ~/mnt/gdrive")         
 os.system("python3 ~/Documents/Namdu1Radio/mountdrive.py")
 sleep(10)        
+gdirve_path='/home/pi/mnt/gdrive/Ready_To_Broadcast'
+while True:
+    if gdirve_path.is_dir():
+        
+        download_file(mapping)
 
-if is_connected("www.google.com"):
-    
-    download_file(mapping)
+    else:
+        sleep(10)
+        print("sleeping for 10")    
 
-else:
-    sleep(10)
-    print("sleeping for 10")    
-
-         
+            
 
 
 
