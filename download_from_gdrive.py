@@ -31,7 +31,7 @@ def download_file(catlist):
             print("error occured while tranfering from "+i)
 
 
-gdrive_path='/home/pi/mnt/gdrive/Ready_To_Broadcast'
+gdrive_path=Path('/home/pi/mnt/gdrive/Ready_To_Broadcast')
 
        
 #os.system("fusermount -uz ~/mnt/gdrive")
