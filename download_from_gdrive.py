@@ -31,13 +31,20 @@ def download_file(catlist):
             print("error occured while tranfering from "+i)
 
 
+gdrive_path='/home/pi/mnt/gdrive/Ready_To_Broadcast'
+
        
-#os.system("fusermount -uz ~/mnt/gdrive")         
-os.system("python3 ~/Documents/Namdu1Radio/mountdrive.py")
-sleep(10)        
-gdirve_path='/home/pi/mnt/gdrive/Ready_To_Broadcast'
+#os.system("fusermount -uz ~/mnt/gdrive")
+if gdrive_path.is_dir():
+         
+    os.system("python3 ~/Documents/Namdu1Radio/mountdrive.py")
+    sleep(30)
+else:
+    print("gdrive already mounted")    
+        
+gdrive_path='/home/pi/mnt/gdrive/Ready_To_Broadcast'
 while True:
-    if gdirve_path.is_dir():
+    if gdrive_path.is_dir():
         
         download_file(mapping)
 
