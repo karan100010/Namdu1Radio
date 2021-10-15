@@ -37,7 +37,7 @@ gdrive_path=Path('/home/pi/mnt/gdrive/Ready_To_Broadcast')
 #os.system("fusermount -uz ~/mnt/gdrive")
 if not gdrive_path.is_dir():
          
-    os.system("python3 ~/Documents/Namdu1Radio/mountdrive.py")
+    os.system("python3 /home/pi/Documents/Namdu1Radio/mountdrive.py")
     sleep(30)
 else:
     print("gdrive already mounted")    
