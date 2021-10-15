@@ -24,6 +24,7 @@ def is_connected(network):
 mapping=["gencat","cat1","cat2","cat3","cat4","cat5","cat6","cat7","cat8","cat9","cat10"]
 def download_file(catlist):
     global source_prefix
+    global remote_prefix
     for i in catlist:
         try:
             os.system("rsync -azP "+remote_prefix+i+"/ "+source_prefix+i +" --ignore-existing")
