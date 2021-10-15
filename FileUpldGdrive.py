@@ -92,8 +92,8 @@ def is_onradio():
         return test
     except:
         return False
-os.system("fusermount -uz ~/mnt/gdrive")        
-os.system("python3 ~/Documents/Namdu1Radio/mountdrive.py")
+
+
 '''
     Macro for playing audio instructions - to keep the code simple
 '''
