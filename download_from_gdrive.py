@@ -46,12 +46,9 @@ while True:
     if gdrive_path.is_dir():
         
         download_file(mapping)
+        os.system('python3 /home/pi/Documents/Namdu1Radio/FileUpldGdrive.py')
+        break
 
     else:
         sleep(10)
-        print("sleeping for 10")    
-
-            
-
-
-
+        print("sleeping for 10 seconds")    
