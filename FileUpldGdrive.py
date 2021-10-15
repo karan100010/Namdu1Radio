@@ -147,183 +147,183 @@ time.sleep(20.0)
 
 print("Started fileupload python file")
 
-while True:
 
-    ''' 
-        The following code for Uploading files to localserver or Gdrive or pendrive
-    '''
+
+''' 
+    The following code for Uploading files to localserver or Gdrive or pendrive
+'''
+
+#get the pendrive name
+devname =  getDevName()
+
+if devname != None:
+    #update the destination path  
+    destpath_pdrive = r"/media/pi/"+devname+r"/cat"
     
-    #get the pendrive name
-    devname =  getDevName()
+    #update the pendrive cat's path useful for copying data from/to
+    destpath_pdrivegencat = r"/media/pi/"+devname+r"/gencat"
     
-    if devname != None:
-        #update the destination path  
-        destpath_pdrive = r"/media/pi/"+devname+r"/cat"
-        
-        #update the pendrive cat's path useful for copying data from/to
-        destpath_pdrivegencat = r"/media/pi/"+devname+r"/gencat"
-        
-        #mount pendrive
-        rv1 = subprocess.call("grep -qs '/media/pi' /proc/mounts", shell=True)
-        rv2 = subprocess.call("mount | grep /media/pi", shell=True)
-        penDet = False
-        
-    #Loop for all the categories (Total 11 cat's) available
-    for x in range(1, 12):
+    #mount pendrive
+    rv1 = subprocess.call("grep -qs '/media/pi' /proc/mounts", shell=True)
+    rv2 = subprocess.call("mount | grep /media/pi", shell=True)
+    penDet = False
+    
+#Loop for all the categories (Total 11 cat's) available
+for x in range(1, 12):
+    #src path
+    localpaths = recordingpath1to9+str(x)
+    
+    #dst path
+    destpath = destpath_gdrive+str(x)
+    
+    if devname != None:#if pendrive is connected
+        destpath_pend = destpath_pdrive+str(x)
+    
+    if x == 11:
         #src path
-        localpaths = recordingpath1to9+str(x)
+        localpaths = recordingpathgencat
         
         #dst path
-        destpath = destpath_gdrive+str(x)
+        destpath = destpath_gdrivegencat
         
-        if devname != None:#if pendrive is connected
-            destpath_pend = destpath_pdrive+str(x)
+        #if pendrive is connected
+        if devname != None:
         
-        if x == 11:
-            #src path
-            localpaths = recordingpathgencat
-            
-            #dst path
-            destpath = destpath_gdrivegencat
-            
-            #if pendrive is connected
-            if devname != None:
-            
-                #Update the destination path as pendrive gencat
-                destpath_pend = destpath_pdrivegencat
-            
-            #Get the list of files present in a source path
-            upfiles = os.listdir(localpaths)
-        else:
-            #Get the list of files present in a source path
-            upfiles = os.listdir(localpaths)        
+            #Update the destination path as pendrive gencat
+            destpath_pend = destpath_pdrivegencat
         
-        if not upfiles:
+        #Get the list of files present in a source path
+        upfiles = os.listdir(localpaths)
+    else:
+        #Get the list of files present in a source path
+        upfiles = os.listdir(localpaths)        
+    
+    if not upfiles:
 
-            print("No files to upload in cat",x)
-            continue
-        else:
-            if is_connected(remote_server):
+        print("No files to upload in cat",x)
+        continue
+    else:
+        if is_connected(remote_server):
+            
+            #Loop for files in a directory
+            for i in upfiles:
+            
+                #get the list of files in destination folder
+                chkfiles = os.listdir(destpath)
                 
-                #Loop for files in a directory
-                for i in upfiles:
+                #check is there any files present in a destination folder
+                if not chkfiles:
                 
+                    #start blinking the led as upload started
+                    led.fwd_blink("fast")
+                    
+                    print("uploading to internet cat",x)
+
+                    #copy the file from source to destination
+                    copy2Gdrive(localpaths, destpath, i)
+                    
+                    #stop blinking the led as upload stopped
+                    led.off()
+                else:
                     #get the list of files in destination folder
-                    chkfiles = os.listdir(destpath)
+                    for j in chkfiles:
                     
-                    #check is there any files present in a destination folder
-                    if not chkfiles:
-                    
+                        #check if the file is already present in a destination folder, if present don't copy
+                        if i == j:
+                        
+                            #set the flag as file is already present
+                            found = True
+                            print("File already exists:",i)
+                            
+                            #remove the file from the source path
+                            os.system("rm "+localpaths+"/"+i)
+                            
+                            continue
+                            
+                    #check the file present flag is set or not        
+                    if found == False:
+                        
                         #start blinking the led as upload started
                         led.fwd_blink("fast")
                         
                         print("uploading to internet cat",x)
-
+                        
                         #copy the file from source to destination
                         copy2Gdrive(localpaths, destpath, i)
                         
                         #stop blinking the led as upload stopped
                         led.off()
-                    else:
-                        #get the list of files in destination folder
-                        for j in chkfiles:
-                        
-                            #check if the file is already present in a destination folder, if present don't copy
-                            if i == j:
-                            
-                                #set the flag as file is already present
-                                found = True
-                                print("File already exists:",i)
-                                
-                                #remove the file from the source path
-                                os.system("rm "+localpaths+"/"+i)
-                                
-                                continue
-                                
-                        #check the file present flag is set or not        
-                        if found == False:
-                          
-                            #start blinking the led as upload started
-                            led.fwd_blink("fast")
-                            
-                            print("uploading to internet cat",x)
-                            
-                            #copy the file from source to destination
-                            copy2Gdrive(localpaths, destpath, i)
-                            
-                            #stop blinking the led as upload stopped
-                            led.off()
 
-                        else:
-                            #Clear the flag
-                            found = False
-    
-            elif devname != None:
+                    else:
+                        #Clear the flag
+                        found = False
+
+        elif devname != None:
+            
+            #Loop for files in a directory
+            for i in upfiles:
                 
-                #Loop for files in a directory
-                for i in upfiles:
+                #Get the source path with file to be copied
+                src0 = localpaths+"/"+i
+                
+                #Get the dest path
+                dst0 = destpath_pend
+                
+                #Get the list of files in a destination folder
+                chkfiles = os.listdir(dst0)
+                
+                #Check is there any files presenr in a destination folder
+                if not chkfiles:
+                
+                    #Start blinking the led as upload started
+                    led.fwd_blink("fast")
                     
-                    #Get the source path with file to be copied
-                    src0 = localpaths+"/"+i
+                    print("uploading to pendrive cat",x)
                     
-                    #Get the dest path
-                    dst0 = destpath_pend
+                    #Start copying the file from source to destination
+                    shutil.copy(src0, dst0)
                     
-                    #Get the list of files in a destination folder
-                    chkfiles = os.listdir(dst0)
+                    #Remove the source file after successfull copy
+                    os.system("rm "+src0)
                     
+                    #Stop blinking the led as upload stopped
+                    led.off()
+                else:
                     #Check is there any files presenr in a destination folder
-                    if not chkfiles:
+                    for j in chkfiles:
                     
+                        #Check if the file is already present in a destination folder, if present don't copy
+                        if i == j:
+                            
+                            #Set the flag, file is already present
+                            found = True
+                            
+                            print("File already exists in pendrive:",i)
+                            
+                            #Remove the source file
+                            os.system("rm "+src0)
+                            
+                            continue
+                    #Check the flag is set or not
+                    if found == False:
+                        
                         #Start blinking the led as upload started
                         led.fwd_blink("fast")
                         
                         print("uploading to pendrive cat",x)
-                        
+
                         #Start copying the file from source to destination
                         shutil.copy(src0, dst0)
                         
-                        #Remove the source file after successfull copy
+                        #Remove the file
                         os.system("rm "+src0)
                         
-                        #Stop blinking the led as upload stopped
+                        #Stop blinking led
                         led.off()
+
                     else:
-                        #Check is there any files presenr in a destination folder
-                        for j in chkfiles:
-                        
-                            #Check if the file is already present in a destination folder, if present don't copy
-                            if i == j:
-                                
-                                #Set the flag, file is already present
-                                found = True
-                                
-                                print("File already exists in pendrive:",i)
-                                
-                                #Remove the source file
-                                os.system("rm "+src0)
-                                
-                                continue
-                        #Check the flag is set or not
-                        if found == False:
-                            
-                            #Start blinking the led as upload started
-                            led.fwd_blink("fast")
-                            
-                            print("uploading to pendrive cat",x)
-
-                            #Start copying the file from source to destination
-                            shutil.copy(src0, dst0)
-                            
-                            #Remove the file
-                            os.system("rm "+src0)
-                            
-                            #Stop blinking led
-                            led.off()
-
-                        else:
-                            #Clear the flag
-                            found = False                        
-                    print ("Files copied to pendrive successfully !!!")                                
+                        #Clear the flag
+                        found = False                        
+                print ("Files copied to pendrive successfully !!!")                                
 
 
