@@ -224,9 +224,7 @@ def record(driver,catname,logger):
                 # os.system("rm "+recFileName)
                 #led.fwd_on()
 
-                longpress = False
-                gencatpreview = True
-                p=False
+                longpress = False                              
                 chromium_playing=True
                 disable_pauseplay=False
     else:           
@@ -296,7 +294,7 @@ def record(driver,catname,logger):
                     
                     
                     longpress = False
-                    p=False
+                    
 
 
                     gencatpreview = True
