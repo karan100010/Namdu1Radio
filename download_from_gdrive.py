@@ -27,7 +27,7 @@ def download_file(catlist):
     global remote_prefix
     for i in catlist:
         try:
-            os.system("rsync -azPtu "+remote_prefix+i+"/ "+source_prefix+i +" --ignore-existing")
+            os.system("rsync -azPtu "+remote_prefix+i+"/ "+source_prefix+i +"/ --ignore-existing")
         except:
             print("error occured while tranfering from "+i)
 
