@@ -143,7 +143,7 @@ GPIO.setmode(GPIO.BCM)
 os.system("sudo chmod -R 777 "+uploadpath)
 
 #Added delay to ensure the Gdrive mounted properly
-time.sleep(20.0)
+
 
 print("Started fileupload python file")
 
