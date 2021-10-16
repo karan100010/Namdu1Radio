@@ -39,6 +39,7 @@ ccw_turn=False
 playpause=False
 turn=False
 disable_pauseplay=False
+recording=False
 val=0
 c=0                    #counter
 
@@ -201,19 +202,23 @@ def record(driver,catname,logger):
                 
                     
                 #time.sleep(10)
+                if t>5:
                 
-                try:
-                    os.system("sudo lame -b 320 "+recFileName+".wav " "/var/www/html/.upload/"+catname+"/"+recFileName+".mp3")
-                except Exception as e:
-                    logger.error(e)    
-                os.system("rm "+recFileName+".wav")
-                
-                os.system("sudo chmod -R 777 /var/www/html/.upload/")
-                with open("/home/pi/ip_list.txt") as file:
-                    lines = file.readlines()
-                    ipmap = [line.rstrip() for line in lines]
+                    try:
+                        os.system("sudo lame -b 320 "+recFileName+".wav " "/var/www/html/.upload/"+catname+"/"+recFileName+".mp3")
+                    except Exception as e:
+                        logger.error(e)    
+                    os.system("rm "+recFileName+".wav")
+                    
+                    os.system("sudo chmod -R 777 /var/www/html/.upload/")
+                    with open("/home/pi/ip_list.txt") as file:
+                        lines = file.readlines()
+                        ipmap = [line.rstrip() for line in lines]
 
-                sync_background(catname=mapping[val],ipmap=ipmap,logger=logger1)
+                    sync_background(catname=mapping[val],ipmap=ipmap,logger=logger1)
+                else:
+                     os.system("rm "+recFileName+".wav")
+                     logger.info('removed file becase it was less the 5 sec')   
                 # os.system("lxterminal -e python "+projectpath+"/Wav2Mp3Convert.py  &")
                 # shutil.copyfile(recordingpathcat11+"/"+recFileName+".mp3","/var/www/html/new/.upload/"+recFileName+"mp3")
                 # os.system("rm "+recFileName)
