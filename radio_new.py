@@ -202,7 +202,7 @@ def record(driver,catname,logger):
                 
                     
                 #time.sleep(10)
-                if t>5:
+                if t>10:
                 
                     try:
                         os.system("sudo lame -b 320 "+recFileName+".wav " "/var/www/html/.upload/"+catname+"/"+recFileName+".mp3")
@@ -275,7 +275,7 @@ def record(driver,catname,logger):
                     
                     logger.info(t)
                    
-                    if t>5:
+                    if t>10:
                         try:
                             os.system("sudo lame -b 320 "+recFileName+".wav " "/var/www/html/.upload/"+catname+"/"+recFileName+".mp3")
                         except Exception as e:
