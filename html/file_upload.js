@@ -61,7 +61,7 @@ function completeHandler(event) {
   alert('Upload successful');
   progressBar.innerHTML = ''; //wil clear progress bar after successful upload
   progressBar.setAttribute('style', 'width: 30px  ');
-  window.location = './index.php'
+  window.location.reload()
 }
 
 function errorHandler(event) {
