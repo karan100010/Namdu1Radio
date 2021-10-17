@@ -38,6 +38,7 @@ if is_connected(remote_server):
         os.system('rclone mount gdrive: $HOME/mnt/gdrive --allow-non-empty &')
         print("gdrive mounted")
         cntr = False
+        sleep(30)
 else:
     sleep(30)
     print("No internet!!! Cannot mount Gdrive")
