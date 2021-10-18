@@ -21,7 +21,7 @@ function uploadFile(name,fileid) {
    window.location.reload(); 
   
   }
-  else if(file.name.split(".")[1]!="mp3" && (file.name.split(".")[1]!="wav")){
+  else if(file.name.split(".")[loc_array.length - 1]!="mp3" && (file.name.split(".")[1]!="wav")){
     alert("Please select the corret filtype mp3 or wav.");
     window.location.reload(); 
 
