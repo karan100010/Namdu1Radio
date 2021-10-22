@@ -18,8 +18,9 @@ function uploadFile(name,fileid) {
   }
   else if(file.size>10000000){
     alert("Filesize is grater then 10MB please select a smaller size.");
-   window.location.reload(); 
-  
+   window.location.reload();
+
+  console.log(file.name.split(".")[file.name.split(".").length-1])
   }
   else if(file.name.split(".")[file.name.split(".").length - 1]!="mp3" && (file.name.split(".")[file.name.split(".").length-1]!="wav")){
     alert("Please select the corret filtype mp3 or wav.");
@@ -33,9 +34,9 @@ function uploadFile(name,fileid) {
   formdata.append('file1', file);
   var d = new Date();
   var datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
-    d.getFullYear() + "_" + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
-
-  formdata.append('finalname',name.split('.')[0]+'_comment'+datestring+'.'+file.name.split('.')[1])
+    d.getFullYear() + "_" + ("0" + d.getHours()).slice(-2) + "_" + ("0" + d.getMinutes()).slice(-2);
+    //formdata.append('finalname',"abc.mp3")
+  formdata.append('finalname',name.split('.')[0]+'_comment'+datestring+'.'+file.name.split('.')[file.name.split(".").length-1])
   console.log(formdata.get('finalname'));
   var ajax = new XMLHttpRequest();
   ajax.upload.addEventListener('progress', progressHandler, false);
