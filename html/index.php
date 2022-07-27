@@ -37,7 +37,7 @@
      //while($entryName=readdir($myDirectory)) {
      // $dirArray[]=$entryName;
      //}
- $dirArray=glob('.upload/gencat/*.*');
+ $dirArray=glob('C:\xampp\htdocs\git\Namdu1Radio\audio-alert/*.wav*');// audio alert
  usort($dirArray, function($a, $b) {
      return filemtime($b) - filemtime($a);
  });
