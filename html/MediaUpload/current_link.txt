@@ -1,1 +1,1 @@
-http://localhost/.upload/gencat/recorded@16Sep2021_12_49_24.mp3
+http://localhost/Namdu1Radio/audio-alert/beep_catgen.wav
