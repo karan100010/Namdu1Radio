@@ -43,7 +43,7 @@
             <h1>Upload Form</h1>
           </div>
           <div class="panel-body">
-            <form action="insert.php" method="post">
+            <form action="insert.php" method="post" >
               
          
             <div class="form-group">
@@ -158,8 +158,10 @@
                 <option>National</option>
               </select>
               </div>
+
+              <input type="file" class="btn btn-success " name="audioFile" style="margin-bottom:5px;"/>
               
-              <input type="submit" class="btn btn-primary" />
+              <input type="submit"  class="btn btn-primary" />
             </form>
           </div>
         
@@ -179,7 +181,7 @@
       
 
       
-          <!-- <small>Jadite Solutions Logo & Radio Bulbul Logo</small> -->
+          
           
 
 
