@@ -3,6 +3,8 @@
  <head>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+    <link rel="icon" href="CR Bolo Logo.jpeg">
   <style type="text/css">
     #playlist,audio{background:#666;width:400px;padding:20px;}
     .active a{color:#5DB0E6;text-decoration:none;}
@@ -22,7 +24,7 @@
 	<a href="/MediaUpload/upload.html" style="padding: 10px; background-color: #000000; color: #ffffff">Upload Image/Video</a>
   </div>
   <center>
-   <div > <img src="wallpaper.jpg" style="width:100%;height:70%"> </div>
+   <div > <img src="CR Bolo Logo.png" style="width:100%;height:70%"> </div>
    <br>	
    <font size="10px">  Programs </font> 
 
@@ -207,10 +209,40 @@ submitBtn.addEventListener('click', function(){uploadFile('$name',$fileid)});
       
     ?>
       
-</center>
+
 	
    </ul> 	
 
+   <div class="panel-footer">
+
+<footer>
+    <table class="table align-center">
+    <thead class="thead-dark">
+
+    <tr >
+      <th class="text-center" scope="col">Partners</th>
+      <th class="text-center" scope="col">Supported by</th>
+      <th class="text-center" scope="col">Technical Partner</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+       
+      <td><img class="footerImage image-fluid" src="JS-Logo_Final.png" width="100">
+    
+      <img class="footerImage image-fluid" src="Radio Bulbul.jpg" width="60">
+      </td>
+      <td><img class="footerImage image-fluid" src="isoc-logo.jpeg" width="100"></td>
+      <td>Hackergram</td>
+    </tr>
+
+    </table>
+
+
+</footer>
+
+    </div>  
+    </center>
  </body>
  <script
     type="text/javascript"
