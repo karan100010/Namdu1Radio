@@ -147,7 +147,9 @@ for($i=0;$i<count($filename);$i++){
            <label class='custom-file-label' id='$inputlab' for='$fileid'>Choose file</label>
          </div>
          <div class='input-group-append'>
-         <button class='btn btn-primary' type='button' id='$inputid' >Upload</button>
+         <a href='upload_form.php'>
+         <button class='btn btn-primary' type='button' id='$inputid'> Upload </button>
+         </a> 
        </div>
      </div>
      <div class='progress'>
