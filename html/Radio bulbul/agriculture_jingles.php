@@ -55,13 +55,13 @@
     <?php
 
     // Opens directory
-    //$myDirectory=opendir("./../audio-alert/");
+    //$myDirectory=opendir("././Agriculture/agriculture_jingles/");
 
     // Gets each entry
     //while($entryName=readdir($myDirectory)) {
     // $dirArray[]=$entryName;
     //}
-    $dirArray = glob( dirname(__DIR__));
+    $dirArray = glob("./Agriculture/agriculture_jingles/*");
     usort($dirArray, function ($a, $b) {
       return filemtime($b) - filemtime($a);
     });
@@ -144,7 +144,7 @@
 
           echo (" 
 	  <audio autoplay id='audio' preload='auto' tabindex= '0' controls='' type='audio/mpeg'>
-           <source src='../audio-alert/$name'>
+           <source src='./Agriculture/agriculture_jingles/$name'>
            Sorry, your browser does not support HTML5 audio.
           </audio>
 		
@@ -152,7 +152,7 @@
      	 
       	  
            <li class='active'>
- 	    <a href='../audio-alert/$name'>$name</a>
+ 	    <a href='./Agriculture/agriculture_jingles/$name'>$name</a>
        <div>
        <div class='input-group'>
          <div class='custom-file'>
@@ -191,7 +191,7 @@
           echo ("
           
            <li>
-	     <a href='./../audio-alert/$name'>$name</a>
+	     <a href='././Agriculture/agriculture_jingles/$name'>$name</a>
 	   </li>
      <div>
      <!--

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
   <head>
   <link rel="icon" href="CR Bolo Logo.jpeg">
@@ -116,18 +116,11 @@
             <h1>Upload Form</h1>
           </div>
           <div class="panel-body">
-            
-
-                <FORM action="upload.php" method="post" enctype="multipart/form-data">
-                    
-                
-                   
-                      
-                   
+            <form action="insert.php" method="post" >
             <div class="form-group">
                 <label for="name">Name</label>
                 
-                <INPUT
+                <input
                 required=true
                   type="text"
                   class="form-control"
@@ -197,7 +190,7 @@
     
               
               <div class="form-group">
-                <label  for="p_category">Program Category</label>
+                <label for="p_category">Program Category</label>
                 <select
                 required=true
                   type="text"
@@ -236,11 +229,11 @@
               </select>
               </div> 
 
-             
-
-              <INPUT class='custom-file-input' type="file" name="file">
-                <INPUT class='btn btn-primary' type="submit" value="Upload">
-            </FORM>
+              <!-- <input type="file" class="btn btn-success " name="audioFile" style="margin-bottom:5px;"/> -->
+              <input type='file' name='fileToUpload' accept='audio/*' class='custom-file-input' id='fileid' for='file' aria-describedby='inputGroupFileAddon04'>  
+              <!-- <input type="submit"  class="btn btn-primary" /> -->
+              <button class='btn btn-primary' type='submit' id='$inputid'> Upload </button>
+            </form>
           </div>
         
           <script>
@@ -287,8 +280,3 @@
     </div>
   </body>
 </html>
-
-
-
-
-
