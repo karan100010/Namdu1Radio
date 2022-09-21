@@ -12,8 +12,8 @@
          $servername = "localhost";
          $username = "root";
          $password = "";
-         $dbname = "staff";
-        $conn = mysqli_connect("localhost", "root", "", "staff");
+         $dbname = "upload_form";
+        $conn = mysqli_connect("localhost", "root", "", "upload_form");
          
         // Check connection
         if($conn === false){
@@ -57,6 +57,19 @@
             }
         }
 
+
+        foreach( $_REQUEST as $element ) {echo  ($element);}     
+
+$fileName = $_POST["fileToUpload"]; // The file name
+$fileTmpLoc = $_FILES["fileToUpload"]["tmp_name"]; // File in the PHP tmp folder
+$fileType = $_FILES["fileToUpload"]["type"]; // The type of file it is
+$fileSize = $_FILES["fileToUpload"]["size"]; // File size in bytes
+$fileErrorMsg = $_FILES["fileToUpload"]["error"]; // 0 for false... and 1 for true
+
+
+
+move_uploaded_file($fileTmpLoc, '../sql/all uploads'.$fileName);
+    
 
 
 
