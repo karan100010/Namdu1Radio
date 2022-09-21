@@ -12,17 +12,15 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script><title>Upload file </title>
   
 <style>
-#leftbox1 {
+            #leftbox1 {
               float:left;
-              
-               width:50%
+              width:50%
                 text-align:center;
             }
             #middlebox1{
-             
               float:left;
               width:50%;
-             text-align:center;
+              text-align:center;
             }
             #rightbo1{
               
@@ -109,7 +107,7 @@
   <body>
   <br>	
   <div class="b_img"> <img src="CR Bolo Logo.png" style="width:100%;height:70%"> </div>
-   <br>	
+  <br>	
   
   <div class="container" >
       <div class="row col-md-6 col-md-offset-3">
@@ -119,8 +117,6 @@
           </div>
           <div class="panel-body">
             <form action="insert.php" method="post" >
-              
-         
             <div class="form-group">
                 <label for="name">Name</label>
                 
@@ -191,7 +187,6 @@
                   name="number"
                 />
               </div>
-             
     
               
               <div class="form-group">
@@ -234,12 +229,20 @@
               </select>
               </div>
 
-              <input type="file" class="btn btn-success " name="audioFile" style="margin-bottom:5px;"/>
-              
-              <input type="submit"  class="btn btn-primary" />
+              <!-- <input type="file" class="btn btn-success " name="audioFile" style="margin-bottom:5px;"/> -->
+              <input type='file' name='fileToUpload' accept='audio/*' class='custom-file-input' id='fileid' for='file' aria-describedby='inputGroupFileAddon04'>  
+              <!-- <input type="submit"  class="btn btn-primary" /> -->
+              <button class='btn btn-primary' type='submit' id='$inputid'> Upload </button>
             </form>
           </div>
         
+          <script>
+            var submitBtn = document.getElementById('$inputid');
+
+            $fileid.addEventListener('change', function(){handleFileupload($fileid,$inputlab)});
+     submitBtn.addEventListener('click', function(){uploadFile('$name',$fileid),console.log("hello")});
+     </script>
+          
 
 
         <div class="panel-footer">

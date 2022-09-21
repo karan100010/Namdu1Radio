@@ -2,15 +2,13 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 <style>
+ 
       .center {
-          margin: 0;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          -ms-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-          
+          margin-top: 60px;
+          margin-bottom: 60px;
+          text-align: center;
         }
 button {
   background-color: #04AA6D;
@@ -47,10 +45,20 @@ button {
 .dropdown:hover .dropdown-content {display: block;}
 
  .dropbtn:hover {background-color: #3e8e41;}
+
+ #footer{
+  position: relative;
+  
+ }
+ .banner img{
+  text-align: center;
+  width: 100vw;
+  height: 30vw;
+ }
 </style>
 </head>
 <body>
-
+  <div class="banner"> <img src="../CR Bolo Logo.png"> </div>
 <div class="container">
 <div class="center">
         <div class="dropdown">
@@ -81,8 +89,39 @@ button {
                     <a href="#">National</a>
                 </div>
                 </div>
+                
+                <div class="panel-footer">
 
+                 
+            
+                </div>
+                
 </div>
+</div>
+<footer id="footer">
+  <table class="table align-center">
+    <thead class="thead-dark">
 
+      <tr>
+        <th class="text-center" scope="col">Partners</th>
+        <th class="text-center" scope="col">Supported by</th>
+        <th class="text-center" scope="col">Technical Partner</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+
+        <td><img class="footerImage image-fluid" src="../JS-Logo_Final.png" width="100">
+
+          <img class="footerImage image-fluid" src="../Radio Bulbul.jpg" width="60">
+        </td>
+        <td><img class="footerImage image-fluid" src="../isoc-logo.jpeg" width="100"></td>
+        <td>Hackergram</td>
+      </tr>
+
+  </table>
+
+
+</footer>
 </body>
 </html>
