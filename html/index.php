@@ -3,6 +3,8 @@
  <head>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+    <link rel="icon" href="CR Bolo Logo.jpeg">
   <style type="text/css">
     #playlist,audio{background:#666;width:400px;padding:20px;}
     .active a{color:#5DB0E6;text-decoration:none;}
@@ -22,7 +24,7 @@
 	<a href="/MediaUpload/upload.html" style="padding: 10px; background-color: #000000; color: #ffffff">Upload Image/Video</a>
   </div>
   <center>
-   <div > <img src="wallpaper.jpg" style="width:100%;height:70%"> </div>
+   <div > <img src="CR Bolo Logo.png" style="width:100%;height:70%"> </div>
    <br>	
    <font size="10px">  Programs </font> 
 
@@ -31,13 +33,13 @@
  <?php
     
      // Opens directory
-     //$myDirectory=opendir("./.upload/gencat/");
+     //$myDirectory=opendir("./../audio-alert/");
 
      // Gets each entry
      //while($entryName=readdir($myDirectory)) {
      // $dirArray[]=$entryName;
      //}
- $dirArray=glob('.upload/gencat/*.*');
+ $dirArray=glob('../audio-alert/*.*');
  usort($dirArray, function($a, $b) {
      return filemtime($b) - filemtime($a);
  });
@@ -128,7 +130,7 @@ for($i=0;$i<count($filename);$i++){
  
   	 echo("
 	  <audio autoplay id='audio' preload='auto' tabindex= '0' controls='' type='audio/mpeg'>
-           <source src='.upload/gencat/$name'>
+           <source src='../audio-alert/$name'>
            Sorry, your browser does not support HTML5 audio.
           </audio>
 		
@@ -136,7 +138,7 @@ for($i=0;$i<count($filename);$i++){
      	 
       	  
            <li class='active'>
- 	    <a href='.upload/gencat/$name'>$name</a>
+ 	    <a href='../audio-alert/$name'>$name</a>
        <div>
        <div class='input-group'>
          <div class='custom-file'>
@@ -145,7 +147,9 @@ for($i=0;$i<count($filename);$i++){
            <label class='custom-file-label' id='$inputlab' for='$fileid'>Choose file</label>
          </div>
          <div class='input-group-append'>
-         <button class='btn btn-primary' type='button' id='$inputid' >Upload</button>
+         <a href='upload_form.php'>
+         <button class='btn btn-primary' type='button' id='$inputid'> Upload </button>
+         </a> 
        </div>
      </div>
      <div class='progress'>
@@ -174,7 +178,7 @@ for($i=0;$i<count($filename);$i++){
          echo("
           
            <li>
-	     <a href='./.upload/gencat/$name'>$name</a>
+	     <a href='./../audio-alert/$name'>$name</a>
 	   </li>
      <div>
   <div class='input-group'>
@@ -207,10 +211,40 @@ submitBtn.addEventListener('click', function(){uploadFile('$name',$fileid)});
       
     ?>
       
-</center>
+
 	
    </ul> 	
 
+   <div class="panel-footer">
+
+<footer>
+    <table class="table align-center">
+    <thead class="thead-dark">
+
+    <tr >
+      <th class="text-center" scope="col">Partners</th>
+      <th class="text-center" scope="col">Supported by</th>
+      <th class="text-center" scope="col">Technical Partner</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+       
+      <td><img class="footerImage image-fluid" src="JS-Logo_Final.png" width="100">
+    
+      <img class="footerImage image-fluid" src="Radio Bulbul.jpg" width="60">
+      </td>
+      <td><img class="footerImage image-fluid" src="isoc-logo.jpeg" width="100"></td>
+      <td>Hackergram</td>
+    </tr>
+
+    </table>
+
+
+</footer>
+
+    </div>  
+    </center>
  </body>
  <script
     type="text/javascript"
