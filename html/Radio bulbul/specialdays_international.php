@@ -43,11 +43,13 @@
     <a href="/MediaUpload/gallery.php" style="padding: 10px; background-color: #000000; color: #ffffff">Visual Gallery</a>
     <a href="/MediaUpload/upload.html" style="padding: 10px; background-color: #000000; color: #ffffff">Upload Image/Video</a>
   </div>
+  <a href='../Radio bulbul/Agriculture/agriculture_drama/'></a>
   <center>
     <div> <img src="../CR Bolo Logo.png" style="width:100%;height:70%"> </div>
     <br>
+    <a href='../Radio bulbul/Agriculture/agriculture_drama/$name'></a>
     <font size="10px"> Programs </font>
-    <a href="../upload_form.php">
+    <a href="upload_form.php">
     <button type="submit">Upload <span style="color: red;">Recording</span> here</button>
     </a>
     <br><br>
@@ -55,13 +57,13 @@
     <?php
 
     // Opens directory
-    //$myDirectory=opendir("./../audio-alert/");
+    //$myDirectory=opendir("././Education/education_drama/");
 
     // Gets each entry
     //while($entryName=readdir($myDirectory)) {
     // $dirArray[]=$entryName;
     //}
-    $dirArray = glob( dirname(__DIR__));
+    $dirArray = glob("./Special days/specialdays_international/*");
     usort($dirArray, function ($a, $b) {
       return filemtime($b) - filemtime($a);
     });
@@ -144,7 +146,7 @@
 
           echo (" 
 	  <audio autoplay id='audio' preload='auto' tabindex= '0' controls='' type='audio/mpeg'>
-           <source src='../audio-alert/$name'>
+           <source src='./Special days/specialdays_international/$name'>
            Sorry, your browser does not support HTML5 audio.
           </audio>
 		
@@ -152,7 +154,7 @@
      	 
       	  
            <li class='active'>
- 	    <a href='../audio-alert/$name'>$name</a>
+ 	    <a href=../Radio bulbul/Special days/specialdays_international/$name'>$name</a>
        <div>
        <div class='input-group'>
          <div class='custom-file'>
@@ -191,7 +193,7 @@
           echo ("
           
            <li>
-	     <a href='./../audio-alert/$name'>$name</a>
+	     <a href='././Agriculture/agriculture_drama/$name'>$name</a>
 	   </li>
      <div>
      <!--
@@ -244,13 +246,13 @@ submitBtn.addEventListener('click', function(){uploadFile('$name',$fileid)});
           <tbody>
             <tr>
 
-            <td><img class="footerImage image-fluid" src="../JS-Logo_Final.png" width="100">
+              <td><img class="footerImage image-fluid" src="../JS-Logo_Final.png" width="100">
 
-<img class="footerImage image-fluid" src="../Radio Bulbul.jpg" width="60">
-</td>
-<td><img class="footerImage image-fluid" src="../isoc-logo.jpeg" width="100"></td>
-<td>Hackergram</td>
-</tr>
+                <img class="footerImage image-fluid" src="../Radio Bulbul.jpg" width="60">
+              </td>
+              <td><img class="footerImage image-fluid" src="../isoc-logo.jpeg" width="100"></td>
+              <td>Hackergram</td>
+            </tr>
 
         </table>
 

@@ -43,11 +43,11 @@
     <a href="/MediaUpload/gallery.php" style="padding: 10px; background-color: #000000; color: #ffffff">Visual Gallery</a>
     <a href="/MediaUpload/upload.html" style="padding: 10px; background-color: #000000; color: #ffffff">Upload Image/Video</a>
   </div>
-  <a href='../Radio bulbul/Agriculture/agriculture_drama/'>$name</a>
+  <a href='../Radio bulbul/Agriculture/agriculture_drama/'></a>
   <center>
     <div> <img src="../CR Bolo Logo.png" style="width:100%;height:70%"> </div>
     <br>
-    <a href='../Radio bulbul/Agriculture/agriculture_drama/$name'>$name</a>
+    <a href='../Radio bulbul/Agriculture/agriculture_drama/$name'></a>
     <font size="10px"> Programs </font>
     <a href="upload_form.php">
     <button type="submit">Upload <span style="color: red;">Recording</span> here</button>
