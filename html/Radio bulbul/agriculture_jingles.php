@@ -47,7 +47,7 @@
   <div> <img src="../CR Bolo Logo.png" style="width:100%;height:70%"> </div>
     <br>
     <font size="10px"> Programs </font>
-    <a href="../upload_form.php">
+    <a href="../upload_form.html">
     <button type="submit">Upload <span style="color: red;">Recording</span> here</button>
     </a>
     <br><br>

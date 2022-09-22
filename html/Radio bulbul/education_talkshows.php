@@ -49,7 +49,7 @@
     <br>
     <a href='../Radio bulbul/Agriculture/agriculture_drama/$name'></a>
     <font size="10px"> Programs </font>
-    <a href="upload_form.php">
+    <a href="../upload_form.html">
     <button type="submit">Upload <span style="color: red;">Recording</span> here</button>
     </a>
     <br><br>
